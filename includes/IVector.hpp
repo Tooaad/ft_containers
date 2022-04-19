@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 00:32:54 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/04/19 01:51:17 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:29:07 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ class Integers
 /* ✔️✔️✔️ */ virtual void assign(size_type n, const value_type& u) const = 0;
 /* ✔️✔️✔️ */ virtual void push_back(const value_type& x) const = 0;
 /* ✔️✔️✔️ */ virtual void pop_back() const = 0;
-/* ✔️ */ virtual iterator insert(const_iterator position, const value_type& x) const = 0;
-/* ✔️ */	virtual iterator insert(const_iterator position, size_type n, const value_type& x) const = 0;
+/* ✔️✔️✔️ */ virtual iterator insert(const_iterator position, const value_type& x) const = 0;
+/* ✔️✔️✔️ */	virtual iterator insert(const_iterator position, size_type n, const value_type& x) const = 0;
     	template <class InputIterator>
-/* ✔️ */  	virtual iterator insert(const_iterator position, InputIterator first, InputIterator last) const = 0;;
-/* ✔️ */ virtual iterator erase(const_iterator position) const = 0;
-/* ✔️ */ virtual iterator erase(const_iterator first, const_iterator last) const = 0;
-/* ✗ */	virtual void swap(vector& x) const = 0;
+/* ✔️✔️✔️ */  	virtual iterator insert(const_iterator position, InputIterator first, InputIterator last) const = 0;;
+/* ✔️✔️✔️ */ virtual iterator erase(const_iterator position) const = 0;
+/* ✔️✔️✔️ */ virtual iterator erase(const_iterator first, const_iterator last) const = 0;
+/* ✔️✔️✔️ */	virtual void swap(vector& x) const = 0;
 /* ✔️✔️✔️ */ virtual void clear() const = 0;
 
 /* ✔️ */	virtual allocator_type get_allocator() const = 0;

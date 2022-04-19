@@ -6,13 +6,14 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/04/19 02:13:30 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:12:45 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Vector.hpp"
 #include <iostream>
 #include <algorithm>
+// #include <vector>
 
 void print (const std::string & n) { std::cout << " " << n; };
 void print2 (const int & n) { std::cout << n << " "; };
@@ -21,16 +22,17 @@ void cleaks() { system("leaks containers"); }
 
 int main()
 {
-	atexit(cleaks);
-	ft::Vector<int> mvector1(7, 1);
+	// atexit(cleaks);
+	ft::Vector<int> mvector1(0, 10);
 	ft::Vector<int> mvector2;
+
+
 // Begin & End normal
 	std::cout << "Instantiate Vector with 2 params with value 1: "; 
 	std::for_each(mvector1.begin(), mvector1.end(), print2); std::cout << "\n";
 	std::cout << "Instantiate Vector with no params: ";
 	std::for_each(mvector2.begin(), mvector2.end(), print2); std::cout << "\n";
 	std::cout << "\n";
-
 // // PUSHB
 	mvector2.push_back(10);
 	mvector2.push_back(11);
@@ -70,17 +72,49 @@ int main()
 	std::for_each(mvector1.begin(), mvector1.end(), print2); std::cout << "\n";
 
 // // INSERT
-/*
-	mvector1.insert(mvector2.begin() + 1, 8);
+	mvector1.insert(mvector1.begin() + 1, 8);
 	std::cout << "Result: should insert 8 in 2nd position: " << "\n";
-	std::for_each(mvector2.begin(), mvector2.end(), print2); std::cout << "\n";
-	mvector2.insert(mvector2.begin(), mvector1.begin(), mvector1.end());
+	std::for_each(mvector1.begin(), mvector1.end(), print2); std::cout << "\n";
+	mvector1.insert(mvector1.begin(), mvector2.begin(), mvector2.end());
+	std::cout << "Result: should insert 10 11 12 at the beginning of the vector1: " << "\n";
+	std::for_each(mvector1.begin(), mvector1.end(), print2); std::cout << "\n";
+	ft::Vector<int> mvector3;
+	mvector3.insert(mvector3.begin(), 2, 8);
+	mvector3.insert(mvector3.begin() + 1, 1, 7);
+	std::cout << "Result: should insert 10 11 12 at the beginning of the vector1: " << "\n";
+	std::for_each(mvector3.begin(), mvector3.end(), print2); std::cout << "\n";
 	
 // // ERASE
-// 	mvector2.erase(mvector2.begin()+2 , mvector2.end());
-// 	std::for_each(mvector2.begin(), mvector2.end(), print2);
+	mvector3.erase(mvector3.begin() , mvector3.end());
+	std::cout << "Result: erase all the elements in vector3: " << "\n";
+	std::for_each(mvector3.begin(), mvector3.end(), print2); std::cout << "\n";
+	std::cout << "vector2: "; std::for_each(mvector2.begin(), mvector2.end(), print2); std::cout << "\n";
+	mvector2.erase(mvector2.begin());
+	std::cout << "Result: 10 value is erase from vector2: " << "\n";
+	std::for_each(mvector2.begin(), mvector2.end(), print2);
+	std::cout << "\n";
 	
-	*/
+// // SWAP
+
+	std::cout << "vector2: "; std::for_each(mvector2.begin(), mvector2.end(), print2); std::cout << "\n";
+	std::cout << "vector3: "; std::for_each(mvector3.begin(), mvector3.end(), print2); std::cout << "\n";
+	mvector2.swap(mvector3);
+	std::cout << "vector3: "; std::for_each(mvector3.begin(), mvector3.end(), print2); std::cout << "\n";
+	std::cout << "vector2: "; std::for_each(mvector2.begin(), mvector2.end(), print2); std::cout << "\n";
+	
+// // Relational Operators
+
+	ft::Vector<int> mvector4;
+
+	std::cout << "Operator==: ";
+	(mvector2==mvector4)? std::cout << "True" << "\n" : std::cout << "False" << "\n";
+	std::cout << "Operator!=: ";
+	(mvector2!=mvector4)? std::cout << "True" << "\n" : std::cout << "False" << "\n";
+	std::cout << "Operator>: ";
+	(mvector3>mvector4)? std::cout << "True" << "\n" : std::cout << "False" << "\n";
+	std::cout << "Operator<: ";
+	(mvector3<mvector4)? std::cout << "True" << "\n" : std::cout << "False" << "\n";
+	
 	
 	return 0;
 	
