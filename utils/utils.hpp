@@ -6,12 +6,13 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:09:40 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/04/19 12:00:34 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/04/21 00:57:48 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <algorithm>
 namespace ft
 {
 

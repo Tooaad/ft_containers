@@ -1,18 +1,14 @@
 #pragma once
 
-#include <iterator> // For std::forward_iterator_tag
-#include <cstddef>  // For std::ptrdiff_t
 #include <stdexcept>
 #include <iostream>
-#include <algorithm>
 #include "VectorIter.hpp"
 #include "ReverseIter.hpp"
 #include "../utils/utils.hpp"
 
 namespace ft {
 template <class T, class Allocator = std::allocator<T> >
-	class Vector
-	{
+	class Vector {
 		public:
 			typedef T											value_type;
 			typedef Allocator									allocator_type;
@@ -31,12 +27,13 @@ template <class T, class Allocator = std::allocator<T> >
 			T*				_data;
 			size_type		_size;
 			size_type		_capacity;
-			Allocator		_alloc;
+			allocator_type	_alloc;
 		
 		public:
 
 			explicit Vector(const allocator_type& alloc = allocator_type())
-				: _data(0), _size(0), _capacity(0), _alloc(alloc) {}
+				: _data(0), _size(0), _capacity(0), _alloc(alloc) {
+				}
 
 			explicit Vector(size_type n, const value_type& value, const allocator_type& alloc = allocator_type())
 				: _size(n), _capacity(n), _alloc(alloc) {
@@ -189,7 +186,6 @@ template <class T, class Allocator = std::allocator<T> >
 					resize(this->size() + 1, val);
 				this->_alloc.construct(&this->_data[this->size()], val);
 				this->_size++;
-
 			}
 
 			void pop_back() {
@@ -312,7 +308,6 @@ template <class T, class Allocator = std::allocator<T> >
 			allocator_type get_allocator() const {
 				return this->_alloc;
 			}
-
 	};
 
 	template <class T, class Alloc>

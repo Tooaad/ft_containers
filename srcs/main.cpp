@@ -6,11 +6,12 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/04/20 00:12:45 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:40:20 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Vector.hpp"
+#include "RBTree.hpp"
 #include <iostream>
 #include <algorithm>
 // #include <vector>
@@ -26,7 +27,7 @@ int main()
 	ft::Vector<int> mvector1(0, 10);
 	ft::Vector<int> mvector2;
 
-
+/*
 // Begin & End normal
 	std::cout << "Instantiate Vector with 2 params with value 1: "; 
 	std::for_each(mvector1.begin(), mvector1.end(), print2); std::cout << "\n";
@@ -115,6 +116,15 @@ int main()
 	std::cout << "Operator<: ";
 	(mvector3<mvector4)? std::cout << "True" << "\n" : std::cout << "False" << "\n";
 	
+
+ -----------------------------------------------------------------------------
+*/	
+	
+	ft::RBTree<ft::Pair<int, int>, std::less<int>, std::allocator<ft::Pair<int, int> > > t;
+	ft::Pair<int, int> p1 = ft::make_pair(3, true);
+
+	t.insert(p1);
+	std::cout << p1._first << " " << p1._second << std::endl;
 	
 	return 0;
 	

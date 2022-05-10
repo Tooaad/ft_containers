@@ -25,7 +25,7 @@ namespace ft {
 			typedef typename ft::iterator_traits<T>::pointer			pointer;
 			typedef typename ft::iterator_traits<T>::reference			reference;
 
-			ReverseIter() : _ptr(nullptr) {}
+			ReverseIter() : _ptr() {}
 			explicit ReverseIter(pointer x) : _ptr(x) {}
 			template <class U>
 			ReverseIter(const ReverseIter<U> &iter) : _ptr(iter._ptr) {}

@@ -15,7 +15,7 @@
 #include "iterator_traits.hpp"
 
 namespace ft {
-	template <typename T>
+template <typename T>
 	class VectorIter {
 
 		public:		
@@ -25,7 +25,7 @@ namespace ft {
 			typedef typename ft::iterator_traits<T>::pointer			pointer;
 			typedef typename ft::iterator_traits<T>::reference			reference;
 
-			VectorIter() : _ptr(nullptr) {}
+			VectorIter() : _ptr() {}
 			explicit VectorIter(pointer x) : _ptr(x) {}
 			template <class U>
 			VectorIter(const VectorIter<U> &iter) : _ptr(iter._ptr) {}
@@ -75,53 +75,3 @@ namespace ft {
 	bool operator>=(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() >= b.base(); }    
 
 }
-
-
-	// public:
-	// 	typedef typename ft::iter_traits<T>::difference_type	diference_type;
-	// 	typedef typename ft::iter_traits<T>::value_type 		value_type;
-	// 	typedef typename ft::iter_traits<T>::reference 			reference;
-	// 	typedef typename ft::iter_traits<T>::pointer			pointer;
-	// 	typedef typename std::random_access_iter_tag			iter_category;
-		
-	// private:
-	// 	pointer _ptr;
-		
-	// public:
-	// 	Iter(): _ptr(0) {}
-	// 	Iter(pointer ptr): _ptr(ptr) {}
-	// 	~Iter() {}
-	// 	Iter&	operator=(Iter const & iter) {
-	// 		this->_ptr = iter._ptr;
-	// 		return *this;
-	// 	}
-	// 	template <typename E>
-	// 	Iter(const Iter<E> &iter): _ptr(iter._ptr) {}
-
-	// 	// pointer getPtr() const {
-	// 	// 	return this->_ptr;
-	// 	// }
-		
-	// 	Iter&	operator++() {++_ptr; return *this;}
-	// 	Iter&	operator++(int) {
-	// 		Iter temp(*this);
-	// 		++(*this);
-	// 		return temp;
-	// 	}
-	// 	Iter&	operator--() {--_ptr; return *this;}
-	// 	Iter&	operator--(int) {
-	// 		Iter temp(*this);
-	// 		--(*this);
-	// 		return temp;
-	// 	}
-	// 	friend bool	operator==(const Iter& a, const Iter& b) {
-	// 		return a._ptr == b._ptr;
-	// 	}
-	// 	friend bool	operator!=(const Iter& a, const Iter& b) {
-	// 		return a._ptr != b._ptr;
-	// 	}
-	// 	reference	operator*() const {return this->*_ptr;}
-	// 	pointer		operator->() const {return this->_ptr;}
-		
-
-	// };

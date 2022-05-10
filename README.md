@@ -44,3 +44,7 @@ this is a great template to begin with.
 - Code Sample of how to build your own iterator pt2 - more deep: https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp
 
 https://en.cppreference.com/w/cpp/language/converting_constructor
+
+
+- TreeIter: https://cdmana.com/2021/12/202112300642463009.html
+- TreeIter+: https://programmer.ink/think/use-a-red-black-tree-to-encapsulate-set-and-map-at-the-same-time.html
