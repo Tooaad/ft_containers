@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/09 18:51:04 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:16:01 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #include "iterator_traits.hpp"
 
+static const int BLACK = 0;
+static const int RED = 1;
 
 namespace ft {
 template <class T>
@@ -25,11 +27,10 @@ template <class T>
 			Node*	_parent;
 			T		_value;
 			bool	_color;
-			// 0 = Black, 1 = Red
 			
 			// Prueba
 			Node() {}
-			Node(const T& val) : _right(0), _left(0), _parent(0), _value(val), _color(1) {}
+			Node(const T& val) : _right(0), _left(0), _parent(0), _value(val), _color(RED) {}
 			Node& operator=(const Node& otherNode) {
 				std::cout << "Node" << std::endl;
 				this->_right = otherNode._right;
@@ -54,10 +55,11 @@ template <class Node, class Pair >
 			typedef typename ft::iterator_traits<Node>::pointer			node_ptr;
 			typedef typename ft::iterator_traits<Node>::reference		reference_ptr;
 			
-			TreeIter() : _node(), _root(), _nil()  {}
+			TreeIter() : _node(0), _root(0), _nil(0)  {}
 			explicit TreeIter(node_ptr node, node_ptr root, node_ptr nil) : _node(node), _root(root), _nil(nil) {}
+			// explicit TreeIter(node_ptr node) : _node(node), _root(0), _nil(0) {}
 			template <class N, class P>
-			TreeIter(TreeIter<N, P> it) {
+			TreeIter(const TreeIter<N, P>& it) {
 				this->_node = it._node;
 				this->_root = it._root;
 				this->_nil = it._nil;
@@ -72,17 +74,14 @@ template <class Node, class Pair >
 				return *this;
 			}
 
-			reference operator*() const { return this->_node->_data; }
-			pointer operator->() const { return &this->_node->_data; }
-
 			TreeIter& operator++() { 
 				if (this->_node->_right) {
-					node_ptr* tmp = this->_node->right;
+					node_ptr tmp = this->_node->right;
 					tmp = min(this->tmp);
 					this->_node = tmp;
 				}
 				else {
-					Node* tmp = this->_parent;
+					node_ptr tmp = this->_parent;
 					if (tmp->right == this->_node) {	
 						while (this->_node == tmp->_right) {
 							this->_node = tmp;
@@ -104,7 +103,7 @@ template <class Node, class Pair >
 					this->_node = max(this->tmp);
 				}
 				else {
-					Node* tmp_parent = this->_node->parent;
+					node_ptr tmp_parent = this->_node->parent;
 					while (tmp_parent->_left == this->_node) {
 						this->_node = tmp_parent->_parent;
 						tmp_parent = tmp_parent->_parent;
@@ -126,7 +125,7 @@ template <class Node, class Pair >
 				return n;
 			}
 
-		private:
+		public:
 			node_ptr	_node;
 			node_ptr	_root;
 			node_ptr	_nil;

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 01:19:13 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/09 18:25:05 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/05/17 01:47:58 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ template <class T1, class T2>
 			second_type	_second;
 		 
 		public:
-			Pair() : _first(), _second() {std::cout << "'1" << std::endl;}
+			Pair() : _first(), _second() {std::cout << "1" << std::endl;}
 
 			Pair(const first_type& a, const second_type& b) : _first(a), _second(b) {}
 			

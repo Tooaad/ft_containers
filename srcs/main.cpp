@@ -6,11 +6,13 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/06 14:40:20 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:06:01 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Vector.hpp"
+// #include "Stack.hpp"
+#include "Map.hpp"
 #include "RBTree.hpp"
 #include <iostream>
 #include <algorithm>
@@ -24,8 +26,8 @@ void cleaks() { system("leaks containers"); }
 int main()
 {
 	// atexit(cleaks);
-	ft::Vector<int> mvector1(0, 10);
-	ft::Vector<int> mvector2;
+	// ft::Vector<int> mvector1(0, 10);
+	// ft::Vector<int> mvector2;
 
 /*
 // Begin & End normal
@@ -120,12 +122,17 @@ int main()
  -----------------------------------------------------------------------------
 */	
 	
+	ft::Map<int, int> mmap;
 	ft::RBTree<ft::Pair<int, int>, std::less<int>, std::allocator<ft::Pair<int, int> > > t;
-	ft::Pair<int, int> p1 = ft::make_pair(3, true);
-
-	t.insert(p1);
-	std::cout << p1._first << " " << p1._second << std::endl;
+	ft::Pair<int, int> p1 = ft::make_pair(3, 5);
+	ft::Pair<int, int> p2 = ft::make_pair(2, 2);
 	
+
+	mmap.insert(p1);
+	std::cout << mmap[0] << " " << mmap.size() << std::endl;
+	mmap.insert(p2);
+	std::cout << mmap[0] << " " << mmap.size() << std::endl;
+
 	return 0;
 	
 }
