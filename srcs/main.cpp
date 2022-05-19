@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/18 21:06:01 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/05/19 02:03:03 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,16 @@ int main()
 	
 	ft::Map<int, int> mmap;
 	ft::RBTree<ft::Pair<int, int>, std::less<int>, std::allocator<ft::Pair<int, int> > > t;
-	ft::Pair<int, int> p1 = ft::make_pair(3, 5);
+	ft::Pair<int, int> p3 = ft::make_pair(4, 4);
+	ft::Pair<int, int> p1 = ft::make_pair(1, 1);
 	ft::Pair<int, int> p2 = ft::make_pair(2, 2);
 	
 
 	mmap.insert(p1);
 	std::cout << mmap[0] << " " << mmap.size() << std::endl;
 	mmap.insert(p2);
+	std::cout << mmap[0] << " " << mmap.size() << std::endl;
+	mmap.insert(p3);
 	std::cout << mmap[0] << " " << mmap.size() << std::endl;
 
 	return 0;

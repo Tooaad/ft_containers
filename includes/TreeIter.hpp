@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/18 21:16:01 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/05/19 00:59:03 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,31 @@ template <class T>
 				this->_color = otherNode._color;
 			}
 			~Node() {}
+						bool	isLeft() {
+				if (_parent && _parent->_left)
+					return _parent->_left == this;
+				return false;
+			}
+
+			bool	isRight() {
+				if (_parent && _parent->_right)
+					return _parent->_right == this;
+				return false;
+			}
+
+			Node*	getGrandParent() {
+				if (_parent && _parent->_parent)
+					return _parent->_parent;
+				return NULL;
+			}
+
+			Node*	getUncle() {
+				if (_parent && _parent->isLeft())
+					return getGrandParent()->_right;
+				if (_parent && !_parent->isLeft())
+					return getGrandParent()->_left;
+				return NULL;
+			}
 	};
 
 	
