@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 01:19:13 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/17 01:47:58 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:55:32 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ template <class T1, class T2>
 			
 			template<class U, class V>
 				Pair(const Pair<U,V>& pr) : _first(pr._first), _second(pr._second) {}
-
 
 			Pair& operator=(const Pair& pr) {
 				this->_first = pr._first;

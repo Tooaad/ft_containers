@@ -6,15 +6,18 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/19 02:01:08 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/02 13:28:54 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// TREEITER NOW HAS 2 PARAMS some iterators have 3
 
 #pragma once
 
 #include "TreeIter.hpp"
 #include "../utils/pair.hpp"
 #include "allocator_traits.hpp"
+#define COUNT 4
 
 namespace ft
 {
@@ -22,30 +25,33 @@ namespace ft
 	class RBTree
 	{
 	public:
-		typedef Pair value_type;
-		typedef Compare key_compare;
-		typedef Alloc allocator;
-		typedef size_t size_type;
-		typedef ptrdiff_t difference_type;
-		typedef ft::Node<Pair> node_type;
-		typedef typename Alloc::template rebind<node_type>::other node_alloc;
-		typedef ft::allocator<node_alloc> node_traits;
-		typedef typename node_alloc::pointer pointer;
-		typedef typename node_alloc::const_pointer const_pointer;
-		typedef typename ft::TreeIter<pointer, Pair> iterator;
-		typedef typename ft::TreeIter<const_pointer, Pair> const_iterator;
-		typedef typename ft::ReverseIter<iterator> reverse_iterator;
-		typedef typename ft::ReverseIter<const_iterator> const_reverse_iterator;
+		typedef Pair												value_type;
+		typedef Compare												key_compare;
+		typedef Alloc												allocator;
+		typedef size_t												size_type;
+		typedef ptrdiff_t											difference_type;
+		typedef ft::Node<Pair>										node_type;
+		typedef typename Alloc::template rebind<node_type>::other	node_alloc;
+		typedef ft::allocator<node_alloc>							node_traits;
+		typedef typename node_alloc::pointer						pointer;
+		typedef typename node_alloc::const_pointer					const_pointer;
+		typedef typename ft::TreeIter<pointer, Pair>				iterator;
+		typedef typename ft::TreeIter<const_pointer, Pair>			const_iterator;
+		typedef typename ft::ReverseIter<iterator>					reverse_iterator;
+		typedef typename ft::ReverseIter<const_iterator>			const_reverse_iterator;
 
-		pointer _root;
-		size_type _size;
-		key_compare _comp;
-		node_alloc _node_alloc;
+	// private:
+		pointer		_root;
+		size_type	_size;
+		key_compare	_comp;
+		node_alloc	_node_alloc;
+
+	// public:
 
 		explicit RBTree(const key_compare &comp = key_compare(), const node_alloc &node_allocator = node_alloc())
 			: _root(0), _size(0), _comp(comp), _node_alloc(node_allocator)
 		{
-			std::cout << "'2" << std::endl;
+			std::cout << "A Tree has been successfully created" << std::endl;
 		}
 
 		RBTree(const RBTree &otherTree)
@@ -85,20 +91,11 @@ namespace ft
 
 		void deallocate_node(pointer node)
 		{
-			if (!this->_root)
+			if (this->_root != node)
 			{
-				deallocate_node(this->_root->_left);
-				deallocate_node(this->_root->_right);
 				_node_alloc.destroy(node);
 				_node_alloc.deallocate(node, 1);
 			}
-		}
-
-		void p_swap(pointer &one, pointer &two) 
-		{
-			pointer const tmp = one;
-			one = two;
-			two = tmp;
 		}
 
 		ft::Pair<iterator, bool> insert(const value_type &value)
@@ -106,7 +103,7 @@ namespace ft
 			if (!this->_root) {
 				this->_root = createNode(value);
 				this->_root->_color = BLACK;
-				return ft::make_pair(iterator(this->_root, this->_root, 0), true);
+				return ft::make_pair(iterator(this->_root), true);
 			}
 			pointer tmp = this->_root;
 			pointer parent;
@@ -124,12 +121,14 @@ namespace ft
 					parent = tmp;
 					tmp = tmp->_left;
 				}
-				else
-					return ft::make_pair(iterator(tmp, this->_root, 0), false);
+				// else
+				// 	return ft::make_pair(iterator(tmp, this->_root, 0), false);
 			}
 			tmp = createNode(value);
 			pointer newNode = tmp;
 			newNode->_color = RED;
+	// From here functions should be divide as different movements
+	// nodes have been moved 
 			if (this->_comp(parent->_value, value))
 			{
 				parent->_right = newNode;
@@ -140,6 +139,7 @@ namespace ft
 				parent->_left = newNode;
 				newNode->_parent = parent;
 			}
+	// Decides where to put the node on the last leaf, left or right
 			// Adjusting color, father exists and it is RED
 			while (parent && parent->_color == RED)
 			{
@@ -163,7 +163,7 @@ namespace ft
 						if (parent->_right == tmp)
 						{ // _Right rotation
 							rotate_Left(parent);
-							p_swap(parent, tmp);
+							ft::swap(parent, tmp);
 						}
 						rotate_Right(grandParent);
 						grandParent->_color = RED;
@@ -189,7 +189,7 @@ namespace ft
 						if (parent->_left == tmp)
 						{
 							rotate_Right(parent);
-							p_swap(parent, tmp);
+							ft::swap(parent, tmp);
 						}
 						rotate_Left(grandParent);
 						grandParent->_color = RED;
@@ -200,7 +200,7 @@ namespace ft
 				}
 			}
 			this->_root->_color = BLACK;
-			return ft::make_pair(iterator(newNode, this->_root, 0), true);
+			return ft::make_pair(iterator(this->_root), true);
 		}
 
 		void rotate_Right(pointer parent)
@@ -263,30 +263,36 @@ namespace ft
 			}
 		}
 
-		// key_compare& value_compare() { return this->_root->__value->second; }
+		void nodeTransplant(pointer nodeToRemove, pointer nodeToTransplant) {
+			if (nodeToRemove->_parent == NULL)
+				_root = nodeToTransplant;
+			else if (nodeToRemove->_parent->_left && nodeToRemove->_parent->_left == nodeToRemove->_left)
+				nodeToRemove->_parent->_left = nodeToTransplant;
+			else
+				nodeToRemove->_parent->_right = nodeToTransplant;
+			nodeToTransplant->_parent = nodeToRemove->_parent;
+		}
+
+		void erase(pointer &nodeToRemove) {
+			// pointer nil = NULL;
+			if (nodeToRemove->_color == RED) {
+				pointer subMinNode = nodeToRemove->subMin();
+				subMinNode->rewire(nodeToRemove);
+				deallocate_node(nodeToRemove);	
+				
+				// if (!nodeToRemove->_right || !nodeToRemove->_left) {
+				// 	std::cout << "Erase last Red node" << std::endl;
+				// 	nodeTransplant(nodeToRemove, nil);
+				// }
+			}
+		}
 
 		// ITERATORS
-		iterator begin()
-		{
-			pointer nil;
-			return iterator(min(), this->_root(), nil);
-		}
-		const_iterator begin() const
-		{
-			pointer nil;
-			return const_iterator(min(), this->_root(), nil);
-		}
+		iterator begin() { return iterator(min()); }
+		const_iterator begin() const { return const_iterator(min()); }
 
-		iterator end()
-		{
-			pointer nil;
-			return iterator(max(), this->_root(), nil);
-		}
-		const_iterator end() const
-		{
-			pointer nil;
-			return const_iterator(max(), this->_root(), nil);
-		}
+		iterator end() { return iterator(max()); }
+		const_iterator end() const { return const_iterator(max()); }
 
 		reverse_iterator rbegin() { return reverse_iterator(this->end()); }
 		const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end()); }
@@ -296,6 +302,8 @@ namespace ft
 
 		// CAPACITY
 		void increment_size() { this->_size++; }
+		
+		void decrement_size() { this->_size--; }
 
 		size_type size() const { return this->_size; }
 
@@ -317,13 +325,29 @@ namespace ft
 		}
 
 		// OPERATIONS
+		// Map->Tree->Iter->Node->Pair
+
+		template <class K>
+		pointer find(const K& value) {
+			pointer tmp = this->_root;
+			while (tmp) {
+				if (tmp->_value._first < value)
+					tmp = tmp->_right;
+				else if (value < tmp->_value._first)
+					tmp = tmp->_left;
+				else
+					return tmp;
+			}
+			std::cout << "not found" << std::endl;
+			return NULL;
+		}
 
 		pointer min()
 		{
 			pointer tmp = this->_root;
 
-			while (this->_root && this->tmp->_left)
-				tmp = this->tmp->_left;
+			while (this->_root && tmp->_left)
+				tmp = tmp->_left;
 			return tmp;
 		}
 
@@ -331,137 +355,40 @@ namespace ft
 		{
 			pointer tmp = this->_root;
 
-			while (this->_root && this->tmp->_right)
-				tmp = this->tmp->_right;
+			while (this->_root && tmp->_right)
+				tmp = tmp->_right;
 			return tmp;
 		}
+
+			void print2DUtil(pointer root, int space)
+			{
+				// Base case
+				if (root == NULL)
+					return;
+			
+				// Increase distance between levels
+				space += COUNT;
+			
+				// Process right child first
+				print2DUtil(root->_right, space);
+			
+				// Print current node after space
+				// count
+				std::cout<<std::endl;
+				for (int i = COUNT; i < space; i++)
+					std::cout<<" ";
+				std::cout<<root->_value._second<<"\n";
+			
+				// Process left child
+				print2DUtil(root->_left, space);
+			}
+			
+			// Wrapper over print2DUtil()
+			void print2D(pointer root)
+			{
+				// Pass initial space count as 0
+				print2DUtil(root, 0);
+			}
+		
 	};
 }
-
-// 				void	rotate_Left(pointer node) {
-// 	pointer	tmp_Right = node->_right;
-
-// 	node->_right = tmp_Right->_left;
-// 	if (tmp_Right->_left != 0)
-// 		tmp_Right->_left->_parent = node;
-// 	tmp_Right->_parent = node->_parent;
-// 	updateChildren(node, tmp_Right);
-// 	tmp_Right->_left = node;
-// 	node->_parent = tmp_Right;
-// }
-
-// void	rotate_Right(pointer node) {
-// 	pointer	tmp_Left = node->_left;
-
-// 	node->_left = tmp_Left->_right;
-// 	if (tmp_Left->_right != 0)
-// 		tmp_Left->_right->_parent = node;
-// 	tmp_Left->_parent = node->_parent;
-// 	updateChildren(node, tmp_Left);
-// 	tmp_Left->_right = node;
-// 	node->_parent = tmp_Left;
-// }
-
-// void	updateChildren(pointer node, pointer tmp) {
-// 	if (node->_parent == 0)
-// 		_root = tmp;
-// 	else if (node->isLeft())
-// 		node->_parent->_left = tmp;
-// 	else
-// 		node->_parent->_right = tmp;
-// }
-
-// void	swapColor(pointer n1, pointer n2) {
-// 	bool	tmp;
-
-// 	tmp = n1->_color;
-// 	n1->_color = n2->_color;
-// 	n2->_color = tmp;
-// }
-
-// void	rewire() {
-// 	_root->_parent = 0;
-// }
-
-// ft::Pair<iterator, bool> insert(const value_type& value) {
-// 	if (!this->_root) {
-// 		this->_root = createNode(value);
-// 		this->_root->_color = BLACK;
-// 		return ft::make_pair(iterator(this->_root, this->_root, 0), true);
-// 	}
-// 	else {
-// 		pointer tmp = this->_root;
-// 		while (tmp) {
-// 			if (_comp(tmp->_value, value)) {
-// 				if (tmp->_right == 0)
-// 					break ;
-// 				tmp = tmp->_right;
-// 			}
-// 			else if (_comp(value, tmp->_value)) {
-// 				if (tmp->_left == 0)
-// 					break ;
-// 				tmp = tmp->_left;
-// 			}
-// 			else {
-// 				rewire();
-// 				return ft::make_pair(iterator(tmp, _root, 0), false);
-// 			}
-// 		}
-// 		if (_comp(tmp->_value, value)) {
-// 			tmp->_right = createNode(value);
-// 			tmp->_right->_parent = tmp;
-// 			tmp = tmp->_right;
-// 		}
-// 		else if (_comp(value, tmp->_value)) {
-// 			tmp->_left = createNode(value);
-// 			tmp->_left->_parent = tmp;
-// 			tmp = tmp->_left;
-// 		}
-// 		fixInsert(tmp);
-// 		_size++;
-// 		rewire();
-// 		return ft::make_pair(iterator(tmp, _root, 0), true);
-// 	}
-// }
-
-// void	fixInsert(pointer node) {
-// 	if (node != _root && node->_color == RED && node->_parent->_color == RED) {
-// 		if (node->getUncle() && node->getUncle()->_color == RED)
-// 			colorCase(node->_parent, node->getUncle(), node->getGrandParent());
-// 		else if (node->_parent != _root && node->_parent->isLeft())
-// 			_leftCase(node, node->_parent, node->getGrandParent());
-// 		else if (node->_parent != _root && node->_parent->isRight())
-// 			_rightCase(node, node->_parent, node->getGrandParent());
-// 	}
-// 	_root->_color = BLACK;
-// 	rewire();
-// }
-
-// void	colorCase(pointer parent, pointer uncle, pointer grandParent) {
-// 	uncle->_color = BLACK;
-// 	parent->_color = BLACK;
-// 	grandParent->_color = RED;
-// 	fixInsert(grandParent);
-// }
-
-// void	_leftCase(pointer node, pointer parent, pointer grandParent) {
-// 	if (!node->isLeft()) {
-// 		rotate_Left(parent);
-// 		node = parent;
-// 		parent = node->_parent;
-// 	}
-// 	rotate_Right(grandParent);
-// 	swapColor(parent, grandParent);
-// 	fixInsert(parent);
-// }
-
-// void	_rightCase(pointer node, pointer parent, pointer grandParent) {
-// 	if (node->isLeft()) {
-// 		rotate_Right(parent);
-// 		node = parent;
-// 		parent = node->_parent;
-// 	}
-// 	rotate_Left(grandParent);
-// 	swapColor(parent, grandParent);
-// 	fixInsert(parent);
-// }

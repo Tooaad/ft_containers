@@ -52,3 +52,12 @@ https://github.com/Hedenghui/cpp/blob/b9b5976aa8a821d191e115cb2bb790d78743b168/m
  
 https://stackoverflow.com/questions/14148756/what-does-template-rebind-do
 https://howardhinnant.github.io/allocator_boilerplate.html
+
+- Delete node: https://medium.com/analytics-vidhya/deletion-in-red-black-rb-tree-92301e1474ea
+
+- https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+
+# Cosas a pillar
+- Prueba map.find con un 0 (sin insertarlo en el mapa) -> lo encuentra esta mal
+- Probar a meter el mismo key varias veces e imprimir donde estan valor
+- Como funciona el operator[], que hace

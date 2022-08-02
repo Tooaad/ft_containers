@@ -61,8 +61,8 @@ template <class T, class Allocator = std::allocator<T> >
 				this->_alloc = otherVector._alloc;
 				this->_data = _alloc.allocate(_capacity);
 
-				for (iterator it = otherVector.begin(); it < otherVector.end(); it++)
-					push_back(*it);
+				for (size_type i = 0; i < this->_size; i++)
+					_alloc.construct(&this->_data[i], otherVector._data[i]);
 			}
 
 			virtual ~Vector() {

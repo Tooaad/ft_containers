@@ -6,13 +6,13 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 21:25:45 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/05/02 23:23:38 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:30:04 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "Vector.hpp"
+#include "../includes/Vector.hpp"
 
 namespace ft {
 template <class T, class Container = Vector<T> > 
@@ -28,25 +28,27 @@ template <class T, class Container = Vector<T> >
 			container_type c;
 			
 		public:
-			explicit Stack(const container_type& char ctnr = container_type()) : c(ctnr) {}
 			virtual ~Stack() {}
+			explicit Stack(const container_type& ctnr = container_type()) : c(ctnr) {}
 			Stack(const Stack& stack) : c(stack.c) {}
 			Stack& operator=(const Stack& stack) {
 				this->c = stack.c;
 				return *this;
 			}
-			bool empty() const { return c.empty(); }
-			size_type size const { return c.size(); }
 			reference top() { return c.back(); }
-			const_reference top() { return c.back(); }
+			const_reference top() const { return c.back(); }
+
+			bool empty() const { return c.empty(); }
+			size_type size() const { return c.size(); }
+			
 			void push(const value_type& val) { c.push_back(val); }
-			void pop() { c.pop_back(); }
+			void pop() { c.pop_back(); }	
 
 			template <class T1, class C1>
-    			friend bool operator==(const stack<T1, C1>& x, const stack<T1, C1>& y);
+    			friend bool operator==(const Stack<T1, C1>& x, const Stack<T1, C1>& y);
 
     		template <class T1, class C1>
-				friend bool operator< (const stack<T1, C1>& x, const stack<T1, C1>& y);
+				friend bool operator< (const Stack<T1, C1>& x, const Stack<T1, C1>& y);
 	};
 
 	template <class T, class Container>
