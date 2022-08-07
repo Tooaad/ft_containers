@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/02 13:26:09 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/06 19:16:55 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,49 +74,49 @@ template <class T>
 				node->_right = NULL;
 				node->_left = NULL;
 			}
-			void remove() {
-				if (_parent) {
-					this->_parent = NULL;
-					if (this->_parent->_left && this->_parent->_left == this->_left)
-						this->_parent->_left = NULL;
-					else
-						this->_parent->_right = NULL;
-				}
-				if (_left) {
-					this->_left = NULL;
-					this->_parent->_left = NULL;
-				}
-				if (_right) {
-					this->_parent = NULL;
-					this->_parent->_right = NULL;
-				}
+
+			void leftRotate(Node* _root) {
+				Node* nodeAux = this->_right;
+				this->_right = nodeAux->_left;
+				if (nodeAux->_left != NULL)
+					nodeAux->_left->_parent = this;
+				nodeAux->_parent = this->_parent;
+				if (!this->_parent)
+					_root = nodeAux;
+				else if (this == this->_parent->_left)
+					this->_parent->_left = nodeAux;
+				else
+					this->_parent->_right = nodeAux;
+				nodeAux->_left = this;
+				this->_parent = nodeAux;		
 			}
 
-			// bool	isLeft() {
-			// 	if (_parent && _parent->_left)
-			// 		return _parent->_left == this;
-			// 	return false;
-			// }
+			void rightRotate(Node* _root) {
+				Node* nodeAux = this->_left;
+				this->_left = nodeAux->_right;
+				if (nodeAux->_right != NULL)
+					nodeAux->_right->_parent = this;
+				nodeAux->_parent = this->_parent;
+				if (!this->_parent)
+					_root = nodeAux;
+				else if (this == this->_parent->_right)
+					this->_parent->_right = nodeAux;
+				else
+					this->_parent->_left = nodeAux;
+				nodeAux->_right = this;
+				this->_parent = nodeAux;		
+			}
+			bool	isLeft() {
+				if (this->_parent && this->_parent->_left)
+					return this->_parent->_left == this;
+				return false;
+			}
 
-			// bool	isRight() {
-			// 	if (_parent && _parent->_right)
-			// 		return _parent->_right == this;
-			// 	return false;
-			// }
-
-			// Node*	getGrandParent() {
-			// 	if (_parent && _parent->_parent)
-			// 		return _parent->_parent;
-			// 	return NULL;
-			// }
-
-			// Node*	getUncle() {
-			// 	if (_parent && _parent->isLeft())
-			// 		return getGrandParent()->_right;
-			// 	if (_parent && !_parent->isLeft())
-			// 		return getGrandParent()->_left;
-			// 	return NULL;
-			// }
+			bool	isRight() {
+				if (this->_parent && this->_parent->_right)
+					return this->_parent->right == this;
+				return false;
+			}
 	};
 
 	
@@ -133,11 +133,11 @@ template <class Node, class Pair >
 			typedef typename ft::iterator_traits<Node>::reference		reference_ptr;
 
 			node_ptr	_root;
-			node_ptr	_node;
+			node_ptr	_nil;
 			
 			TreeIter() : _root(0) {}
-			explicit TreeIter(node_ptr root, node_ptr node) : _root(root), _node(node) {}
-			explicit TreeIter(node_ptr root): _root(root), _node((this->_root)) {}
+			// explicit TreeIter(node_ptr root, node_ptr nil) : _root(root), _nil(0) {}
+			explicit TreeIter(node_ptr root): _root(root), _nil(0) {}
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
 				this->_root = it._root;
@@ -206,8 +206,9 @@ template <class Node, class Pair >
 					n = n->_right;
 				return n;
 			}
-			reference operator*() const { return *_node; }
-			pointer operator->() const { return _node; }
+			
+			reference operator*() const { return *_root->_value; }
+			pointer operator->() const { return _root->_value; }
 			
 	};
 	

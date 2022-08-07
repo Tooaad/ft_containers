@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/02 13:00:21 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/07 12:45:46 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,9 @@ int main()
 
 	// std::cout << it._root->_value._second << std::endl;
 	tree.print2D(tree._root);
-	mmap.erase(30);
+	mmap.erase(10);
+	// std::cout << tree.max() << std::endl;
+	// mmap.erase(30);
 	// std::cout << "   " << tree._root->_value._second << "\n" <<
 	// " " << tree._root->_left->_value._second << "   " << tree._root->_right->_value._second << "\n" <<
 	// tree._root->_left->_left->_value._second << " " << tree._root->_left->_right->_value._second << " " << tree._root->_right->_left->_value._second << " " << tree._root->_right->_right->_value._second
