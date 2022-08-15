@@ -2,13 +2,13 @@
 
 #include <stdexcept>
 #include <iostream>
-#include "VectorIter.hpp"
+#include "vectorIter.hpp"
 #include "ReverseIter.hpp"
 #include "../utils/utils.hpp"
 
 namespace ft {
 template <class T, class Allocator = std::allocator<T> >
-	class Vector {
+	class vector {
 		public:
 			typedef T											value_type;
 			typedef Allocator									allocator_type;
@@ -16,8 +16,8 @@ template <class T, class Allocator = std::allocator<T> >
 			typedef typename Allocator::const_reference			const_reference;
 			typedef typename Allocator::pointer					pointer;
 			typedef typename Allocator::const_pointer			const_pointer;
-			typedef typename ft::VectorIter<pointer>			iterator;
-			typedef typename ft::VectorIter<const_pointer>		const_iterator;
+			typedef typename ft::vectorIter<pointer>			iterator;
+			typedef typename ft::vectorIter<const_pointer>		const_iterator;
 			typedef typename ft::ReverseIter<iterator>			reverse_iterator;
 			typedef typename ft::ReverseIter<const_iterator>	const_reverse_iterator;
 			typedef typename Allocator::difference_type			difference_type;
@@ -31,23 +31,23 @@ template <class T, class Allocator = std::allocator<T> >
 		
 		public:
 
-			explicit Vector(const allocator_type& alloc = allocator_type())
-				: _data(0), _size(0), _capacity(0), _alloc(alloc) {
+			explicit vector(const allocator_type& alloc = allocator_type())
+				: _size(0), _capacity(0), _alloc(alloc) {
+					this->_data = this->_alloc.allocate(this->_capacity);
 				}
 
-			explicit Vector(size_type n, const value_type& value, const allocator_type& alloc = allocator_type())
-				: _size(n), _capacity(n), _alloc(alloc) {
-					this->_data = _alloc.allocate(n);
+			explicit vector(size_type n, const value_type& value = value_type(), const allocator_type& alloc = allocator_type()) : _size(n), _capacity(n), _alloc(alloc) {
+					this->_data = _alloc.allocate(_capacity);
 					for (size_type i = 0; i < n; i++)
 						this->_alloc.construct(&this->_data[i], value);
 				}
 			
 			template <class InputIterator>
-				Vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
-				: _alloc(alloc) {
-					size_type n;
+				vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+				: _size(0), _alloc(alloc) {
+					size_type n = 0;
 					
-					for (InputIterator it = first; it < last; it++)
+					for (InputIterator it = first; it != last; it++)
 						n++;
 					this->_data = _alloc.allocate(n);
 					this->_capacity = n;
@@ -55,31 +55,31 @@ template <class T, class Allocator = std::allocator<T> >
 						push_back(*it);
 				}
 			
-			Vector(const Vector& otherVector) {
-				this->_size = otherVector._size;
-				this->_capacity = otherVector._capacity;
-				this->_alloc = otherVector._alloc;
+			vector(const vector& othervector) {
+				this->_size = othervector._size;
+				this->_capacity = othervector._capacity;
+				this->_alloc = othervector._alloc;
 				this->_data = _alloc.allocate(_capacity);
 
 				for (size_type i = 0; i < this->_size; i++)
-					_alloc.construct(&this->_data[i], otherVector._data[i]);
+					_alloc.construct(&this->_data[i], othervector._data[i]);
 			}
 
-			virtual ~Vector() {
+			virtual ~vector() {
 				this->_alloc.destroy(this->_data);
-				this->_alloc.deallocate(this->_data, this->_capacity);
+				// this->_alloc.deallocate(this->_data, this->_capacity);
 			}
 
-			Vector&	operator=(const Vector& otherVector) {
+			vector&	operator=(const vector& othervector) {
 				// clear();
-				if (otherVector._size > this->_capacity)
-					this->_capacity = otherVector._capacity;
+				if (othervector._size > this->_capacity)
+					this->_capacity = othervector._capacity;
 
-				this->_size = otherVector._size;
+				this->_size = othervector._size;
 				this->_data = _alloc.allocate(_capacity);
 
-				for (size_type i = 0; i < otherVector.size(); i++)
-					this->_alloc.construct(&this->_data[i], otherVector._data[i]);
+				for (size_type i = 0; i < othervector.size(); i++)
+					this->_alloc.construct(&this->_data[i], othervector._data[i]);
 				return *this;
 			}
 
@@ -104,24 +104,29 @@ template <class T, class Allocator = std::allocator<T> >
 				return this->_alloc.max_size();
 			}
 
-			void resize(size_type n, value_type val = value_type()) {	
-				if (n > this->size()) {
+			void resize(size_type n, value_type val = value_type()) {
+				if (n > capacity()) {
 					size_type oldCapacity = this->_capacity;
-					pointer newData;
-					
 					reserve(n);
-					newData = this->_alloc.allocate(this->capacity());
-					for (size_type i = 0; i < this->size(); i++)
-						this->_alloc.construct(&newData[i], this->_data[i]);
+					pointer newData = this->_alloc.allocate(capacity());
 
-					while (this->size() > this->capacity())
-						push_back(val);
+					// Para copiar lo antiguo en lo nuevo
+					for (size_type i = 0; i < size(); i++)
+						this->_alloc.construct(&newData[i], this->_data[i]);
 					this->_alloc.deallocate(this->_data, oldCapacity);
 					this->_data = newData;
 				}
-				else if (n < this->size())
-					while (this->size() < this->capacity())
-						pop_back();
+				while (size() > capacity())
+					pop_back();
+				
+				while (size() < n && val != value_type())
+					push_back(val);
+			}
+
+			void reserve(size_type n) {
+				if (n > max_size())
+					throw std::length_error("Trying to allocate more than the allowed max_size");
+				(n < 20)? this->_capacity *= 2 : this->_capacity = n;
 			}
 
 			size_type capacity() const {
@@ -132,25 +137,17 @@ template <class T, class Allocator = std::allocator<T> >
 				return (this->begin() == this->end());
 			}
 
-			void reserve(size_type n) {
-				if (n < 32)
-					n *= 2;
-				if (n > max_size())
-					throw std::length_error("Trying to allocate more than the allowed max_size");
-				if (n > capacity())
-					this->_capacity = n;
-			}
 
 	//		ELEMENT ACCESS
 			reference operator[](size_type n) { return this->_data[n]; }
 			const_reference operator[](size_type n) const { return this->_data[n]; }
 			reference at(size_type n) {
-				if (!this->_data[n])
+				if (n > this->_capacity)
 					throw std::out_of_range("Index out of range");
 				return  this->_data[n];
 			}
 			const_reference at(size_type n) const {
-				if (!this->_data[n])
+				if (n > this->_capacity)
 					throw std::out_of_range("Index out of range");
 				return  this->_data[n];
 			}
@@ -164,30 +161,32 @@ template <class T, class Allocator = std::allocator<T> >
 			template <class InputIterator>
 				void assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) {
 					size_type n = 0;
-					for (InputIterator it = first; it < last; it++)
-						n++;
 					clear();
-					if (n > this->capacity())
+					for (InputIterator it = first; it != last; it++)
+						n++;
+					if (n > capacity())
 						resize(n);
-					for (InputIterator it = first; it < last; it++)
+					for (InputIterator it = first; it != last; it++)
 						push_back(*it);
 			}
 
 			void assign(size_type n, const value_type& value) {
 				clear();
-				if (n > this->capacity())
+				if (n > capacity())
 					resize(n);
-				for (size_type i = 0; i < n; i++)
+
+				while (size() < n)
 					push_back(value);
 			}
 
 			void push_back(const value_type& val) {
-				if (this->size() == this->capacity())
-					resize(this->size() + 1, val);
-				this->_alloc.construct(&this->_data[this->size()], val);
+				if (size() == capacity())
+					resize(capacity() < 1 ? 1 : capacity() * 2);
+				this->_alloc.construct(&this->_data[size()], val);
 				this->_size++;
 			}
 
+ 
 			void pop_back() {
 				if (!this->empty()) {
 					this->_size--;
@@ -201,17 +200,17 @@ template <class T, class Allocator = std::allocator<T> >
 					push_back(val);
 					return position;
 				}
-				ft::Vector<T> newVector;
+				ft::vector<T> newvector;
 				size_type oldCapacity = this->capacity();
 
 				for (iterator it = this->begin(); it < position; it++)
-					newVector.push_back(*it);
-				newVector.push_back(val);
+					newvector.push_back(*it);
+				newvector.push_back(val);
 				for (iterator it = position; it < this->end(); it++)
-					newVector.push_back(*it);
+					newvector.push_back(*it);
 
 				this->_alloc.deallocate(this->_data, oldCapacity);
-				*this = newVector;
+				*this = newvector;
 				return position;
 			}
 
@@ -222,40 +221,40 @@ template <class T, class Allocator = std::allocator<T> >
 						this->push_back(val);
 					return ;
 				}
-				ft::Vector<T> newVector;
+				ft::vector<T> newvector;
 				size_type oldCapacity = this->capacity();
 
 				for (iterator it = this->begin(); it < position; it++)
-					newVector.push_back(*it);
+					newvector.push_back(*it);
 				for (size_type i = 0; i < n; i++)
-					newVector.push_back(val);
+					newvector.push_back(val);
 				for (iterator it = position; it < this->end(); it++)
-					newVector.push_back(*it);
+					newvector.push_back(*it);
 
 				this->_alloc.deallocate(this->_data, oldCapacity);
-				*this = newVector;
+				*this = newvector;
 			}
 
 			template <class InputIterator>
 				void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) {
 					if (position == this->end())
 					{
-						for (InputIterator it = first; it < last; it++)
+						for (InputIterator it = first; it != last; it++)
 							this->push_back(*it);
 						return ;
 					}
-					ft::Vector<T> newVector;
+					ft::vector<T> newvector;
 					size_type oldCapacity = this->capacity();
 
 					for (iterator it = this->begin(); it < position; it++)
-						newVector.push_back(*it);
-					for (InputIterator i = first; i < last; i++)
-						newVector.push_back(*i);
+						newvector.push_back(*it);
+					for (InputIterator i = first; i != last; i++)
+						newvector.push_back(*i);
 					for (iterator it = position; it < this->end(); it++)
-						newVector.push_back(*it);
+						newvector.push_back(*it);
 
 					this->_alloc.deallocate(this->_data, oldCapacity);
-					*this = newVector;
+					*this = newvector;
 				}
 
 			iterator erase (iterator position) {
@@ -291,11 +290,11 @@ template <class T, class Allocator = std::allocator<T> >
 				return first;
 			}
 
-			void swap(Vector &otherVector) {
-				ft::swap(this->_alloc, otherVector._alloc);
-				ft::swap(this->_data, otherVector._data);
-				ft::swap(this->_size, otherVector._size);
-				ft::swap(this->_capacity, otherVector._capacity);
+			void swap(vector &othervector) {
+				ft::swap(this->_alloc, othervector._alloc);
+				ft::swap(this->_data, othervector._data);
+				ft::swap(this->_size, othervector._size);
+				ft::swap(this->_capacity, othervector._capacity);
 			}
 
 			void clear() {
@@ -311,37 +310,38 @@ template <class T, class Allocator = std::allocator<T> >
 	};
 
 	template <class T, class Alloc>
-		bool operator== (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs) {
+		bool operator== (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
 			if (lhs.size() != rhs.size())
 				return false;
 			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 		}
 
 	template <class T, class Alloc>
-		bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs) {
+		bool operator!= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
 			return !(lhs == rhs);
 		}
 
 	template <class T, class Alloc>
-		bool operator<  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs) {
+		bool operator<  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
 			return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 		}
 	template <class T, class Alloc>
-		bool operator<= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs) {
+		bool operator<= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
 			return !(rhs < lhs);
 		}
 	template <class T, class Alloc>
-		bool operator>  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs) {
+		bool operator>  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
 			return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
 		}
 
 	template <class T, class Alloc>
-		bool operator>= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs) {
+		bool operator>= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
 			return !(lhs < rhs);
 		}
 
 	template<typename T, class Alloc>
-	void	swap(ft::Vector<T, Alloc>& x, ft::Vector<T, Alloc>& y) {
+	void	swap(ft::vector<T, Alloc>& x, ft::vector<T, Alloc>& y) {
 		x.swap(y);
 	}
 }
+

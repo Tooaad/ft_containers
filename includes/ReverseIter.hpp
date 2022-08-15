@@ -28,7 +28,7 @@ namespace ft {
 			ReverseIter() : _ptr() {}
 			explicit ReverseIter(pointer x) : _ptr(x) {}
 			template <class U>
-			ReverseIter(const ReverseIter<U> &iter) : _ptr(iter._ptr) {}
+			ReverseIter(const ReverseIter<U> &iter) : _ptr(iter.base()) {}
 			~ReverseIter() {}
 
 			template <class U>
@@ -37,10 +37,10 @@ namespace ft {
 				return *this;
 			}
 
-			ReverseIter base() const {return _ptr;}
+			pointer base() const {return _ptr;}
 
-			reference operator*() const { return *_ptr; }
-			pointer operator->() const { return _ptr; }
+			reference operator*() const { pointer tmp = this->_ptr; return *(--tmp); }
+			pointer operator->() const { operator*(); }
 			reference operator[](difference_type pos) const {return *(*this + pos); }
 
 			ReverseIter& operator++() { _ptr--; return *this; }  
@@ -73,5 +73,15 @@ namespace ft {
 			
 	template <class A, class B>
 	bool operator>=(const ReverseIter<A>& a, const ReverseIter<B>& b) { return a.base() >= b.base(); }
+
+	template <typename A, typename B>
+	ptrdiff_t		operator-(const ReverseIter<A>& lhs, const ReverseIter<B>& rhs) {
+		return rhs.base() - lhs.base();
+	}
+
+	template <typename A>
+	ReverseIter<A>		operator+(typename ReverseIter<A>::difference_type n, const ReverseIter<A>& rhs) {
+		return (ReverseIter<A>)(rhs.base() - n);
+	}
 
 }

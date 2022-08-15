@@ -16,6 +16,8 @@
 
 #include "../includes/TreeIter.hpp"
 #include "../utils/pair.hpp"
+#include "../utils/utils.hpp"
+#include "../includes/ReverseIter.hpp"
 #include "allocator_traits.hpp"
 #define COUNT 4
 
@@ -50,17 +52,12 @@ namespace ft
 		// public:
 
 		explicit RBTree(const key_compare &comp = key_compare(), const node_alloc &node_allocator = node_alloc())
-			: _size(0), _comp(comp), _node_alloc(node_allocator)
+			: _root(0), _size(0), _comp(comp), _node_alloc(node_allocator)
 		{
 			std::cout << "A Tree has been successfully created" << std::endl;
 			_nil = _node_alloc.allocate(1);
 			_node_alloc.construct(_nil, value_type());
 			_nil->_color = BLACK;
-			// _nil->_parent = _nil;
-			// _root = _nil;
-			// _nil->_left = _root;
-			// _nil->_right = _root;
-			// _root->_parent = _nil;
 			std::cout << "---" << _nil << std::endl;
 		}
 
@@ -91,7 +88,7 @@ namespace ft
 		}
 
 		~RBTree() {
-			// deallocate_node(_nil);
+			deallocate_node(_nil);
 		}
 
 		pointer createNode(const value_type &value)
@@ -293,19 +290,25 @@ namespace ft
 			return true;
 		}
 
+		void delNil(pointer& node) {
+			if (node && node != _nil)
+				return ;
+			node = NULL;
+		}
+
 		void deleteFix(pointer &nodeToRemove)
 		{
 			pointer nodeAux;
 			
 			while (nodeToRemove != this->_root && nodeToRemove->_color == BLACK)
 			{
-				
-				std::cout << "++++++" <<  nodeToRemove->_parent->_value._first << std::endl;
+				std::cout << "+++++" << std::endl;
 				if (nodeToRemove->isLeft())
 				{
 					nodeAux = nodeToRemove->_parent->_right;
 					if (nodeAux->_color == RED)
 					{
+						std::cout << "L1:"  << std::endl;
 						nodeAux->_color = BLACK;
 						nodeToRemove->_parent->_color = RED;
 						//----
@@ -314,33 +317,42 @@ namespace ft
 						rotateLeft(nodeToRemove->_parent);
 						nodeAux = nodeToRemove->_parent->_right;
 					}
-					if (nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
+					if (setNil(nodeAux->_left) && setNil(nodeAux->_right)
+						&& nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
 					{
+						std::cout << "L2:"  << std::endl;
 						nodeAux->_color = RED;
 						//----
-							
+						nodeAux->_left = NULL;
+						nodeAux->_right = NULL;
+						nodeAux->_parent->_left = NULL;
 						//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
 					else
 					{
+						delNil(nodeAux->_left);
+						delNil(nodeAux->_right);
 						if (setNil(nodeAux->_right) && nodeAux->_right->_color == BLACK)
 						{
+							std::cout << "L3:"  << std::endl;
 							nodeAux->_left->_color = BLACK;
 							nodeAux->_color = RED;
 							//----
 							
 							//----
-							nodeAux->rightRotate(this->_root);
-							
+							rotateRight(nodeAux);
 							nodeAux = nodeToRemove->_parent->_right;
 						}
+						std::cout << "*******" << nodeAux->_value.first << std::endl;
+						std::cout << "L4:"  << std::endl;
 						nodeAux->_color = nodeToRemove->_parent->_color;
 						nodeToRemove->_parent->_color = BLACK;
 						nodeAux->_right->_color = BLACK;
 					//----
-						nodeAux->_right->_right = NULL;
-						nodeToRemove->_parent->_left = NULL;
+						delNil(nodeAux->_right->_right);
+						delNil(nodeToRemove->_parent->_left);
+						delNil(nodeAux->_left);
 					//----
 						rotateLeft(nodeAux->_parent);
 						nodeToRemove = this->_root;
@@ -348,50 +360,61 @@ namespace ft
 				}
 				else 
 				{
+					std::cout << "@@@@@@" << std::endl;
 					nodeAux = nodeToRemove->_parent->_left;
-					if (nodeAux->_color == 1)
+					if (nodeAux->_color == RED)
 					{
-						nodeAux->_color = 0;
-						nodeToRemove->_parent->_color = 1;
+						std::cout << "R1:"  << std::endl;
+						nodeAux->_color = BLACK;
+						nodeToRemove->_parent->_color = RED;
 					//----
 							
 					//----
 						rotateRight(nodeToRemove->_parent);
 						nodeAux = nodeToRemove->_parent->_left;
 					}
-					if (nodeAux->_left->_color == 0 && nodeAux->_right->_color == 0)
+					if (setNil(nodeAux->_left) && setNil(nodeAux->_right) &&
+						nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
 					{
-						nodeAux->_color = 1;
-						//----
-						
-						//----
+						std::cout << "R2:"  << std::endl;
+						nodeAux->_color = RED;
+					//----
+						nodeAux->_left = NULL;
+						nodeAux->_right = NULL;
+						nodeAux->_parent->_right = NULL;
+					//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
 					else
 					{
-						if (setNil(nodeAux->_left) && nodeAux->_left->_color == 0)
+						delNil(nodeAux->_left);
+						delNil(nodeAux->_right);
+						if (setNil(nodeAux->_left) && nodeAux->_left->_color == BLACK)
 						{
-							nodeAux->_right->_color = 0;
-							nodeAux->_color = 1;
+							std::cout << "R3:"  << std::endl;
+							nodeAux->_right->_color = BLACK;
+							nodeAux->_color = RED;
 						//----
 							
 						//----
 							rotateLeft(nodeAux->_parent);
 							nodeAux = nodeToRemove->_parent->_left;
 						}
+						std::cout << "R4:"  << std::endl;
 						nodeAux->_color = nodeToRemove->_parent->_color;
-						nodeToRemove->_parent->_color = 0;
-						nodeAux->_left->_color = 0;
+						nodeToRemove->_parent->_color = BLACK;
+						nodeAux->_left->_color = BLACK;
 					//----
-						nodeAux->_left->_left = NULL;
-						nodeToRemove->_parent->_right = NULL;
+						delNil(nodeAux->_left->_left);
+						delNil(nodeToRemove->_parent->_right);
+						delNil(nodeAux->_right);
 					//----
 						rotateRight(nodeAux->_parent);
 						nodeToRemove = this->_root;
 					}
 				}
 			}
-			nodeToRemove->_color = 0;
+			nodeToRemove->_color = BLACK;
 		}
 
 			void erase(pointer & nodeToRemove)
@@ -405,14 +428,16 @@ namespace ft
 						nodeAux = _nil;
 						std::cout << "<" << std::endl;
 						nodeAux->_parent = nodeToRemove->_parent;
-						nodeToRemove->_parent->_left = nodeAux;
-						// nodeToRemove->_parent->_right = nodeAux;
+						if (nodeToRemove->isLeft())
+							nodeToRemove->_parent->_left = nodeAux;
+						else
+							nodeToRemove->_parent->_right = nodeAux;
 					}
 					else {
 						nodeAux = nodeToRemove->_right;
 						nodeTransplant(nodeToRemove, nodeToRemove->_right);
 					}
-					std::cout << "1:" << std::endl;
+					std::cout << "01:"  << std::endl;
 				}
 				else if (!nodeToRemove->_right)
 				{
@@ -420,26 +445,30 @@ namespace ft
 						nodeAux = _nil;
 						std::cout << "<" << std::endl;
 						nodeAux->_parent = nodeToRemove->_parent;
-						nodeToRemove->_parent->_right = nodeAux;
-						// nodeToRemove->_parent->_left = nodeAux;
+						if (nodeToRemove->isRight())
+							nodeToRemove->_parent->_left = nodeAux;
+						else
+							nodeToRemove->_parent->_right = nodeAux;
 					}
 					else {
 						nodeAux = nodeToRemove->_left;
 						nodeTransplant(nodeToRemove, nodeToRemove->_left);
 					}
-					std::cout << "2:" << std::endl;
+					std::cout << "02:" << std::endl;
 				}
 				else
 				{
 					copyRemove = nodeToRemove->subMin();
 					copy_color = copyRemove->_color;
-					copyRemove->_right = _nil;
+					if (!copyRemove->_right)
+						copyRemove->_right = _nil;
 					nodeAux = copyRemove->_right;
-					
-					if (copyRemove->_parent == nodeToRemove)
+					if (copyRemove->_parent == nodeToRemove) {
 						nodeAux->_parent = copyRemove;
+					}
 					else
 					{
+						std::cout << "03:" << std::endl;
 						nodeTransplant(copyRemove, copyRemove->_right);
 						copyRemove->_right = nodeToRemove->_right;
 						copyRemove->_right->_parent = copyRemove;
@@ -447,17 +476,17 @@ namespace ft
 					nodeTransplant(nodeToRemove, copyRemove);
 					copyRemove->_left = nodeToRemove->_left;
 					copyRemove->_left->_parent = copyRemove;
+					std::cout << "04:" << std::endl;
 					copyRemove->_color = nodeToRemove->_color;
-					// copyRemove->_right = NULL;
 				}
 				deallocate_node(nodeToRemove);
 				if (copy_color == BLACK)
 					deleteFix(nodeAux);
 			//----
 				else {
-					if (nodeAux->isLeft())
+					if (nodeAux->_parent->_left == _nil)
 						nodeAux->_parent->_left = NULL;
-					else
+					if (nodeAux->_parent->_right == _nil)
 						nodeAux->_parent->_right = NULL;
 				}
 			//----
@@ -509,9 +538,9 @@ namespace ft
 				pointer tmp = this->_root;
 				while (tmp)
 				{
-					if (tmp->_value._first < value)
+					if (tmp->_value.first < value)
 						tmp = tmp->_right;
-					else if (value < tmp->_value._first)
+					else if (value < tmp->_value.first)
 						tmp = tmp->_left;
 					else
 						return tmp;

@@ -12,11 +12,10 @@
 
 #pragma once
 
-#include "iterator_traits.hpp"
+#include "../includes/iterator_traits.hpp"
 
 static const int BLACK = 0;
 static const int RED = 1;
-static const int DB = 2; // Double Black
 
 namespace ft {
 template <class T>
@@ -59,7 +58,7 @@ template <class T>
 				Node* tmp = this->_right;
 				while (tmp->_left)
 					tmp = tmp->_left;
-				tmp->_parent->_left = NULL;
+				// tmp->_parent->_left = NULL;
 				return tmp;
 			}
 
@@ -114,7 +113,7 @@ template <class T>
 
 			bool	isRight() {
 				if (this->_parent && this->_parent->_right)
-					return this->_parent->right == this;
+					return this->_parent->_right == this;
 				return false;
 			}
 	};
@@ -141,16 +140,14 @@ template <class Node, class Pair >
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
 				this->_root = it._root;
-				this->_begin = it._begin;
-				this->_limit = it._limit;
+				this->_nil = it._nil;
 			}
 			~TreeIter() {}
 
 			template <class U, class P>
 			TreeIter&	operator=(const TreeIter<U, P>& other) {
 				this->_root = other._root;
-				this->_begin = other._begin;
-				this->_limit = other._limit;
+				this->_nil = other._nil;
 				return *this;
 			}
 			pointer base() const {return this;}
@@ -159,7 +156,7 @@ template <class Node, class Pair >
 				if (this->_root->_right) {
 					node_ptr tmp = this->_root->_right;
 					tmp = min(tmp);
-					// std::cout << "\n" << tmp->_value._first << std::endl;
+					// std::cout << "\n" << tmp->_value.first << std::endl;
 					this->_root = tmp;
 				}
 				else {

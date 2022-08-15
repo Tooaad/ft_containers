@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Stack.hpp                                          :+:      :+:    :+:   */
+/*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,12 @@
 
 #pragma once
 
-#include "../includes/Vector.hpp"
+#include "../includes/vector.hpp"
+#include "../utils/utils.hpp"
 
 namespace ft {
-template <class T, class Container = Vector<T> > 
-	class Stack {
+template <class T, class Container = vector<T> > 
+	class stack {
 		public:
 			typedef Container									container_type;
 			typedef typename container_type::value_type			value_type;
@@ -28,10 +29,10 @@ template <class T, class Container = Vector<T> >
 			container_type c;
 			
 		public:
-			virtual ~Stack() {}
-			explicit Stack(const container_type& ctnr = container_type()) : c(ctnr) {}
-			Stack(const Stack& stack) : c(stack.c) {}
-			Stack& operator=(const Stack& stack) {
+			virtual ~stack() {}
+			explicit stack(const container_type& ctnr = container_type()) : c(ctnr) {}
+			stack(const stack& stack) : c(stack.c) {}
+			stack& operator=(const stack& stack) {
 				this->c = stack.c;
 				return *this;
 			}
@@ -45,36 +46,34 @@ template <class T, class Container = Vector<T> >
 			void pop() { c.pop_back(); }	
 
 			template <class T1, class C1>
-    			friend bool operator==(const Stack<T1, C1>& x, const Stack<T1, C1>& y);
+    			friend bool operator==(const stack<T1, C1>& x, const stack<T1, C1>& y);
 
     		template <class T1, class C1>
-				friend bool operator< (const Stack<T1, C1>& x, const Stack<T1, C1>& y);
+				friend bool operator< (const stack<T1, C1>& x, const stack<T1, C1>& y);
 	};
 
 	template <class T, class Container>
-		bool operator== (const Stack<T,Container>& lhs, const Stack<T,Container>& rhs) {
-			if (lhs.size() != rhs.size())
-				return false;
-			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+		bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs) {
+			return lhs.c == rhs.c;
 		}
 	template <class T, class Container>
-		bool operator!= (const Stack<T,Container>& lhs, const Stack<T,Container>& rhs) {
+		bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs) {
 			return !(lhs == rhs);
 		}
 	template <class T, class Container>
-		bool operator< (const Stack<T,Container>& lhs, const Stack<T,Container>& rhs) {
-			return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		bool operator< (const stack<T,Container>& lhs, const stack<T,Container>& rhs) {
+			return lhs.c < rhs.c;
 		}
 	template <class T, class Container>
-		bool operator<= (const Stack<T,Container>& lhs, const Stack<T,Container>& rhs) {
+		bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs) {
 			return !(rhs < lhs);
 		}
 	template <class T, class Container>
-		bool operator>  (const Stack<T,Container>& lhs, const Stack<T,Container>& rhs) {
-			return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+		bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs) {
+			return rhs < lhs;
 		}
 	template <class T, class Container>
-		bool operator>= (const Stack<T,Container>& lhs, const Stack<T,Container>& rhs) {
+		bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs) {
 			return !(lhs < rhs);
 		}
 }

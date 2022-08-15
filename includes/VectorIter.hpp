@@ -12,11 +12,11 @@
 
 #pragma once
 
-#include "iterator_traits.hpp"
+#include "../includes/iterator_traits.hpp"
 
 namespace ft {
 template <typename T>
-	class VectorIter {
+	class vectorIter {
 
 		public:		
 			typedef typename ft::iterator_traits<T>::iterator_category	iterator_category;
@@ -25,14 +25,14 @@ template <typename T>
 			typedef typename ft::iterator_traits<T>::pointer			pointer;
 			typedef typename ft::iterator_traits<T>::reference			reference;
 
-			VectorIter() : _ptr() {}
-			explicit VectorIter(pointer x) : _ptr(x) {}
+			vectorIter() : _ptr() {}
+			explicit vectorIter(pointer x) : _ptr(x) {}
 			template <class U>
-			VectorIter(const VectorIter<U> &iter) : _ptr(iter._ptr) {}
-			~VectorIter() {}
+			vectorIter(const vectorIter<U> &iter) : _ptr(iter.base()) {}
+			~vectorIter() {}
 
 			template <class U>
-			VectorIter&	operator=(const VectorIter<U>& other) {
+			vectorIter&	operator=(const vectorIter<U>& other) {
 				this->_ptr = other._ptr;
 				return *this;
 			}
@@ -43,35 +43,45 @@ template <typename T>
 			pointer operator->() const { return _ptr; }
 			reference operator[](difference_type pos) const {return *(*this + pos); }
 
-			VectorIter& operator++() { _ptr++; return *this; }  
-			VectorIter operator++(int) { VectorIter tmp = *this; ++(*this); return tmp; }
-			VectorIter& operator--() { _ptr--; return *this; }  
-			VectorIter operator--(int) { VectorIter tmp = *this; --(*this); return tmp; }
-			VectorIter& operator+=(difference_type pos) { this->_ptr += pos; return *this; }  
-			VectorIter& operator-=(difference_type pos) { this->_ptr -= pos; return *this; }  
-			VectorIter operator+(difference_type pos) const { return VectorIter(this->_ptr + pos); }
-			VectorIter operator-(difference_type pos) const { return VectorIter(this->_ptr - pos); }
+			vectorIter& operator++() { _ptr++; return *this; }  
+			vectorIter operator++(int) { vectorIter tmp = *this; ++(*this); return tmp; }
+			vectorIter& operator--() { _ptr--; return *this; }  
+			vectorIter operator--(int) { vectorIter tmp = *this; --(*this); return tmp; }
+			vectorIter& operator+=(difference_type pos) { this->_ptr += pos; return *this; }  
+			vectorIter& operator-=(difference_type pos) { this->_ptr -= pos; return *this; }  
+			vectorIter operator+(difference_type pos) const { return vectorIter(this->_ptr + pos); }
+			vectorIter operator-(difference_type pos) const { return vectorIter(this->_ptr - pos); }
 
 		private:
 			pointer _ptr;
 	};
 	
 	template <class A, class B>
-	bool operator==(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() == b.base(); }
+	bool operator==(const vectorIter<A>& a, const vectorIter<B>& b) { return a.base() == b.base(); }
 			
 	template <class A, class B>
-	bool operator!=(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() != b.base(); }
+	bool operator!=(const vectorIter<A>& a, const vectorIter<B>& b) { return a.base() != b.base(); }
 			
 	template <class A, class B>
-	bool operator<(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() < b.base(); }
+	bool operator<(const vectorIter<A>& a, const vectorIter<B>& b) { return a.base() < b.base(); }
 		
 	template <class A, class B>
-	bool operator>(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() > b.base(); }
+	bool operator>(const vectorIter<A>& a, const vectorIter<B>& b) { return a.base() > b.base(); }
 			
 	template <class A, class B>
-	bool operator<=(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() <= b.base(); }
+	bool operator<=(const vectorIter<A>& a, const vectorIter<B>& b) { return a.base() <= b.base(); }
 			
 	template <class A, class B>
-	bool operator>=(const VectorIter<A>& a, const VectorIter<B>& b) { return a.base() >= b.base(); }    
+	bool operator>=(const vectorIter<A>& a, const vectorIter<B>& b) { return a.base() >= b.base(); } 
+
+	template <typename A, typename B>
+	ptrdiff_t		operator-(const vectorIter<A>& lhs, const vectorIter<B>& rhs) {
+		return rhs.base() - lhs.base();
+	}
+
+	template <typename A>
+	vectorIter<A>		operator+(typename vectorIter<A>::difference_type n, const vectorIter<A>& rhs) {
+		return (vectorIter<A>)(rhs.base() - n);
+	}     
 
 }

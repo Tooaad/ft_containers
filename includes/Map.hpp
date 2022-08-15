@@ -15,7 +15,9 @@
 #include <functional> // For binary_function
 #include <iostream>
 #include "../utils/pair.hpp"
-#include "RBTree.hpp" 
+#include "../utils/utils.hpp"
+#include "RBTree.hpp"
+#include "ReverseIter.hpp"
 
 namespace ft {
 template <class Key, class Value, class Compare = std::less<Key>, class Allocator = std::allocator<ft::Pair<const Key, Value> > >
@@ -40,7 +42,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				public:
 					key_compare comp;
 					bool operator()(const value_type& x, const value_type& y) const
-						{ return comp(x._first, y._first); }
+						{ return comp(x.first, y.first); }
 			};
 
 			typedef ft::RBTree<value_type, value_compare, allocator_type>	tree_type;
@@ -127,7 +129,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			//PROBAR
 			iterator insert(iterator position, const value_type& val) {
 				(void) position;
-				return insert(val)._first;
+				return insert(val).first;
 			}
 
 			template <class InputIterator>
@@ -145,7 +147,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			
 			size_type erase(const key_type& k) {
 				node_pointer element = _tree.find(k);
-				if (element == end()._root && k != end()._root->_value._first)
+				if (!element || (element == end()._root && k != end()._root->_value.first))
 					return 0;
 				this->_tree.erase(element);
 				_tree.print2D(this->_tree._root);
@@ -177,7 +179,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			
 			size_type count(const key_type& k) {
 				iterator found = this->find(k);
-				if (found == end() && k != end()._root->_value._first)
+				if (found == end() && k != end()._root->_value.first)
 					return 0;
 				return 1;
 			}
