@@ -142,12 +142,12 @@ template <class T, class Allocator = std::allocator<T> >
 			reference operator[](size_type n) { return this->_data[n]; }
 			const_reference operator[](size_type n) const { return this->_data[n]; }
 			reference at(size_type n) {
-				if (n > this->_capacity)
+				if (n >= size())
 					throw std::out_of_range("Index out of range");
 				return  this->_data[n];
 			}
 			const_reference at(size_type n) const {
-				if (n > this->_capacity)
+				if (n >= size())
 					throw std::out_of_range("Index out of range");
 				return  this->_data[n];
 			}

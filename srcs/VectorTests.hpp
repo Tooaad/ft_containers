@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/15 13:56:45 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:52:53 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ void print_range(Iter first, Iter last, int type)
     {                                                                                              \
         std::cout << "Capc: " << c.capacity() << std::endl;                                        \
         std::cout << "Size: " << c.size() << std::endl;                                            \
+    }
+
+#define PRINT_LINE(msg, value, type)                                                               \
+    {                                                                                              \
+        if (type == 0)                                                                             \
+            std::cout << "\x1b[34m " << msg << " " << (value) << "\x1b[0m ";                       \
+        else                                                                                       \
+            std::cout << "\x1b[36m " << msg << " " << (value) << "\x1b[0m ";                       \
+        std::cout << std::endl;                                                                    \
     }
 
 #define PRINT_ALL(vec, type)                                                                       \
