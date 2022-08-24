@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/17 23:59:42 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:59:41 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -690,7 +690,7 @@ void emptyTest() {
 void eraseTest() {
     SETUP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
-    std::cout << "\x1b[41m                   ERASE  TEST                  \x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                   ERASE TEST                   \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
         intvector std(b_int, b_int + b_size - 5);
@@ -749,6 +749,7 @@ void eraseTest() {
             PRINT_LINE("Wrong iterator", *it1, 1);
         }
         CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
     }
     if (nextTest())
         return ;
@@ -771,7 +772,8 @@ void eraseRangeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
     }
-
+    if (nextTest())
+        return ;
     {
         longvector std(b_int, b_int + b_size);
         _longvector ft(b_int, b_int + b_size);
@@ -797,7 +799,8 @@ void eraseRangeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
     }
-
+    if (nextTest())
+        return ;
     {
         intvector std(37, -5);
         _intvector ft(37, -5);
@@ -816,6 +819,8 @@ void eraseRangeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
     }
+    if (nextTest())
+        return ;
 }
 
 void eraseMixTest() {
@@ -827,35 +832,50 @@ void eraseMixTest() {
         strvector std(b_string, b_string + b_size);
         _strvector ft(b_string, b_string + b_size);
 
+        std.erase(std.begin() + 2, std.begin() + 2);
+        ft.erase(ft.begin() + 2, ft.begin() + 2);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
         std.erase(std.begin(), std.begin());
         ft.erase(ft.begin(), ft.begin());
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
 
         std.erase(std.end(), std.end());
         ft.erase(ft.end(), ft.end());
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
 
         std.erase(std.begin());
         ft.erase(ft.begin());
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
 
         std.erase(std.end() - 1);
         ft.erase(ft.end() - 1);
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
 
         std.erase(std.begin() + 3, std.begin() + 16);
         ft.erase(ft.begin() + 3, ft.begin() + 16);
+        
+        // std::cout << *(std.begin() + 17) << "---" << *(ft.begin() + 17) << std::endl;
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
 
         strvector::iterator it = std.erase(std.begin() + 9);
         _strvector::iterator it1 = ft.erase(ft.begin() + 9);
@@ -877,10 +897,412 @@ void eraseMixTest() {
         return ;
 }
 
+void frontTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                   FRONT TEST                   \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        longvector std(1, 9);
+        _longvector ft(1, 9);
+
+        PRINT_LINE("Back:", std.back(), 0);
+        PRINT_LINE("Back:", ft.back(), 1);
+
+        if (&std.front() != &std[0]) {
+            PRINT_LINE("Back:", 0, 0);
+        }
+        if (&ft.front() != &ft[0]) {
+            PRINT_LINE("Back:", 0, 1);
+        }
+    }
+    if (nextTest())
+        return ;
+    {
+        longvector std(123, 543);
+        longvector ft(123, 543);
+
+        PRINT_LINE("Back:", std.back(), 0);
+        PRINT_LINE("Back:", ft.back(), 1);
+
+        if (&std.front() != &std[0]) {
+            PRINT_LINE("Back:", 0, 0);
+        }
+        if (&ft.front() != &ft[0]) {
+            PRINT_LINE("Back:", 0, 1);
+        }
+    }
+    if (nextTest())
+        return ;
+    {
+        const longvector std(1, 9);
+        const longvector ft(1, 9);
+
+        PRINT_LINE("Back:", std.back(), 0);
+        PRINT_LINE("Back:", ft.back(), 1);
+
+        if (&std.front() != &std[0]) {
+            PRINT_LINE("Back:", 0, 0);
+        }
+        if (&ft.front() != &ft[0]) {
+            PRINT_LINE("Back:", 0, 1);
+        }
+    }
+    if (nextTest())
+        return ;
+    {
+        const longvector std(123, 543);
+        const longvector ft(123, 543);
+
+        PRINT_LINE("Back:", std.back(), 0);
+        PRINT_LINE("Back:", ft.back(), 1);
+
+        if (&std.front() != &std[0]) {
+            PRINT_LINE("Back:", 0, 0);
+        }
+        if (&ft.front() != &ft[0]) {
+            PRINT_LINE("Back:", 0, 1);
+        }
+    }
+    if (nextTest())
+        return ;
+}
+
+void indexOpTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                OPERATOR[] TEST                 \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+
+    {
+        intvector std(s_int, s_int + s_size);
+        _intvector ft(s_int, s_int + s_size);
+
+        PRINT_LINE("Index 0:", std[0], 0);
+        PRINT_LINE("Index 0:", ft[0], 1);
+
+        intvector::reference value = std[26];
+        _intvector::reference value1 = ft[26];
+
+        PRINT_LINE("Index 26:", value, 0);
+        PRINT_LINE("Index 26:", value1, 1);
+
+        value = -64;
+        value1 = -64;
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        intvector::reference value2 = std[31];
+        _intvector::reference value3 = ft[31];
+
+        PRINT_LINE("Index 31:", value2, 0);
+        PRINT_LINE("Index 31:", value3, 1);
+
+        value2 = -1;
+        value3 = -1;
+
+        CHECK_AND_PRINT_ALL(ft, 0);
+        CHECK_AND_PRINT_ALL(std, 1);
+
+        std[14] = 0;
+        ft[14] = 0;
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+    {
+        const intvector std(s_int, s_int + s_size);
+        const _intvector ft(s_int, s_int + s_size);
+
+        PRINT_LINE("Index 0:", std[0], 0);
+        PRINT_LINE("Index 0:", ft[0], 1);
+
+        intvector::const_reference value = std[26];
+        _intvector::const_reference value1 = ft[26];
+
+        PRINT_LINE("Index 26:", value, 0);
+        PRINT_LINE("Index 26:", value1, 1);
+
+        intvector::const_reference value2 = std[31];
+        _intvector::const_reference value3 = ft[31];
+
+        PRINT_LINE("Index 31:", value2, 0);
+        PRINT_LINE("Index 31:", value3, 1);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+}
+
+void iteratorCompTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m              ITER COMPARATOR TEST              \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        _intvector ft(b_int, b_int + b_size);
+
+        _intvector::iterator it = ft.begin();
+        _intvector::iterator it2 = ft.begin();
+        _intvector::const_iterator cit = ft.begin();
+        _intvector::const_iterator cit2 = ft.begin();
+
+        if (it == ft.begin()) {
+            PRINT_LINE("Equal iterators", 0, 1);
+        }
+        if (cit == ft.begin()) {
+            PRINT_LINE("Equal const iterators", 0, 1);
+        }
+        if (cit == it) {
+           PRINT_LINE("Equal const iterators", 0, 1);
+        }
+
+        ++it;
+        cit += 6;
+
+        if (it != ft.end()) {
+            PRINT_LINE("Not Equal iterators", 0, 1);
+        }
+        if (cit != ft.end()) {
+            PRINT_LINE("Not Equal const iterators", 0, 1);
+        }
+        if (cit != it) {
+            PRINT_LINE("Not Equal const iterators", 0, 1);
+        }
+
+        if (it < it + 1) {
+            PRINT_LINE("Less Than", 0, 1);
+        }
+        if (it + 1 < it) {
+            PRINT_LINE("Less Than.", 0, 1);
+        }
+        if (it < it) {
+            PRINT_LINE("Less Than..", 0, 1);
+        }
+        if (cit < cit + 1) {
+            PRINT_LINE("Less Than...", 0, 1);
+        }
+        if (cit + 1 < cit) {
+            PRINT_LINE("Less Than....", 0, 1);
+        }
+        if (cit < cit) {
+            PRINT_LINE("Less Than.....", 0, 1);
+        }
+        if (it2 < cit2 + 1) {
+            PRINT_LINE("Less Than......", 0, 1);
+        }
+        if (it2 < cit2) {
+            PRINT_LINE("Less Than.......", 0, 1);
+        }
+
+        if (it <= it + 1) {
+            PRINT_LINE("Less Than or equal", 0, 1);
+        }
+        if (it + 1 <= it) {
+            PRINT_LINE("Less Than or equal.", 0, 1);
+        }
+        if (it <= it) {
+            PRINT_LINE("Less Than or equal..", 0, 1);
+        }
+        if (cit <= cit + 1) {
+            PRINT_LINE("Less Than or equal...", 0, 1);
+        }
+        if (cit + 1 <= cit) {
+            PRINT_LINE("Less Than or equal...", 0, 1);
+        }
+        if (cit <= cit) {
+            PRINT_LINE("Less Than or equal....", 0, 1);
+        }
+        if (it2 <= cit2 + 1) {
+            PRINT_LINE("Less Than or equal.....", 0, 1);
+        }
+        if (it2 <= cit2) {
+            PRINT_LINE("Less Than or equal......", 0, 1);
+        }
+
+        if (it > it + 1) {
+            PRINT_LINE("Greater Than", 0, 1);
+        }
+        if (it + 1 > it) {
+            PRINT_LINE("Greater Than.", 0, 1);
+        }
+        if (it > it) {
+            PRINT_LINE("Greater Than..", 0, 1);
+        }
+        if (cit > cit + 1) {
+            PRINT_LINE("Greater Than...", 0, 1);
+        }
+        if (cit + 1 > cit) {
+            PRINT_LINE("Greater Than....", 0, 1);
+        }
+        if (cit > cit) {
+            PRINT_LINE("Greater Than.....", 0, 1);
+        }
+        if (it2 + 1 > cit2) {
+            PRINT_LINE("Greater Than.....", 0, 1);
+        }
+        if (it2 > cit2) {
+            PRINT_LINE("Greater Than......", 0, 1);
+        }
+
+        if (it >= it + 1) {
+            PRINT_LINE("Greater Than or equal", 0, 1);
+        }
+        if (it + 1 >= it) {
+            PRINT_LINE("Greater Than or equal.", 0, 1);
+        }
+        if (it >= it) {
+            PRINT_LINE("Greater Than or equal..", 0, 1);
+        }
+        if (cit >= cit + 1) {
+            PRINT_LINE("Greater Than or equal...", 0, 1);
+        }
+        if (cit + 1 >= cit) {
+            PRINT_LINE("Greater Than or equal....", 0, 1);
+        }
+        if (cit >= cit) {
+            PRINT_LINE("Greater Than or equal.....", 0, 1);
+        }
+        if (it2 >= cit2 + 1) {
+            PRINT_LINE("Greater Than or equal......", 0, 1);
+        }
+        if (it2 + 1 >= cit2) {
+            PRINT_LINE("Greater Than or equal.......", 0, 1);
+        }
+        if (it2 >= cit2) {
+            PRINT_LINE("Greater Than or equal........", 0, 1);
+        }
+    }
+    if (nextTest())
+        return ;
+}
+
+void popbackTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                  POPBACK TEST                  \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        longvector std(s_long, s_long + s_size);
+        _longvector ft(s_long, s_long + s_size);
+
+        std.pop_back();
+        ft.pop_back();
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        for (int i = 0; i < 10; ++i) {
+            std.pop_back();
+            ft.pop_back();
+        }
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+}
+
+void pushbackTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                 PUSHBACK TEST                  \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        doublevector std;
+        _doublevector ft;
+
+        for (int i = 0; i < 26; ++i) {
+            std.push_back(45.0123);
+            ft.push_back(45.0123);
+        }
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.push_back(6);
+        ft.push_back(6);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.push_back(-4356.8933);
+        ft.push_back(-4356.8933);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+}
+
+void resizeTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                  RESIZE TEST                   \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        strvector std;
+        _strvector ft;
+
+        std.resize(14, "HelloWorld");
+        ft.resize(14, "HelloWorld");
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.resize(6, "ABC");
+        ft.resize(6, "ABC");
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.resize(14, b_string[18]);
+        ft.resize(14, b_string[18]);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.resize(15, b_string[57]);
+        ft.resize(15, b_string[57]);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.resize(64, "I-like-vectors");
+        ft.resize(64, "I-like-vectors");
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+}
+
 void runTests() {
-    eraseTest();                //TEST
-    eraseRangeTest();           //TEST
-    eraseMixTest();             //TEST
+
+    resizeTest();
+
+    // eraseMixTest();             //TEST
+    // eraseRangeTest();           //TEST
+    // eraseTest();                //TEST
+    //INSERT FINAL
     
     emptyTest();
     assignTest();
@@ -891,6 +1313,11 @@ void runTests() {
     backTest();             //
     clearTest();
     ctor_copy();            //
+    frontTest();            //
+    indexOpTest();
+    iteratorCompTest();     //
+    popbackTest();
+    pushbackTest();
 
 }
 

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/17 22:52:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:51:26 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int compareVect(Iter first, Iter last, Iter2 first_, Iter2 last_)
     for (;it != last || it_ != last_; ++it, ++it_) {
         if (*it != *it_) {
             std::cout << *it << " ======== " << *it_ << std::endl;
-            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl;
-            return 1;
+            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl << std::endl;
+            exit(1);
         }
     }
     return 0;
@@ -40,7 +40,8 @@ int compareVect(Iter first, Iter last, Iter2 first_, Iter2 last_)
             return ;                                                                                      \
         }                                                                                                 \
         if ((std.capacity() != ft.capacity() || std.size() != ft.size())) {                               \
-            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl; \
+            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl;     \
+        exit(1);                                                                                          \
         }                                                                                                 \
         else                                                                                              \
              std::cout << "\x1b[32m------------------✓✓✓✓✓✓✓✓✓✓✓-------------------\x1b[0m" << std::endl; \

@@ -126,7 +126,7 @@ template <class T, class Allocator = std::allocator<T> >
 			void reserve(size_type n) {
 				if (n > max_size())
 					throw std::length_error("Trying to allocate more than the allowed max_size");
-				(n < 20)? this->_capacity *= 2 : this->_capacity = n;
+				(n > 1 && n < 20)? this->_capacity *= 2 : this->_capacity = n; // n > 1 por test de PUSHBACK
 			}
 
 			size_type capacity() const {
@@ -274,19 +274,20 @@ template <class T, class Allocator = std::allocator<T> >
 			}
 
 			iterator erase (iterator first, iterator last) {
+				if (first == last)
+					return first;
 				size_type diff = last.base() - first.base();
 				size_type init = first.base() - this->_data;
-				size_type trim = (this->_data + this->size()) - last.base();
+				iterator tmp = this->end();
 
-				if (trim > 0) {
-					for (size_type i = last.base() - this->_data, j = init; i < this->size() - 1; i++, j++) {
-						this->_alloc.construct(&this->_data[j], this->_data[i]);
-					}
+				for (size_type i = 0; i <= diff; i++) {
+					if (init + diff < _size)
+						this->_alloc.construct(&_data[init], _data[diff + init]);
+					init++;
 				}
-				for (size_type i = trim; i < this->size() - 1; i++)	
-					this->_alloc.destroy(&this->_data[i]);
-				
-				this->_size -= diff;
+				_size -= diff;
+				if (first == tmp)
+					return this->end();
 				return first;
 			}
 
