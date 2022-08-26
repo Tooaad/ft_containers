@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/24 18:59:41 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:34:30 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1279,8 +1279,8 @@ void resizeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        std.resize(15, b_string[57]);
-        ft.resize(15, b_string[57]);
+        std.resize(16, b_string[57]);
+        ft.resize(16, b_string[57]);
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
@@ -1293,10 +1293,99 @@ void resizeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
     }
+    if (nextTest())
+        return ;
+}
+
+void reserveTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                  RESERVE TEST                  \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intvector std;
+        _intvector ft;
+
+        std.reserve(64);
+        ft.reserve(64);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(64);
+        ft.reserve(64);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(0);
+        ft.reserve(0);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(45);
+        ft.reserve(45);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(65);
+        ft.reserve(65);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(79);
+        ft.reserve(79);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+
+    {
+        intvector std(s_int, s_int + s_size);
+        _intvector ft(s_int, s_int + s_size);
+
+        std.reserve(0);
+        ft.reserve(0);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(32);
+        ft.reserve(32);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(48);
+        ft.reserve(48);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        std.reserve(1);
+        ft.reserve(1);
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
 }
 
 void runTests() {
 
+    reserveTest();
     resizeTest();
 
     // eraseMixTest();             //TEST
@@ -1304,20 +1393,20 @@ void runTests() {
     // eraseTest();                //TEST
     //INSERT FINAL
     
-    emptyTest();
+    pushbackTest();
     assignTest();
     assignRangeTest();
     assignMixedTest();
     operatorEquals();       //
     atTest();               //
     backTest();             //
+    emptyTest();
     clearTest();
     ctor_copy();            //
     frontTest();            //
     indexOpTest();
     iteratorCompTest();     //
     popbackTest();
-    pushbackTest();
 
 }
 

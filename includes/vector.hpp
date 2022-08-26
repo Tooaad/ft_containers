@@ -116,7 +116,7 @@ template <class T, class Allocator = std::allocator<T> >
 					this->_alloc.deallocate(this->_data, oldCapacity);
 					this->_data = newData;
 				}
-				while (size() > capacity())
+				while (size() > capacity() || n < size())
 					pop_back();
 				
 				while (size() < n && val != value_type())
@@ -126,7 +126,10 @@ template <class T, class Allocator = std::allocator<T> >
 			void reserve(size_type n) {
 				if (n > max_size())
 					throw std::length_error("Trying to allocate more than the allowed max_size");
-				(n > 1 && n < 20)? this->_capacity *= 2 : this->_capacity = n; // n > 1 por test de PUSHBACK
+				if (size() == capacity() && capacity() > 0)
+					this->_capacity *= 2;
+				else
+					this->_capacity = n;
 			}
 
 			size_type capacity() const {
