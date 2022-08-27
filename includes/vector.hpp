@@ -107,7 +107,7 @@ template <class T, class Allocator = std::allocator<T> >
 			void resize(size_type n, value_type val = value_type()) {
 				if (n > capacity()) {
 					size_type oldCapacity = this->_capacity;
-					reserve(n);
+					reserve(oldCapacity * 2 > n && size() > 0? capacity() * 2 : n);
 					pointer newData = this->_alloc.allocate(capacity());
 
 					// Para copiar lo antiguo en lo nuevo
@@ -126,9 +126,7 @@ template <class T, class Allocator = std::allocator<T> >
 			void reserve(size_type n) {
 				if (n > max_size())
 					throw std::length_error("Trying to allocate more than the allowed max_size");
-				if (size() == capacity() && capacity() > 0)
-					this->_capacity *= 2;
-				else
+				if (capacity() <= n)
 					this->_capacity = n;
 			}
 

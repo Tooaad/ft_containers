@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/27 00:34:30 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/27 20:02:13 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int nextTest() {
     std::string action;
-    std::getline(std::cin, action);
+    // std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -1286,8 +1286,8 @@ void resizeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        std.resize(64, "I-like-vectors");
-        ft.resize(64, "I-like-vectors");
+        std.resize(56, "I-like-vectors");
+        ft.resize(56, "I-like-vectors");
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
@@ -1348,7 +1348,8 @@ void reserveTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
     }
-
+    if (nextTest())
+        return ;
     {
         intvector std(s_int, s_int + s_size);
         _intvector ft(s_int, s_int + s_size);
@@ -1367,8 +1368,8 @@ void reserveTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        std.reserve(48);
-        ft.reserve(48);
+        std.reserve(33);
+        ft.reserve(33);
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
@@ -1381,12 +1382,14 @@ void reserveTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
     }
+    if (nextTest())
+        return ;
 }
 
 void runTests() {
 
-    reserveTest();
     resizeTest();
+    reserveTest();
 
     // eraseMixTest();             //TEST
     // eraseRangeTest();           //TEST
