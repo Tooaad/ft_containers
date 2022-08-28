@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/27 20:02:13 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/08/28 13:18:04 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int nextTest() {
     std::string action;
-    // std::getline(std::cin, action);
+    std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -762,19 +762,6 @@ void eraseRangeTest() {
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
 
     {
-        longvector std;
-        _longvector ft;
-
-        std.erase(std.begin(), std.end());
-        ft.erase(ft.begin(), ft.end());
-
-        CHECK_AND_PRINT_ALL(std, 0);
-        CHECK_AND_PRINT_ALL(ft, 1);
-        COMPARE(std, ft);
-    }
-    if (nextTest())
-        return ;
-    {
         longvector std(b_int, b_int + b_size);
         _longvector ft(b_int, b_int + b_size);
 
@@ -811,6 +798,19 @@ void eraseRangeTest() {
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
+
+        std.erase(std.begin(), std.end());
+        ft.erase(ft.begin(), ft.end());
+
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+    {
+        longvector std;
+        _longvector ft;
 
         std.erase(std.begin(), std.end());
         ft.erase(ft.begin(), ft.end());
@@ -867,11 +867,8 @@ void eraseMixTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-
-        std.erase(std.begin() + 3, std.begin() + 16);
-        ft.erase(ft.begin() + 3, ft.begin() + 16);
-        
-        // std::cout << *(std.begin() + 17) << "---" << *(ft.begin() + 17) << std::endl;
+        std.erase(std.begin() + 3, std.begin() + 55);
+        ft.erase(ft.begin() + 3, ft.begin() + 55);
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
@@ -1286,8 +1283,8 @@ void resizeTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        std.resize(56, "I-like-vectors");
-        ft.resize(56, "I-like-vectors");
+        std.resize(64, "I-like-vectors");
+        ft.resize(64, "I-like-vectors");
 
         CHECK_AND_PRINT_ALL(std, 0);
         CHECK_AND_PRINT_ALL(ft, 1);
@@ -1386,31 +1383,148 @@ void reserveTest() {
         return ;
 }
 
+void insertTest() {
+    SETUP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                   INSERT TEST                  \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        strvector std;
+        _strvector ft;
+
+        strvector::iterator it = std.insert(std.end(), b_string[54]);
+        _strvector::iterator it1 = ft.insert(ft.end(), b_string[54]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.end(), b_string[23]);
+        it1 = ft.insert(ft.end(), b_string[23]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.begin(), b_string[19]);
+        it1 = ft.insert(ft.begin(), b_string[19]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.begin() + 1, b_string[0]);
+        it1 = ft.insert(ft.begin() + 1, b_string[0]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.begin() + 1, b_string[1]);
+        it1 = ft.insert(ft.begin() + 1, b_string[1]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.begin() + 2, b_string[2]);
+        it1 = ft.insert(ft.begin() + 2, b_string[2]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.begin() + 3, b_string[3]);
+        it1 = ft.insert(ft.begin() + 3, b_string[3]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+        it = std.insert(std.begin() + 2, b_string[4]);
+        it1 = ft.insert(ft.begin() + 2, b_string[4]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.end(), b_string[5]);
+        it1 = ft.insert(ft.end(), b_string[5]);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+    {
+        intvector std;
+        _intvector ft;
+
+        intvector::iterator it = std.insert(std.begin(), 64);
+        _intvector::iterator it1 = ft.insert(ft.begin(), 64);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+
+        it = std.insert(std.end(), 420);
+        it1 = ft.insert(ft.end(), 420);
+
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        COMPARE(std, ft);
+    }
+    if (nextTest())
+        return ;
+}
+
 void runTests() {
 
-    resizeTest();
-    reserveTest();
-
-    // eraseMixTest();             //TEST
-    // eraseRangeTest();           //TEST
-    // eraseTest();                //TEST
-    //INSERT FINAL
+    insertTest();
     
-    pushbackTest();
     assignTest();
     assignRangeTest();
     assignMixedTest();
-    operatorEquals();       //
     atTest();               //
     backTest();             //
-    emptyTest();
     clearTest();
     ctor_copy();            //
     frontTest();            //
+    emptyTest();
+    eraseTest();
+    eraseRangeTest();           //TEST iterators
+    eraseMixTest();
     indexOpTest();
     iteratorCompTest();     //
+    operatorEquals();       //
     popbackTest();
-
+    pushbackTest();
+    resizeTest();
+    reserveTest();
+    
+    
 }
 
         // std::cout << std[0] << "----" << ft[0] << std::endl;

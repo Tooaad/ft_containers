@@ -196,18 +196,18 @@ template <class T, class Allocator = std::allocator<T> >
 			}
 
 			iterator insert(iterator position, const value_type& val) {
-				if (position == this->end())
+				if (position == end())
 				{
 					push_back(val);
-					return position;
+					return begin();
 				}
 				ft::vector<T> newvector;
-				size_type oldCapacity = this->capacity();
+				size_type oldCapacity = capacity();
 
-				for (iterator it = this->begin(); it < position; it++)
+				for (iterator it = begin(); it < position; it++)
 					newvector.push_back(*it);
 				newvector.push_back(val);
-				for (iterator it = position; it < this->end(); it++)
+				for (iterator it = position; it < end(); it++)
 					newvector.push_back(*it);
 
 				this->_alloc.deallocate(this->_data, oldCapacity);
@@ -261,14 +261,13 @@ template <class T, class Allocator = std::allocator<T> >
 			iterator erase (iterator position) {
 				iterator it = this->begin();
 				size_type posElem = 0;
-
 				while (it != position) {
 					it++;
 					posElem++;
 				}
 
 				this->_alloc.destroy(this->_data + posElem);
-				for (; posElem < this->size(); posElem++)
+				for (; posElem < size() - 1; posElem++)
 					this->_alloc.construct(&this->_data[posElem], this->_data[posElem + 1]);
 				this->_size--;
 				return it;
@@ -281,12 +280,12 @@ template <class T, class Allocator = std::allocator<T> >
 				size_type init = first.base() - this->_data;
 				iterator tmp = this->end();
 
-				for (size_type i = 0; i <= diff; i++) {
-					if (init + diff < _size)
+				for (size_type i = 0; i < size() - 1; i++) {
+					if (init + diff < size()) 
 						this->_alloc.construct(&_data[init], _data[diff + init]);
 					init++;
 				}
-				_size -= diff;
+				this->_size -= diff;
 				if (first == tmp)
 					return this->end();
 				return first;
