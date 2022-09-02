@@ -67,19 +67,22 @@ template <class T, class Allocator = std::allocator<T> >
 
 			virtual ~vector() {
 				this->_alloc.destroy(this->_data);
-				// this->_alloc.deallocate(this->_data, this->_capacity);
+				this->_alloc.deallocate(this->_data, this->_capacity);
 			}
 
 			vector&	operator=(const vector& othervector) {
-				// clear();
-				if (othervector._size > this->_capacity)
-					this->_capacity = othervector._capacity;
+				if (this != &othervector) {
+					clear();
+					this->_alloc.deallocate(this->_data, capacity());
+					if (othervector._size > this->_capacity)
+						this->_capacity = othervector._capacity;
 
-				this->_size = othervector._size;
-				this->_data = _alloc.allocate(_capacity);
+					this->_size = othervector._size;
+					this->_data = _alloc.allocate(_capacity);
 
-				for (size_type i = 0; i < othervector.size(); i++)
-					this->_alloc.construct(&this->_data[i], othervector._data[i]);
+					for (size_type i = 0; i < othervector.size(); i++)
+						this->_alloc.construct(&this->_data[i], othervector._data[i]);
+				}
 				return *this;
 			}
 
@@ -199,62 +202,73 @@ template <class T, class Allocator = std::allocator<T> >
 				if (position == end())
 				{
 					push_back(val);
-					return begin();
+					return end() - 1;
 				}
 				ft::vector<T> newvector;
-				size_type oldCapacity = capacity();
+				if (size() + 1 > capacity())
+					reserve(capacity() * 2 > 1 + size() && size() > 0? capacity() * 2 : 1 + size());
 
 				for (iterator it = begin(); it < position; it++)
 					newvector.push_back(*it);
 				newvector.push_back(val);
+				iterator aux = newvector.end() - 1;
+					// for (iterator it = newvector.begin(); it < newvector.end(); it++)
+					// 	std::cout << *it << std::endl;
 				for (iterator it = position; it < end(); it++)
 					newvector.push_back(*it);
 
-				this->_alloc.deallocate(this->_data, oldCapacity);
 				*this = newvector;
-				return position;
+				return aux;
 			}
 
 			void insert(iterator position, size_type n, const value_type& val) {
-				if (position == this->end())
+				if (position == end())
 				{
-					for (size_type i = 0; i < n; i++)
-						this->push_back(val);
+					if (empty())
+						resize(n, val);
+					else
+						for (size_type i = 0; i < n; i++)
+							this->push_back(val);
 					return ;
 				}
 				ft::vector<T> newvector;
-				size_type oldCapacity = this->capacity();
+				if (size() + n > capacity())
+					reserve(capacity() * 2 > n + size() && size() > 0? capacity() * 2 : n + size());
 
-				for (iterator it = this->begin(); it < position; it++)
+				for (iterator it = begin(); it < position; it++)
 					newvector.push_back(*it);
 				for (size_type i = 0; i < n; i++)
 					newvector.push_back(val);
-				for (iterator it = position; it < this->end(); it++)
+				for (iterator it = position; it < end(); it++)
 					newvector.push_back(*it);
 
-				this->_alloc.deallocate(this->_data, oldCapacity);
 				*this = newvector;
 			}
 
 			template <class InputIterator>
 				void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) {
-					if (position == this->end())
+					size_type n = 0;
+					for (InputIterator it = first; it != last; it++)
+						n++;
+					if (position == end())
 					{
+						if (empty())
+							resize(n);
 						for (InputIterator it = first; it != last; it++)
 							this->push_back(*it);
 						return ;
 					}
 					ft::vector<T> newvector;
-					size_type oldCapacity = this->capacity();
+					if (size() + n > capacity())
+						reserve(capacity() * 2 > n + size() && size() > 0? capacity() * 2 : n + size());
 
-					for (iterator it = this->begin(); it < position; it++)
+					for (iterator it = begin(); it < position; it++)
 						newvector.push_back(*it);
 					for (InputIterator i = first; i != last; i++)
 						newvector.push_back(*i);
-					for (iterator it = position; it < this->end(); it++)
+					for (iterator it = position; it < end(); it++)
 						newvector.push_back(*it);
 
-					this->_alloc.deallocate(this->_data, oldCapacity);
 					*this = newvector;
 				}
 
@@ -273,7 +287,7 @@ template <class T, class Allocator = std::allocator<T> >
 				return it;
 			}
 
-			iterator erase (iterator first, iterator last) {
+			iterator erase(iterator first, iterator last) {
 				if (first == last)
 					return first;
 				size_type diff = last.base() - first.base();

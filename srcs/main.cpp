@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/15 16:19:34 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:01:41 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main()
 // double s_double[32]; init_array(s_double, 32);
 
 
-// 	// atexit(cleaks);
+	// atexit(cleaks);
 // 	ft::vector<double> mv;
 // 	ft::vector<std::string> mv1;
 // 	// ft::vector<int> mvector1(0, 10);

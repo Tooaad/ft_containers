@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/24 18:51:26 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:55:09 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ int compareVect(Iter first, Iter last, Iter2 first_, Iter2 last_)
     }
     return 0;
 }
+template <typename T>
+void itComp(T std, T ft)
+    {
+        if (std != ft)
+        {
+            std::cout << std << " ======== " << ft << std::endl;
+            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl << std::endl;
+            exit(1);
+        }
+    } 
 
 #define COMPARE(std, ft)                                                                                  \
     {                                                                                                     \
