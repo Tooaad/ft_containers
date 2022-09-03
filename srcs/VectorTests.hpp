@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/02 13:55:09 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/03 22:00:14 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iomanip>
 #include <sstream>
 #include <cstring>
+#include <chrono>
 #include "../includes/vector.hpp"
 
 template <typename Iter, typename Iter2>
@@ -44,6 +45,13 @@ void itComp(T std, T ft)
         }
     } 
 
+#define TIMER(t1, t2)                                                                                    \
+    {                                                                                                     \
+            std::cout << "\x1b[32m " << t1.count() << "\x1b[0m ";                                                \
+            std::cout << " vs ";                                                                          \
+            std::cout << "\x1b[32m " << t2.count() << "\x1b[0m " << std::endl;                                    \
+    }
+    
 #define COMPARE(std, ft)                                                                                  \
     {                                                                                                     \
         if (compareVect(std.begin(), std.end(), ft.begin(), ft.end())) {                                  \

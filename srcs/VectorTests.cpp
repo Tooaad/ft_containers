@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/02 17:56:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:58:55 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vector.hpp"
 #include "VectorTests.hpp"
-#include <iostream>
-#include <algorithm>
-#include <vector>
 #include <list>
 #include <ios>
-#include <iomanip>
 
 int nextTest() {
     std::string action;
-    // std::getline(std::cin, action);
+    std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -1401,9 +1397,16 @@ void insertTest() {
         strvector std;
         _strvector ft;
 
+        static std::__1::chrono::steady_clock::time_point start = std::chrono::high_resolution_clock::now();
         strvector::iterator it = std.insert(std.end(), b_string[54]);
+        static std::__1::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _strvector::iterator it1 = ft.insert(ft.end(), b_string[54]);
+        end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> t2 = end - start;
 
+        TIMER(t1, t2);
         PRINT_LINE("It:", *it, 0);
         PRINT_LINE("It:", *it1, 1);
         CHECK_AND_PRINT_ALL(std, 0);
@@ -1731,15 +1734,15 @@ void insertMixTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        intvector::iterator it = std.insert(std.begin(), 64);
-        _intvector::iterator it1 = ft.insert(ft.begin(), 64);
+        // intvector::iterator it = std.insert(std.begin(), 64);
+        // _intvector::iterator it1 = ft.insert(ft.begin(), 64);
 
-        PRINT_LINE("It:", *it, 0);
-        PRINT_LINE("It:", *it1, 1);
-        CHECK_AND_PRINT_ALL(std, 0);
-        CHECK_AND_PRINT_ALL(ft, 1);
-        itComp(*it, *it1);
-        COMPARE(std, ft);
+        // PRINT_LINE("It:", *it, 0);
+        // PRINT_LINE("It:", *it1, 1);
+        // CHECK_AND_PRINT_ALL(std, 0);
+        // CHECK_AND_PRINT_ALL(ft, 1);
+        // itComp(*it, *it1);
+        // COMPARE(std, ft);
 
         // for (int i = 0; i < 23; ++i) {
         //     it = std.insert(std.begin() + i + 2, i);
@@ -2019,27 +2022,27 @@ void runTests() {
     insertRangeTest();
     insertMixTest();
     
-    assignTest();
-    assignRangeTest();
-    assignMixedTest();
-    atTest();               //
-    backTest();             //
-    clearTest();
-    ctor_copy();            //
-    frontTest();            //
-    emptyTest();
-    eraseTest();
-    eraseRangeTest();
-    eraseMixTest();
-    indexOpTest();
-    iteratorCompTest();     //
-    operatorEquals();
-    popbackTest();
-    pushbackTest();
-    reserveTest();
-    resizeTest();
-    reverseIteratorCompTest();
-    swapTest();
+    // assignTest();
+    // assignRangeTest();
+    // assignMixedTest();
+    // atTest();               //
+    // backTest();             //
+    // clearTest();
+    // ctor_copy();            //
+    // frontTest();            //
+    // emptyTest();
+    // eraseTest();
+    // eraseRangeTest();
+    // eraseMixTest();
+    // indexOpTest();
+    // iteratorCompTest();     //
+    // operatorEquals();
+    // popbackTest();
+    // pushbackTest();
+    // reserveTest();
+    // resizeTest();
+    // reverseIteratorCompTest();
+    // swapTest();
     
     
 }

@@ -37,7 +37,7 @@ template <typename T>
 				return *this;
 			}
 
-			pointer base() const {return _ptr;}
+			pointer base() const { return _ptr; }
 
 			reference operator*() const { return *_ptr; }
 			pointer operator->() const { return _ptr; }

@@ -67,6 +67,10 @@
 		"deque": "cpp",
 		"iomanip": "cpp",
 		"map": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"list": "cpp",
+		"set": "cpp",
+		"queue": "cpp",
+		"thread": "cpp"
 	}
 }

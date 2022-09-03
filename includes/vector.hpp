@@ -205,15 +205,16 @@ template <class T, class Allocator = std::allocator<T> >
 					return end() - 1;
 				}
 				ft::vector<T> newvector;
+				
 				if (size() + 1 > capacity())
 					reserve(capacity() * 2 > 1 + size() && size() > 0? capacity() * 2 : 1 + size());
 
 				for (iterator it = begin(); it < position; it++)
 					newvector.push_back(*it);
+
 				newvector.push_back(val);
 				iterator aux = newvector.end() - 1;
-					// for (iterator it = newvector.begin(); it < newvector.end(); it++)
-					// 	std::cout << *it << std::endl;
+
 				for (iterator it = position; it < end(); it++)
 					newvector.push_back(*it);
 
