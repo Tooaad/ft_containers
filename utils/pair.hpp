@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pair.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 01:19:13 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/01 19:55:32 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:10:17 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,66 @@
 
 namespace ft {
 template <class T1, class T2>
-	class Pair {
+	class pair {
 		public:
 			typedef T1	first_type;
 			typedef T2	second_type;
 
-			first_type	_first;
-			second_type	_second;
+			first_type	first;
+			second_type	second;
 		 
 		public:
-			Pair() : _first(), _second() {std::cout << "1" << std::endl;}
+			pair() : first(), second() { }
 
-			Pair(const first_type& a, const second_type& b) : _first(a), _second(b) {}
+			pair(const first_type& a, const second_type& b) : first(a), second(b) {}
 			
 			template<class U, class V>
-				Pair(const Pair<U,V>& pr) : _first(pr._first), _second(pr._second) {}
+				pair(const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
 
-			Pair& operator=(const Pair& pr) {
-				this->_first = pr._first;
-				this->_second = pr._second;
+			pair& operator=(const pair& pr) {
+				this->first = pr.first;
+				this->second = pr.second;
 				return *this;
 			}
 
 			T1&	getFirst() const {
-				return _first;
+				return first;
 			}
 		};
 
 	template <class T1,class T2>
-  		ft::Pair<T1,T2> make_pair(T1 x, T2 y)
+  		ft::pair<T1,T2> make_pair(T1 x, T2 y)
   		{
-    		return (Pair<T1,T2>(x,y));
+    		return (pair<T1,T2>(x,y));
   		}
 
 	template <class T1, class T2>
-		bool operator== (const Pair<T1,T2>& lhs, const Pair<T1,T2>& rhs) {
+		bool operator== (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 			return lhs.first==rhs.first && lhs.second==rhs.second;
 		}
 
 	template <class T1, class T2>
-		bool operator!= (const Pair<T1,T2>& lhs, const Pair<T1,T2>& rhs) {
+		bool operator!= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 			return !(lhs==rhs);
 		}
 	
 	template <class T1, class T2>
-		bool operator<  (const Pair<T1,T2>& lhs, const Pair<T1,T2>& rhs) {
+		bool operator<  (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 			return lhs.first<rhs.first || (!(rhs.first<lhs.first) && lhs.second<rhs.second);
 		}
 
 	template <class T1, class T2>
-		bool operator<= (const Pair<T1,T2>& lhs, const Pair<T1,T2>& rhs) {
+		bool operator<= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 			return !(rhs<lhs);
 		}
 	
 	template <class T1, class T2>
-		bool operator>  (const Pair<T1,T2>& lhs, const Pair<T1,T2>& rhs) {
+		bool operator>  (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 			return rhs<lhs;
 		}
 
 	template <class T1, class T2>
-		bool operator>= (const Pair<T1,T2>& lhs, const Pair<T1,T2>& rhs) {
+		bool operator>= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 			return !(lhs < rhs);
 		}
 }

@@ -6,11 +6,12 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/02 18:01:41 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:37:34 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "VectorTests.hpp"
+#include "MapTests.hpp"
 #include "../includes/vector.hpp"
 #include "../includes/stack.hpp"
 #include "../includes/map.hpp"
@@ -25,7 +26,10 @@ void cleaks() { system("leaks containers"); }
 
 int main()
 {
-	runTests();
+	// runTests();
+	runMapTests();
+	// atexit(cleaks);
+
 // std::string b_string[64] = { "uvg6KqtcgduR31n3ajsv", "wbiAcjgojb9JOagZwyMn", "ATZKCzaPOqgkhPjwuGlf", "MOhaJs56yjOw8f6nLPRA", "0gyB2Tr42v6awMw2nK7J", "e6GsiLFUuoDpVFEhJKZ1", "z0jXAhiV9keBsaLOY0Xf", "P68p2ZAosHJdmoZh1C7N", "Pu3EuZVeY0TCO3ojdK0t", "z7jCHMooHCS73M8GygKB", "uT4KoK83JrZxZjkul7ty", "g8gfrZoY5XwfzRusvHvv", "7PGmkM0OSRnYREt9mFIP", "q1od7mBIpPEsCtpF9kdw", "XQo0LWId5TdZnLnpUNOb", "U0m1R0kFFhAFyS6hmHHw", "K0lPKfxJxIOnE8QB90xn", "cZ5xyQifMJhrKxqBK9A7", "cFBiwjfYw7Js6qEGy5Kt", "1tW0KWfXxeFO69tByqcE", "3Fvq9NxBrhPXHe0IlIVx", "MSRDjdFRvHAhFGhiMtDe", "zGm2joMh71jQkYzg5L4V", "Mq4RRaeLvSAO0z2ibp8Q", "WnLFYnQKP8TNJkqVVbUg", "E98UphbbVSzrW5Mzurmg", "F8HRxeEcaTZDkFPkioij", "jmUVl4Q8X5BwVNzXN219", "n7Xp4w4FwzGKit7AI4SO", "4MxXYr6rKOcXLt9UkVd2", "4RVTDsADtRyboaai9d29", "XaSqsrrtdhAfFoJIc5KK", "9Z9jdVCrTT09bg348ceb", "I6uqLG9dO5mfNdSMwOYm", "UwMTzJPlbnhgwbHpDi6w", "DebjMP9afncYE6GhhO00", "YGPuscYDiGfAjY1UWST0", "K6gbvgGjVZgEFUDlkdSk", "8xCBPI0w6TpC0RA62c2W", "fYMxkNwmKg3moP8KvD9v", "QpPdhwhEYjIugg3OPcPH", "qQBXjSn43I3EMP54SyxZ", "7qvdKwoW1CQEZTWPvuSC", "rCT212rdYO0zTGHXesKg", "dBHvlHsBwcR9MkkenYYG", "NQiSlergqR8fVbOeivLj", "xYVqsV147UIe7jVBVwXo", "tcxayO4DdEJ885TbqUMy", "9TGSMTD8U8ksRpHqq0cL", "TIJ16jCv9BSUiWvhbF9T", "BM9GL2ig1hePkA6lM6Ck", "TfJTYB9JQMU6CGcYg20Q", "Fg6e5YT2FQbpTZNTDqdo", "LI5q6ml40MeE9H1dPb93", "OaxJUSm3nYN9Y8Ela7sS", "BgBeODAwXz7xJo50Rwqd", "xdkgKj1dEoJ6zuVhkvvo", "olIewtUEvXJgs1lB9bCn", "dTsPDS0x2uXtcgOIJHb8", "DYvJ2phLppGNZKboTBrd", "DjNFMtt9PxkzqvWBHI6j", "1Z3YkeTFlPniKnzFhzgu", "76XqQg6hqMf5IXxKPOEs", "gzaapTWW7i9EZjjzLeK6" };
 // std::size_t b_size = 64;
 // std::string s_string[32] = { "QExoqp0nICr0sXsHqty2", "naax9QcpJhvaL7DezsNQ", "25ZTtB6wbptfbxM8AvHB", "tShYNtc0MkdjqLrOatgz", "7Z3kf1Qec0NnsLSEpbOt", "WhkSNrKJC966fvjZ2Or1", "8vlxlFRRgW7yYj4GO7dt", "5sq1aoT8zP0HaHj3nFOK", "61Dv31GYZhkgjKCErpng", "l0IIcWWHhOcPzoxEamQM", "bE1RYclskwXlhCm46YFs", "kXeoi5qz94JYPqSDTs79", "TFsQP1dz8VVos9KzUpY0", "b3wYQR7An193gjgYuRj3", "xSmyNsnSJ47jLqrvbpyr", "guAIP2Wq43Gf8VhHsyu5", "yT6c2loPebHovnq9BQog", "3qvU1xcVm2g1DKFDlqh4", "L0q8RR9P41VD4sVjdnWl", "YdjESsIZM4b1oGQPjpBe", "l1ZVQbWKw7brHUSimJgq", "xdn0cf4vqRzpfXWtl10G", "lYnZvpqaV0s8DowMZwzV", "8P1cyKrwJNLoJyvLjYqO", "4MhOXNbAX23CEijO5cRT", "tHe3miAwCOVQbuoLaEP2", "l6uNLsc8fiLl3eWoG6j6", "477xt6l0lph9ALQdr4HX", "D9UJNe4s8YF02LhrwOdl", "dLCisBNOdE8yugntu6cj", "YvY4aQFHgAuagn4dFLO1", "eGR6Dtv7LW75qlV5Fkik" };
@@ -34,7 +38,6 @@ int main()
 // double s_double[32]; init_array(s_double, 32);
 
 
-	// atexit(cleaks);
 // 	ft::vector<double> mv;
 // 	ft::vector<std::string> mv1;
 // 	// ft::vector<int> mvector1(0, 10);
@@ -228,20 +231,20 @@ int main()
 // MY map ------------------------------------------------------------
 	
 	ft::map<int, int> mmap;
-	ft::Pair<int, int> p3 = ft::make_pair(2, 2);
-	ft::Pair<int, int> p2 = ft::make_pair(5, 5);
-	ft::Pair<int, int> p4 = ft::make_pair(9, 9);
-	ft::Pair<int, int> p5 = ft::make_pair(10, 10);
-	ft::Pair<int, int> p6 = ft::make_pair(30, 30);
-	ft::Pair<int, int> p7 = ft::make_pair(25, 25);
-	ft::Pair<int, int> p8 = ft::make_pair(40, 40);
-	ft::Pair<int, int> p9 = ft::make_pair(38, 38);
+	ft::pair<int, int> p3 = ft::make_pair(2, 2);
+	ft::pair<int, int> p2 = ft::make_pair(5, 5);
+	ft::pair<int, int> p4 = ft::make_pair(9, 9);
+	ft::pair<int, int> p5 = ft::make_pair(10, 10);
+	ft::pair<int, int> p6 = ft::make_pair(30, 30);
+	ft::pair<int, int> p7 = ft::make_pair(25, 25);
+	ft::pair<int, int> p8 = ft::make_pair(40, 40);
+	ft::pair<int, int> p9 = ft::make_pair(38, 38);
 	
-	ft::Pair<int, int> p10 = ft::make_pair(22, 22);
-	ft::Pair<int, int> p11 = ft::make_pair(11, 11);
-	ft::Pair<int, int> p12 = ft::make_pair(31, 31);
-	ft::Pair<int, int> p13 = ft::make_pair(33, 33);
-	ft::Pair<int, int> p14 = ft::make_pair(42, 42);
+	ft::pair<int, int> p10 = ft::make_pair(22, 22);
+	ft::pair<int, int> p11 = ft::make_pair(11, 11);
+	ft::pair<int, int> p12 = ft::make_pair(31, 31);
+	ft::pair<int, int> p13 = ft::make_pair(33, 33);
+	ft::pair<int, int> p14 = ft::make_pair(42, 42);
 
 
 	// std::cout << mmap[0] << " " << mmap.size() << std::endl;
@@ -265,10 +268,10 @@ int main()
 	// std::cout << mmap[1] << " " << mmap.size() << std::endl;
 
 
-	ft::RBTree<ft::Pair<const int, int>, ft::map<int, int>::value_compare, std::__1::allocator<ft::Pair<const int, int> > > tree = mmap.getTree();
-	ft::RBTree<ft::Pair<const int, int>, ft::map<int, int>::value_compare, std::__1::allocator<ft::Pair<const int, int> > >::iterator it;
+	ft::RBTree<ft::pair<const int, int>, ft::map<int, int>::value_compare, std::__1::allocator<ft::pair<const int, int> > > tree = mmap.getTree();
+	ft::RBTree<ft::pair<const int, int>, ft::map<int, int>::value_compare, std::__1::allocator<ft::pair<const int, int> > >::iterator it;
 
-	// std::cout << it._root->_value._second << std::endl;
+	// std::cout << it._root->_value.second << std::endl;
 	tree.print2D(tree._root);
 	mmap.erase(2);
 	
@@ -276,10 +279,10 @@ int main()
 
 	// std::cout << tree.max() << std::endl;
 	// mmap.erase(30);
-	// std::cout << "   " << tree._root->_value._second << "\n" <<
-	// " " << tree._root->_left->_value._second << "   " << tree._root->_right->_value._second << "\n" <<
-	// tree._root->_left->_left->_value._second << " " << tree._root->_left->_right->_value._second << " " << tree._root->_right->_left->_value._second << " " << tree._root->_right->_right->_value._second
-	// << "\n	" << tree._root->_right->_right->_right->_value._second << std::endl;
+	// std::cout << "   " << tree._root->_value.second << "\n" <<
+	// " " << tree._root->_left->_value.second << "   " << tree._root->_right->_value.second << "\n" <<
+	// tree._root->_left->_left->_value.second << " " << tree._root->_left->_right->_value.second << " " << tree._root->_right->_left->_value.second << " " << tree._root->_right->_right->_value.second
+	// << "\n	" << tree._root->_right->_right->_right->_value.second << std::endl;
 	// it = mmap.find(8);
 	// std::cout << it._root->_value.first << std::endl;
 

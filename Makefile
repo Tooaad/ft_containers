@@ -2,7 +2,7 @@
 
 NAME                    =   containers
 
-SRCS                    =   main.cpp    VectorTests.cpp				
+SRCS                    =   main.cpp    VectorTests.cpp		MapTests.cpp		
 
 SRCSFD					=	srcs/
 OBJSFD					=	objs/

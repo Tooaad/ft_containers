@@ -8,7 +8,7 @@ this is a great template to begin with.
 
 # General Tasks
 - Remake Iterator, Reverse Iterator & Iterator Traits
-- Pairs & Make_Pair
+- pairs & Make_pair
 - Optimal Tree Structure to order key map insertions
 
 # Vector Tasks
@@ -21,7 +21,7 @@ this is a great template to begin with.
 - Allocator
 - Others
 
-# Map
+# map
 - Orthodox Canonical Form
 - Iterator function
 - Capacity functions

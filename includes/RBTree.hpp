@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/07 14:06:21 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:11:51 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@
 
 namespace ft
 {
-	template <class Pair, class Compare, class Alloc>
+	template <class pair, class Compare, class Alloc>
 	class RBTree
 	{
 	public:
-		typedef Pair value_type;
+		typedef pair value_type;
 		typedef Compare key_compare;
 		typedef Alloc allocator;
 		typedef size_t size_type;
 		typedef ptrdiff_t difference_type;
-		typedef ft::Node<Pair> node_type;
+		typedef ft::Node<pair> node_type;
 		typedef typename Alloc::template rebind<node_type>::other node_alloc;
 		typedef ft::allocator<node_alloc> node_traits;
 		typedef typename node_alloc::pointer pointer;
 		typedef typename node_alloc::const_pointer const_pointer;
-		typedef typename ft::TreeIter<pointer, Pair> iterator;
-		typedef typename ft::TreeIter<const_pointer, Pair> const_iterator;
+		typedef typename ft::TreeIter<pointer, pair> iterator;
+		typedef typename ft::TreeIter<const_pointer, pair> const_iterator;
 		typedef typename ft::ReverseIter<iterator> reverse_iterator;
 		typedef typename ft::ReverseIter<const_iterator> const_reverse_iterator;
 
@@ -54,11 +54,9 @@ namespace ft
 		explicit RBTree(const key_compare &comp = key_compare(), const node_alloc &node_allocator = node_alloc())
 			: _root(0), _size(0), _comp(comp), _node_alloc(node_allocator)
 		{
-			std::cout << "A Tree has been successfully created" << std::endl;
 			_nil = _node_alloc.allocate(1);
 			_node_alloc.construct(_nil, value_type());
 			_nil->_color = BLACK;
-			std::cout << "---" << _nil << std::endl;
 		}
 
 		RBTree(const RBTree &otherTree)
@@ -107,7 +105,7 @@ namespace ft
 			}
 		}
 
-		ft::Pair<iterator, bool> insert(const value_type &value)
+		ft::pair<iterator, bool> insert(const value_type &value)
 		{
 			if (!this->_root)
 			{
@@ -522,15 +520,14 @@ namespace ft
 			{
 				if (this->size() > 0)
 				{
-					pointer nil;
 					deallocate_node(this->_root);
-					this->_size = nil;
-					this->_root = nil;
+					this->_size = 0;
+					this->_root = _nil;
 				}
 			}
 
 			// OPERATIONS
-			// Map->Tree->Iter->Node->Pair
+			// map->Tree->Iter->Node->pair
 
 			template <class K>
 			pointer find(const K &value)
@@ -584,7 +581,7 @@ namespace ft
 				std::cout << std::endl;
 				for (int i = COUNT; i < space; i++)
 					std::cout << " ";
-				std::cout << root->_value._second;
+				std::cout << root->_value.second;
 				if (root->_color == 0)
 					std::cout << "-N" << "\n";
 				else 

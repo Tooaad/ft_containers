@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/08/06 19:16:55 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/04 21:17:53 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ template <class T>
 	};
 
 	
-template <class Node, class Pair >
+template <class Node, class pair >
 	class TreeIter {
 		public:
-			typedef Pair												value_type;
+			typedef pair												value_type;
 			typedef value_type*											pointer;
 			typedef value_type&											reference;
 			typedef typename std::bidirectional_iterator_tag			iterator_category;
@@ -153,20 +153,12 @@ template <class Node, class Pair >
 			pointer base() const {return this;}
 			node_ptr baseNode() const {return _root;}
 			TreeIter& operator++() {
-				if (this->_root->_right) {
-					node_ptr tmp = this->_root->_right;
-					tmp = min(tmp);
-					// std::cout << "\n" << tmp->_value.first << std::endl;
-					this->_root = tmp;
-				}
+				if (this->_root->_right)
+					this->_root = min(this->_root->_right);
 				else {
-					node_ptr tmp = this->_root;
-					node_ptr tmpParent = this->_root->_parent;
-					while (tmpParent && tmp == tmpParent->_right) {
-						tmp = tmp->_parent;
-						tmpParent = tmpParent->_parent;
-					} 
-					this->_root = tmpParent;
+					while (this->_root && this->_root == this->_root->_parent->_right)
+						this->_root = this->_root->_parent;
+					this->_root = this->_root->_parent;
 				}
 				return *this;
 			}
@@ -204,8 +196,8 @@ template <class Node, class Pair >
 				return n;
 			}
 			
-			reference operator*() const { return *_root->_value; }
-			pointer operator->() const { return _root->_value; }
+			reference operator*() const { return _root->_value; }
+			pointer operator->() const { return &_root->_value; }
 			
 	};
 	

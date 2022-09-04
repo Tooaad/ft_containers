@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/03 21:58:55 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:33:59 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2010,7 +2010,7 @@ void swapTest() {
         COMPARE(std, ft);
     }
     if (nextTest())
-        return ;    
+        return ;
 }
 
 void runTests() {
@@ -2022,27 +2022,27 @@ void runTests() {
     insertRangeTest();
     insertMixTest();
     
-    // assignTest();
-    // assignRangeTest();
-    // assignMixedTest();
-    // atTest();               //
-    // backTest();             //
-    // clearTest();
-    // ctor_copy();            //
-    // frontTest();            //
-    // emptyTest();
-    // eraseTest();
-    // eraseRangeTest();
-    // eraseMixTest();
-    // indexOpTest();
-    // iteratorCompTest();     //
-    // operatorEquals();
-    // popbackTest();
-    // pushbackTest();
-    // reserveTest();
-    // resizeTest();
-    // reverseIteratorCompTest();
-    // swapTest();
+    assignTest();
+    assignRangeTest();
+    assignMixedTest();
+    atTest();               //
+    backTest();             //
+    clearTest();
+    ctor_copy();            //
+    frontTest();            //
+    emptyTest();
+    eraseTest();
+    eraseRangeTest();
+    eraseMixTest();
+    indexOpTest();
+    iteratorCompTest();     //
+    operatorEquals();
+    popbackTest();
+    pushbackTest();
+    reserveTest();
+    resizeTest();
+    reverseIteratorCompTest();
+    swapTest();
     
     
 }
