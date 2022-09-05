@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/04 20:11:51 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:17:07 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,13 @@ namespace ft
 			{
 				this->_root = createNode(value);
 				this->_root->_color = BLACK;
-				return ft::make_pair(iterator(this->_root), true);
+				return ft::make_pair(iterator(this->_root, _nil), true);
 			}
+			// Borrar NIL ????
+
+			delNil(this->_root->_right);
+
+			print2D(this->_root);
 			pointer tmp = this->_root;
 			pointer parent;
 			while (tmp)
@@ -206,7 +211,7 @@ namespace ft
 				}
 			}
 			this->_root->_color = BLACK;
-			return ft::make_pair(iterator(this->_root), true);
+			return ft::make_pair(iterator(this->_root, _nil), true);
 		}
 
 		void rotateRight(pointer parent)
@@ -491,17 +496,17 @@ namespace ft
 			}
 
 			// ITERATORS
-			iterator begin() { return iterator(min()); }
-			const_iterator begin() const { return const_iterator(min()); }
+			iterator begin() { return iterator(min(), 0); }
+			const_iterator begin() const { return const_iterator(min(), 0); }
 
-			iterator end() { return iterator(max()); }
-			const_iterator end() const { return const_iterator(max()); }
+			iterator end() { return iterator(max(), 0); }
+			const_iterator end() const { return const_iterator(max(), 0); }
 
-			reverse_iterator rbegin() { return reverse_iterator(this->end()); }
-			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end()); }
+			reverse_iterator rbegin() { return reverse_iterator(this->end(), 0); }
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end(), 0); }
 
-			reverse_iterator rend() { return reverse_iterator(this->begin()); }
-			const_reverse_iterator rend() const { return const_reverse_iterator(this->begin()); }
+			reverse_iterator rend() { return reverse_iterator(this->begin(), 0); }
+			const_reverse_iterator rend() const { return const_reverse_iterator(this->begin(), 0); }
 
 			// CAPACITY
 			void increment_size() { this->_size++; }

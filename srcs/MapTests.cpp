@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/04 21:19:28 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:04:52 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void ctorTest() {
 void ctorRangeTest() {
     SETUP_MAP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
-    std::cout << "\x1b[41m                    CTOR TEST                   \x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                CTOR RANGE TEST                 \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
-        intmap std(std_intstr_arr, std_intstr_arr + 1, std::less<int>());
-        _intmap ft(ft_intstr_arr, ft_intstr_arr + 1, std::less<int>());
+        intmap std(std_intstr_arr, std_intstr_arr + 2, std::less<int>());
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 2, std::less<int>());
+        ft.getTree().print2D(ft.getTree()._root);
 
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -69,8 +70,8 @@ void ctorRangeTest() {
 
         strmap std2(std_strstr_arr, std_strstr_arr + 8);
         _strmap ft2(ft_strstr_arr, ft_strstr_arr + 8);
-        PRINT_AL(std1, 0);
-        PRINT_AL(ft1, 1);
+        PRINT_AL(std2, 0);
+        PRINT_AL(ft2, 1);
     }
     if (nextTes())
         return ;

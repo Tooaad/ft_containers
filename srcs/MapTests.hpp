@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/04 20:47:55 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:43:12 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void init_array_int_str(std::pair<int, std::string>* arr, std::size_t size)
                           "1IRLC9sfQI5AzDYeotLd" };
 
     for (std::size_t i = 0; i < size; ++i) {
-        arr[i] = std::make_pair(rand(), x[i]);
+        arr[i] = std::make_pair(i, x[i]);
     }
 }
 
@@ -113,7 +113,7 @@ void init_array_int_str(ft::pair<int, std::string>* arr, std::size_t size)
                           "1IRLC9sfQI5AzDYeotLd" };
 
     for (std::size_t i = 0; i < size; ++i) {
-        arr[i] = ft::make_pair(rand(), x[i]);
+        arr[i] = ft::make_pair(i, x[i]);
     }
 }
 

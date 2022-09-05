@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/04 21:17:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:26:45 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,17 @@ template <class T>
 				return tmp;
 			}
 
-			void rewire(Node* node) // this = 38 || node = 30
-			{
-				this->_right = node->_right;
-				this->_left = node->_left;
-				this->_parent = node->_parent;
-				node->_parent->_right = this;
-				node->_right->_parent = this;
-				node->_left->_parent = this;  
-				node->_right = NULL;
-				node->_left = NULL;
-			}
+			// void rewire(Node* node) // this = 38 || node = 30
+			// {
+			// 	this->_right = node->_right;
+			// 	this->_left = node->_left;
+			// 	this->_parent = node->_parent;
+			// 	node->_parent->_right = this;
+			// 	node->_right->_parent = this;
+			// 	node->_left->_parent = this;  
+			// 	node->_right = NULL;
+			// 	node->_left = NULL;
+			// }
 
 			void leftRotate(Node* _root) {
 				Node* nodeAux = this->_right;
@@ -132,22 +132,24 @@ template <class Node, class pair >
 			typedef typename ft::iterator_traits<Node>::reference		reference_ptr;
 
 			node_ptr	_root;
-			node_ptr	_nil;
+			// node_ptr	_nil;
 			
 			TreeIter() : _root(0) {}
 			// explicit TreeIter(node_ptr root, node_ptr nil) : _root(root), _nil(0) {}
-			explicit TreeIter(node_ptr root): _root(root), _nil(0) {}
+			explicit TreeIter(node_ptr root, node_ptr nil): _root(root) {
+				max(_root)->_right = nil;
+			}
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
 				this->_root = it._root;
-				this->_nil = it._nil;
+				// this->_nil = it._nil;
 			}
 			~TreeIter() {}
 
 			template <class U, class P>
 			TreeIter&	operator=(const TreeIter<U, P>& other) {
 				this->_root = other._root;
-				this->_nil = other._nil;
+				// this->_nil = other._nil;
 				return *this;
 			}
 			pointer base() const {return this;}
