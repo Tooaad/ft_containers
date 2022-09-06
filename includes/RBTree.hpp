@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/05 13:17:07 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:15:14 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ namespace ft
 				this->_root = createNode(value);
 				this->_root->_color = BLACK;
 				return ft::make_pair(iterator(this->_root, _nil), true);
-			}
-			// Borrar NIL ????
-
-			delNil(this->_root->_right);
-
-			print2D(this->_root);
+			}	
 			pointer tmp = this->_root;
+			while (tmp && tmp->_right)
+				tmp = tmp->_right;
+			delNil(tmp->_parent->_right);
+			
+			tmp = this->_root;
 			pointer parent;
 			while (tmp)
 			{
@@ -496,11 +496,11 @@ namespace ft
 			}
 
 			// ITERATORS
-			iterator begin() { return iterator(min(), 0); }
-			const_iterator begin() const { return const_iterator(min(), 0); }
+			iterator begin() { return iterator(min()); }
+			const_iterator begin() const { return const_iterator(min()); }
 
-			iterator end() { return iterator(max(), 0); }
-			const_iterator end() const { return const_iterator(max(), 0); }
+			iterator end() { return iterator(max()); }
+			const_iterator end() const { return const_iterator(max()); }
 
 			reverse_iterator rbegin() { return reverse_iterator(this->end(), 0); }
 			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end(), 0); }
@@ -551,7 +551,7 @@ namespace ft
 				return NULL;
 			}
 
-			pointer min()
+			pointer min() const
 			{
 				pointer tmp = this->_root;
 
@@ -560,7 +560,7 @@ namespace ft
 				return tmp;
 			}
 
-			pointer max()
+			pointer max() const
 			{
 				pointer tmp = this->_root;
 

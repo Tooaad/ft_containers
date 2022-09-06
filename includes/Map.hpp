@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/05 11:18:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:26:46 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 					insert(first, last);
 				}
 			
-			map(const map& x) : _tree(x._tree) {
-				insert(x.begin(), x.end());
-			}
+			map(const map& x) { *this = x; }
 
 			~map() {}
 
@@ -123,7 +121,6 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			ft::pair<iterator, bool> insert(const value_type& val) {
 				this->_tree.increment_size();
 				return this->_tree.insert(val);
-				
 			}
 
 			//PROBAR

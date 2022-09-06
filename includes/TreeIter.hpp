@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/05 12:26:45 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:25:58 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,18 @@ template <class Node, class pair >
 			typedef typename ft::iterator_traits<Node>::pointer			node_ptr;
 			typedef typename ft::iterator_traits<Node>::reference		reference_ptr;
 
+		protected:
 			node_ptr	_root;
 			// node_ptr	_nil;
-			
+		public:
 			TreeIter() : _root(0) {}
-			// explicit TreeIter(node_ptr root, node_ptr nil) : _root(root), _nil(0) {}
+			explicit TreeIter(node_ptr root) : _root(root) {}
 			explicit TreeIter(node_ptr root, node_ptr nil): _root(root) {
-				max(_root)->_right = nil;
+				if (nil) {
+					node_ptr last = max(_root);
+					last->_right = nil;
+					nil->_parent = last;
+				}
 			}
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
@@ -152,8 +157,8 @@ template <class Node, class pair >
 				// this->_nil = other._nil;
 				return *this;
 			}
-			pointer base() const {return this;}
-			node_ptr baseNode() const {return _root;}
+			pointer base() const { return this; }
+			node_ptr baseNode() const { return _root; }
 			TreeIter& operator++() {
 				if (this->_root->_right)
 					this->_root = min(this->_root->_right);

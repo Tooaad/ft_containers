@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 01:19:13 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/04 20:10:17 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:23:15 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ template <class T1, class T2>
 
 			first_type	first;
 			second_type	second;
-		 
-		public:
+
 			pair() : first(), second() { }
 
 			pair(const first_type& a, const second_type& b) : first(a), second(b) {}
@@ -34,10 +33,6 @@ template <class T1, class T2>
 				this->first = pr.first;
 				this->second = pr.second;
 				return *this;
-			}
-
-			T1&	getFirst() const {
-				return first;
 			}
 		};
 
