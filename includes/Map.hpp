@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/06 15:26:46 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/11 20:44:31 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 
 			map& operator= (const map& x) {
 				if(this != &x) {
-					this->_tree.clear();
 					this->_tree = x._tree;
+					this->_comp = x._comp;
 					this->_alloc = x._alloc;
 					
 				}
@@ -111,10 +111,26 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 
 			// BUSCA LA CLAVE NO LA POSICION
 			mapped_type& operator[](const key_type& k) 
-			{ 
-				return (this->_tree.find(k)._root->_value.second);
-
+			{
+				if (this->_tree.find(k).second == false)
+					((this->insert(ft::make_pair(k,mapped_type()))));
+				return (this->_tree.find(k).first->_value.second);
 			}
+
+			// mapped_type& at(const key_type& k)
+			// {
+			// 	if (operator[](k))
+			// 		throw std::out_of_range("Index out of range");
+			// 	return operator[](k);
+			// }
+			
+			// const mapped_type& at(const key_type& k) const
+			// {
+			// 	const mapped_type temp = operator[](k);
+			// 	if (!temp)
+			// 		throw std::out_of_range("Index out of range");
+			// 	return temp;
+			// }
 
 	//	Modifiers
 

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/05 11:43:12 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/11 21:19:54 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@
 #include <cstring>
 #include <chrono>
 #include "../includes/map.hpp"
+
+template <typename Iter, typename Iter2>
+int compareMap(Iter first, Iter last, Iter2 first_, Iter2 last_)
+{
+    Iter it = first;
+    Iter2 it_ = first_;
+    for (;it != last || it_ != last_; ++it, ++it_) {
+        if (it->second != it_->second) {
+            std::cout << it->second << " ======== " << it_->second << std::endl;
+            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl << std::endl;
+            exit(1);
+        }
+    }
+    return 0;
+}
 
 template <typename It>
 void print_map(It first, It last, int type)
@@ -37,6 +52,28 @@ void print_map(It first, It last, int type)
     std::cout << std::endl;
 }
 
+#define COMPAR(std, ft)                                                                                   \
+    {                                                                                                     \
+        if (compareMap(std.begin(), std.end(), ft.begin(), ft.end())) {                                   \
+            return ;                                                                                      \
+        }                                                                                                 \
+        if ((std.size() != ft.size())) {                                                                  \
+            std::cout << "\x1b[31m--------------❌❌❌❌❌❌❌❌❌❌❌-------------\x1b[0m" << std::endl;     \
+        exit(1);                                                                                          \
+        }                                                                                                 \
+        else                                                                                              \
+             std::cout << "\x1b[32m------------------✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓-------------------\x1b[0m" << std::endl; \
+    }
+
+#define PRINT_LIN(msg, value, type)                                                                \
+    {                                                                                              \
+        if (type == 0)                                                                             \
+            std::cout << "\x1b[34m " << msg << " " << (value) << "\x1b[0m ";                       \
+        else                                                                                       \
+            std::cout << "\x1b[36m " << msg << " " << (value) << "\x1b[0m ";                       \
+        std::cout << std::endl;                                                                    \
+    }
+
 #define PRINT_MAP(map, type)                                                                       \
     {                                                                                              \
         std::cout << "\nmap content:\n";                                                           \
@@ -49,7 +86,7 @@ void print_map(It first, It last, int type)
         std::cout << "Size: " << c.size() << std::endl;                                            \
     }
 
-#define PRINT_AL(map, type)                                                                       \
+#define PRINT_AL(map, type)                                                                        \
     {                                                                                              \
         PRINT_SIZ(map);                                                                            \
         PRINT_MAP(map, type);                                                                      \

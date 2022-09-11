@@ -60,4 +60,4 @@ https://howardhinnant.github.io/allocator_boilerplate.html
 # Cosas a pillar
 - Prueba map.find con un 0 (sin insertarlo en el mapa) -> lo encuentra esta mal
 - Probar a meter el mismo key varias veces e imprimir donde estan valor
-- Como funciona el operator[], que hace
+- Como funciona el operator[], que hace ? (Si buscas algo que no existe, debe insertar y devolverlo) y se puede sobreescribir el valor buscado
