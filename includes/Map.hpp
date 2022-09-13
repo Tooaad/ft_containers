@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/11 20:44:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:52:05 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,20 +117,19 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				return (this->_tree.find(k).first->_value.second);
 			}
 
-			// mapped_type& at(const key_type& k)
-			// {
-			// 	if (operator[](k))
-			// 		throw std::out_of_range("Index out of range");
-			// 	return operator[](k);
-			// }
+			mapped_type& at(const key_type& k)
+			{
+				if (this->_tree.find(k).second == false)
+					throw std::out_of_range("Index out of range");
+				return (this->_tree.find(k).first->_value.second);
+			}
 			
-			// const mapped_type& at(const key_type& k) const
-			// {
-			// 	const mapped_type temp = operator[](k);
-			// 	if (!temp)
-			// 		throw std::out_of_range("Index out of range");
-			// 	return temp;
-			// }
+			const mapped_type& at(const key_type& k) const
+			{
+				if (this->_tree.find(k).second == false)
+					throw std::out_of_range("Index out of range");
+				return (this->_tree.find(k).first->_value.second);
+			}
 
 	//	Modifiers
 
@@ -186,8 +185,8 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			value_compare value_comp() const { return value_compare(this->_comp); }
 
 
-			iterator find(const key_type& k) { return iterator(this->_tree.find(k)); }
-			const_iterator find(const key_type& k) const { return const_iterator(this->_tree.find(k)); }
+			iterator find(const key_type& k) { return iterator(this->_tree.find(k).first); }
+			const_iterator find(const key_type& k) const { return const_iterator(this->_tree.find(k).first); }
 			
 			size_type count(const key_type& k) {
 				iterator found = this->find(k);

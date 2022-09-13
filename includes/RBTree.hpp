@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/11 20:38:32 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:52:14 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -546,6 +546,23 @@ namespace ft
 
 			template <class K>
 			ft::pair<pointer, bool> find(const K &value)
+			{
+				pointer tmp = this->_root;
+				while (tmp)
+				{
+					if (tmp->_value.first < value)
+						tmp = tmp->_right;
+					else if (value < tmp->_value.first)
+						tmp = tmp->_left;
+					else
+						return ft::make_pair(tmp, true);
+				}
+				// insert(value);
+				return ft::make_pair(_nil, false);
+			}
+			
+			template <class K>
+			ft::pair<pointer, bool> find(const K &value) const
 			{
 				pointer tmp = this->_root;
 				while (tmp)

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/06 15:25:58 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:54:53 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ template <class Node, class pair >
 			typedef typename ft::iterator_traits<Node>::pointer			node_ptr;
 			typedef typename ft::iterator_traits<Node>::reference		reference_ptr;
 
-		protected:
+		// protected:
 			node_ptr	_root;
 			// node_ptr	_nil;
 		public:
