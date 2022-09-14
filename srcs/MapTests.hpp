@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/11 21:19:54 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:39:53 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,29 @@ void print_map(It first, It last, int type)
     {                                                                                              \
         PRINT_SIZ(map);                                                                            \
         PRINT_MAP(map, type);                                                                      \
+    }
+
+#define PRINT_PAIR_REF(p, type)                                                                    \
+    {                                                                                              \
+        PRINT_LIN("Key:", (p).first, type);                                                        \
+        PRINT_LIN("Value:", (p).second, type);                                                     \
+    }
+
+#define PRINT_BOUND(b, end, type)                                                                  \
+    {                                                                                              \
+        if (b != end) {                                                                            \
+            PRINT_PAIR_REF(*b, type);                                                              \
+        } else {                                                                                   \
+            PRINT_LIN("End iterator", "", type);                                                  \
+        }                                                                                          \
+        std::cout << std::endl;                                                                    \
+    }
+
+#define PRINT_EQ_RANGE(p, end, type)                                                               \
+    {                                                                                              \
+        std::cout << "--------------------------------\n";                                         \
+        PRINT_BOUND(p.first, end, type);                                                           \
+        PRINT_BOUND(p.second, end, type);                                                          \
     }
 
 template <typename T>

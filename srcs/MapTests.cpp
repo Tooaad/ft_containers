@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/13 13:05:18 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:07:28 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -624,10 +624,337 @@ void countTest() {
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
     }
+    if (nextTes())
+        return ;
+}
+
+void upperBoundTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                UPPERBOUND TEST                 \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        std.insert(std::make_pair(34, "kljd9834iuhwet"));
+        std.insert(std::make_pair(3468, "dfghe45sywu4hsr"));
+        std.insert(std::make_pair(96533, "sdfghthrdfg5456ik"));
+        std.insert(std::make_pair(89548945894, "jtt5454wujtjse"));
+        std.insert(std::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        std.insert(std::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        std.insert(std::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        std.insert(std::make_pair(4, "asdfhfjgh54w3ag"));
+        std.insert(std::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        std.insert(std::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        std.insert(std::make_pair(453834782, "juytje54yaerdrj"));
+        std.insert(std::make_pair(19458942, "j567uysdts56y6uj5r"));
+        std.insert(std::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        ft.insert(ft::make_pair(34, "kljd9834iuhwet"));
+        ft.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
+        ft.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+        ft.insert(ft::make_pair(89548945894, "jtt5454wujtjse"));
+        ft.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        ft.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        ft.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        ft.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
+        ft.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        ft.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        ft.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
+        ft.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+        ft.insert(ft::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        intmap::iterator b = std.upper_bound(98583944);
+        _intmap::iterator b1 = ft.upper_bound(98583944);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(239485948);
+        b1 = ft.upper_bound(239485948);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(19458942);
+        b1 = ft.upper_bound(19458942);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(19458941);
+        b1 = ft.upper_bound(19458941);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(19458943);
+        b1 = ft.upper_bound(19458943);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+        
+        b = std.upper_bound(-1);
+        b1 = ft.upper_bound(-1);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(3);
+        b1 = ft.upper_bound(3);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(4);
+        b1 = ft.upper_bound(4);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(5);
+        b1 = ft.upper_bound(5);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(0);
+        b1 = ft.upper_bound(0);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.upper_bound(std::numeric_limits<int>::max());
+        b1 = ft.upper_bound(std::numeric_limits<int>::max());
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
+        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
+
+        b = std.upper_bound(std::numeric_limits<int>::max());
+        b1 = ft.upper_bound(std::numeric_limits<int>::max());
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+    }
+}
+
+void eqRangeTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                EQUAL_RANGE TEST                \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        std.insert(std::make_pair(34, "kljd9834iuhwet"));
+        std.insert(std::make_pair(3468, "dfghe45sywu4hsr"));
+        std.insert(std::make_pair(96533, "sdfghthrdfg5456ik"));
+        std.insert(std::make_pair(1954894589, "jtt5454wujtjse"));
+        std.insert(std::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        std.insert(std::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        std.insert(std::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        std.insert(std::make_pair(4, "asdfhfjgh54w3ag"));
+        std.insert(std::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        std.insert(std::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        std.insert(std::make_pair(453834782, "juytje54yaerdrj"));
+        std.insert(std::make_pair(19458942, "j567uysdts56y6uj5r"));
+        std.insert(std::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        ft.insert(ft::make_pair(34, "kljd9834iuhwet"));
+        ft.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
+        ft.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+        ft.insert(ft::make_pair(1954894589, "jtt5454wujtjse"));
+        ft.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        ft.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        ft.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        ft.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
+        ft.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        ft.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        ft.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
+        ft.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+        ft.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+
+
+        std::pair<intmap::iterator, intmap::iterator> eq = std.equal_range(98583944);
+        ft::pair<_intmap::iterator, _intmap::iterator> eq1 = ft.equal_range(98583944);
+
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(209485948);
+        eq1 = ft.equal_range(209485948);
+
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(19458942);
+        eq1 = ft.equal_range(19458942);
+
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(19458941);
+        eq1 = ft.equal_range(19458941);
+
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(19458943);
+        eq1 = ft.equal_range(19458943);
+
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(-1);
+        eq1 = ft.equal_range(-1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(3);
+        eq1 = ft.equal_range(3);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(4);
+        eq1 = ft.equal_range(4);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(5);
+        eq1 = ft.equal_range(5);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(0);
+        eq1 = ft.equal_range(0);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        eq = std.equal_range(std::numeric_limits<int>::max());
+        eq1 = ft.equal_range(std::numeric_limits<int>::max());
+
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
+        ft.insert(ft::make_pair(std::numeric_limits<int>::max(), "max"));
+
+        eq = std.equal_range(std::numeric_limits<int>::max());
+        eq1 = ft.equal_range(std::numeric_limits<int>::max());
+        
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+    }
+    if (nextTes())
+        return ;
+    // {
+    //     intmap temp(std_intstr_arr, std_intstr_arr + intstr_size);
+    //     _intmap tem(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+    //     temp.insert(std::make_pair(34, "kljd9834iuhwet"));
+    //     temp.insert(std::make_pair(3468, "dfghe45sywu4hsr"));
+    //     temp.insert(std::make_pair(96533, "sdfghthrdfg5456ik"));
+    //     temp.insert(std::make_pair(1954894589, "jtt5454wujtjse"));
+    //     temp.insert(std::make_pair(7754322, "w4wt5u4wjhstrhj"));
+    //     temp.insert(std::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+    //     temp.insert(std::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+    //     temp.insert(std::make_pair(4, "asdfhfjgh54w3ag"));
+    //     temp.insert(std::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+    //     temp.insert(std::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+    //     temp.insert(std::make_pair(453834782, "juytje54yaerdrj"));
+    //     temp.insert(std::make_pair(19458942, "j567uysdts56y6uj5r"));
+    //     temp.insert(std::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+
+    //     testd.insert(ft::make_pair(34, "kljd9834iuhwet"));
+    //     testd.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
+    //     testd.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+    //     testd.insert(ft::make_pair(1954894589, "jtt5454wujtjse"));
+    //     testd.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+    //     testd.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+    //     testd.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+    //     testd.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
+    //     testd.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+    //     testd.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+    //     testd.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
+    //     testd.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+    //     testd.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+
+    //     const intmap std(temp);
+    //     const _intmap ft(tem);
+
+    //     std::pair<intmap::const_iterator, intmap::const_iterator> eq = std.equal_range(98583944);
+    //     ft::pair<_intmap::const_iterator, _intmap::const_iterator> eq1 = ft.equal_range(98583944);
+
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(209485948);
+    //     eq1 = ft.equal_range(209485948);
+
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(19458942);
+    //     eq1 = ft.equal_range(19458942);
+
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(19458941);
+    //     eq1 = ft.equal_range(19458941);
+
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(19458943);
+    //     eq1 = ft.equal_range(19458943);
+
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(-1);
+    //     eq1 = ft.equal_range(-1);
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+        
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(3);
+    //     eq1 = ft.equal_range(3);
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(4);
+    //     eq1 = ft.equal_range(4);
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(5);
+    //     eq1 = ft.equal_range(5);
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(0);
+    //     eq1 = ft.equal_range(0);
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+    //     eq = std.equal_range(std::numeric_limits<int>::max());
+    //     eq1 = ft.equal_range(std::numeric_limits<int>::max());
+
+    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+    // }
 }
 
 void runMapTests() {
 
+    // upperBoundTest();
+    eqRangeTest();
     countTest();        //
     emptyMapTest();
     clearMapTest();

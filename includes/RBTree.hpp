@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/13 11:52:14 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:06:47 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,11 @@ namespace ft
 					parent = tmp;
 					tmp = tmp->_left;
 				}
-				// else
-				// {
-				// 	this->_size--;	
-				// 	return ft::make_pair(iterator(this->_root, _nil), false);
-				// }
+				// If a Key already exists returns the oldest one
+				else
+				{
+					return ft::make_pair(iterator(this->_root, 0), false);
+				}
 			}
 			tmp = createNode(value);
 			pointer newNode = tmp;

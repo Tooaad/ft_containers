@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/13 12:52:05 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:32:37 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			const_iterator lower_bound(const key_type& k) const { return find(k); }
 			iterator upper_bound(const key_type& k) { return ++find(k); }
 			const_iterator upper_bound(const key_type& k) const { return ++find(k); }
-			ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {return make_pair(lower_bound(k), upper_bound(k)); }
-			ft::pair<iterator,iterator> equal_range(const key_type& k) { return make_pair(lower_bound(k), upper_bound(k)); }
+			ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {return ft::make_pair(lower_bound(k), upper_bound(k)); }
+			ft::pair<iterator,iterator> equal_range(const key_type& k) { return ft::make_pair(lower_bound(k), upper_bound(k)); }
 			allocator_type get_allocator() const { return allocator_type(this->_tree._node_alloc); }
 	};
 }
