@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 20:43:36 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:54:57 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1171,8 +1171,41 @@ void valueCompTest() {
         return ;
 }
 
+void swapTests() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                SWAP TEST                \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + 32);
+        intmap std1;
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 32);
+        _intmap ft1;
+
+        std::swap(std, std1);
+        ft::swap(ft, ft1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        // PETA
+
+        // std.clear();
+        // std.swap(std1);
+        // ft.clear();
+        // ft.swap(ft1);
+
+        // PRINT_AL(std, 0);
+        // PRINT_AL(ft, 1);
+        // COMPAR(std, ft);
+
+    }
+}
+
 void runMapTests() {
 
+    swapTests();
     valueCompTest();
     eqRangeTest();
     lowerBoundTest();
