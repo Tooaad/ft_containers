@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/14 19:07:28 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:19:03 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -666,6 +666,7 @@ void upperBoundTest() {
         ft.insert(ft::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
         intmap::iterator b = std.upper_bound(98583944);
+        PRINT_AL(ft, 1);
         _intmap::iterator b1 = ft.upper_bound(98583944);
 
         PRINT_BOUND(b, std.end(), 0);
@@ -953,8 +954,8 @@ void eqRangeTest() {
 
 void runMapTests() {
 
-    // upperBoundTest();
-    eqRangeTest();
+    upperBoundTest();
+    // eqRangeTest();
     countTest();        //
     emptyMapTest();
     clearMapTest();

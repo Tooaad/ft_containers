@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/13 12:54:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:09:34 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,25 @@ template <class Node, class pair >
 			pointer base() const { return this; }
 			node_ptr baseNode() const { return _root; }
 			TreeIter& operator++() {
-				if (this->_root->_right)
-					this->_root = min(this->_root->_right);
+				if (this->_root->_right) {
+					node_ptr tmp = this->_root->_right;
+					tmp = min(tmp);
+					// std::cout << "\n" << tmp->_value._first << std::endl;
+					this->_root = tmp;
+				}
 				else {
-					while (this->_root && this->_root == this->_root->_parent->_right)
+					node_ptr tmp = this->_root;
+					node_ptr tmpParent = this->_root->_parent;
+					while (tmpParent && tmp == tmpParent->_right) {
+						tmp = tmp->_parent;
+						tmpParent = tmpParent->_parent;
+					}
+					if (!tmpParent) {
 						this->_root = this->_root->_parent;
-					this->_root = this->_root->_parent;
+						// this->_root->_right = NULL;
+						return *this;
+					}
+					this->_root = tmpParent;
 				}
 				return *this;
 			}

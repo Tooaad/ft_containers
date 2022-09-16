@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/14 17:32:37 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:21:07 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,10 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			}
 			iterator lower_bound(const key_type& k) { return find(k); }
 			const_iterator lower_bound(const key_type& k) const { return find(k); }
-			iterator upper_bound(const key_type& k) { return ++find(k); }
+			iterator upper_bound(const key_type& k) {
+				iterator t = ++find(k); 
+				std::cout << t._root->_value.first << std::endl;
+				return t; }
 			const_iterator upper_bound(const key_type& k) const { return ++find(k); }
 			ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {return ft::make_pair(lower_bound(k), upper_bound(k)); }
 			ft::pair<iterator,iterator> equal_range(const key_type& k) { return ft::make_pair(lower_bound(k), upper_bound(k)); }
