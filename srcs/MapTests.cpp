@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 20:54:57 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 21:18:16 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1171,10 +1171,10 @@ void valueCompTest() {
         return ;
 }
 
-void swapTests() {
+void swapMapTest() {
     SETUP_MAP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
-    std::cout << "\x1b[41m                SWAP TEST                \x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      SWAP TEST                 \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
         intmap std(std_intstr_arr, std_intstr_arr + 32);
@@ -1189,23 +1189,130 @@ void swapTests() {
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
 
-        // PETA
+        std.clear();
+        std1.swap(std);
+        ft.clear();
+        ft.swap(ft1);
 
-        // std.clear();
-        // std.swap(std1);
-        // ft.clear();
-        // ft.swap(ft1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
+}
 
-        // PRINT_AL(std, 0);
-        // PRINT_AL(ft, 1);
-        // COMPAR(std, ft);
+void keyCompTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      KEYCOMP TEST              \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
+        _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
 
+        strmap::iterator it = std.begin();
+        strmap::const_iterator cit = std.begin();
+        strmap::key_compare comp = std.key_comp();
+
+        _strmap::iterator it1 = ft.begin();
+        _strmap::const_iterator cit1 = ft.begin();
+        _strmap::key_compare comp1 = ft.key_comp();
+
+        if (comp(it->first, cit->first)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(it1->first, cit->first)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+        
+        it++;
+        cit++; cit++;
+        
+        it1++;
+        cit1++; cit1++;
+        
+        if (comp(it->first, cit->first)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(it1->first, cit->first)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+
+        it++;
+        
+        it1++;
+
+        if (comp(it->first, cit->first)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(it1->first, cit->first)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+    }
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        intmap::iterator it = std.begin();
+        intmap::iterator it1 = std.begin();
+        intmap::key_compare comp = std.key_comp();
+
+        _intmap::iterator it2 = ft.begin();
+        _intmap::iterator it3 = ft.begin();
+        _intmap::key_compare comp1 = ft.key_comp();
+
+        if (comp(it->first, it1->first)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(it2->first, it3->first)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+
+        it++;
+        it1++; it1++;
+        
+        it2++;
+        it3++; it3++;
+
+        if (comp(it->first, it1->first)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(it2->first, it3->first)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
     }
 }
 
 void runMapTests() {
 
-    swapTests();
+    keyCompTest();
+    swapMapTest();
     valueCompTest();
     eqRangeTest();
     lowerBoundTest();
