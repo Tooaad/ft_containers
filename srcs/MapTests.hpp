@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/14 17:39:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:53:35 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ void print_map(It first, It last, int type)
 
 #define PRINT_EQ_RANGE(p, end, type)                                                               \
     {                                                                                              \
-        std::cout << "--------------------------------\n";                                         \
+        if (type == 0)                                                                             \
+            std::cout << "--------------------------------\n";                                     \
         PRINT_BOUND(p.first, end, type);                                                           \
         PRINT_BOUND(p.second, end, type);                                                          \
     }

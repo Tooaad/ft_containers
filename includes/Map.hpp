@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.hpp                                            :+:      :+:    :+:   */
+/*   Map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/15 14:21:07 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:36:40 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 
 			key_compare key_comp() const { return this->_comp; }
 
-			value_compare value_comp() const { return value_compare(this->_comp); }
+			value_compare value_comp() const { value_compare	_value_compare; return _value_compare; }
 
 
 			iterator find(const key_type& k) { return iterator(this->_tree.find(k).first); }
@@ -194,15 +194,37 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 					return 0;
 				return 1;
 			}
-			iterator lower_bound(const key_type& k) { return find(k); }
-			const_iterator lower_bound(const key_type& k) const { return find(k); }
+			iterator lower_bound(const key_type& k) {
+				value_compare	_value_compare;
+				for (iterator it = begin(); it != end(); it++)
+					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value) || !_value_compare(it.baseNode()->_value, ft::make_pair(k, mapped_type())))
+						return it;
+				return end();
+			}
+			const_iterator lower_bound(const key_type& k) const {
+				value_compare	_value_compare;
+				for (const_iterator it = begin(); it != end(); it++)
+					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value) || !_value_compare(it.baseNode()->_value, ft::make_pair(k, mapped_type())))
+						return it;
+				return end();
+			}
 			iterator upper_bound(const key_type& k) {
-				iterator t = ++find(k); 
-				std::cout << t._root->_value.first << std::endl;
-				return t; }
-			const_iterator upper_bound(const key_type& k) const { return ++find(k); }
-			ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {return ft::make_pair(lower_bound(k), upper_bound(k)); }
+				value_compare	_value_compare;
+				for (iterator it = begin(); it != end(); it++)
+					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value))
+						return it;
+				return end();
+			}
+			const_iterator upper_bound(const key_type& k) const {
+				value_compare	_value_compare;
+				for (const_iterator it = begin(); it != end(); it++)
+					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value))
+						return it;
+				return end();
+			}
 			ft::pair<iterator,iterator> equal_range(const key_type& k) { return ft::make_pair(lower_bound(k), upper_bound(k)); }
+			ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {return ft::make_pair(lower_bound(k), upper_bound(k)); }
+			
 			allocator_type get_allocator() const { return allocator_type(this->_tree._node_alloc); }
 	};
 }

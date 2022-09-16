@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/14 17:06:47 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:46:06 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -525,7 +525,7 @@ namespace ft
 
 			size_type size() const { return this->_size; }
 
-			size_type max_size() const { return std::min<size_type>(node_traits::max_size(this->_node_alloc), std::numeric_limits<difference_type>::max()); }
+			size_type max_size() const { return _node_alloc().max_size(); }
 
 			bool empty() const { return !this->_root; }
 

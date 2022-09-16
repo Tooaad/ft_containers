@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/15 14:09:34 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:06:24 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,11 +173,6 @@ template <class Node, class pair >
 						tmp = tmp->_parent;
 						tmpParent = tmpParent->_parent;
 					}
-					if (!tmpParent) {
-						this->_root = this->_root->_parent;
-						// this->_root->_right = NULL;
-						return *this;
-					}
 					this->_root = tmpParent;
 				}
 				return *this;
@@ -216,7 +211,8 @@ template <class Node, class pair >
 				return n;
 			}
 			
-			reference operator*() const { return _root->_value; }
+			reference operator*() const { return const_cast<reference
+			>(_root->_value); }
 			pointer operator->() const { return &_root->_value; }
 			
 	};

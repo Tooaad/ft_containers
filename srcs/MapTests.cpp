@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/15 14:19:03 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:43:36 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -628,6 +628,117 @@ void countTest() {
         return ;
 }
 
+void lowerBoundTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                LOWERBOUND TEST                 \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        std.insert(std::make_pair(34, "kljd9834iuhwet"));
+        std.insert(std::make_pair(3468, "dfghe45sywu4hsr"));
+        std.insert(std::make_pair(96533, "sdfghthrdfg5456ik"));
+        std.insert(std::make_pair(89548945894, "jtt5454wujtjse"));
+        std.insert(std::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        std.insert(std::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        std.insert(std::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        std.insert(std::make_pair(4, "asdfhfjgh54w3ag"));
+        std.insert(std::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        std.insert(std::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        std.insert(std::make_pair(453834782, "juytje54yaerdrj"));
+        std.insert(std::make_pair(19458942, "j567uysdts56y6uj5r"));
+        std.insert(std::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        ft.insert(ft::make_pair(34, "kljd9834iuhwet"));
+        ft.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
+        ft.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+        ft.insert(ft::make_pair(89548945894, "jtt5454wujtjse"));
+        ft.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        ft.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        ft.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        ft.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
+        ft.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        ft.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        ft.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
+        ft.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+        ft.insert(ft::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        intmap::iterator b = std.lower_bound(98583944);
+        _intmap::iterator b1 = ft.lower_bound(98583944);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(239485948);
+        b1 = ft.lower_bound(239485948);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(19458942);
+        b1 = ft.lower_bound(19458942);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(19458941);
+        b1 = ft.lower_bound(19458941);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(19458943);
+        b1 = ft.lower_bound(19458943);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+        
+        b = std.lower_bound(-1);
+        b1 = ft.lower_bound(-1);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(3);
+        b1 = ft.lower_bound(3);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(4);
+        b1 = ft.lower_bound(4);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(5);
+        b1 = ft.lower_bound(5);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(0);
+        b1 = ft.lower_bound(0);
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        b = std.lower_bound(std::numeric_limits<int>::max());
+        b1 = ft.lower_bound(std::numeric_limits<int>::max());
+
+        PRINT_BOUND(b, std.end(), 0);
+        PRINT_BOUND(b1, ft.end(), 1);
+
+        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
+        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
+
+    }
+    if (nextTes())
+        return ;
+}
+
 void upperBoundTest() {
     SETUP_MAP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
@@ -666,7 +777,6 @@ void upperBoundTest() {
         ft.insert(ft::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
         intmap::iterator b = std.upper_bound(98583944);
-        PRINT_AL(ft, 1);
         _intmap::iterator b1 = ft.upper_bound(98583944);
 
         PRINT_BOUND(b, std.end(), 0);
@@ -735,12 +845,9 @@ void upperBoundTest() {
         std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
         std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
 
-        b = std.upper_bound(std::numeric_limits<int>::max());
-        b1 = ft.upper_bound(std::numeric_limits<int>::max());
-
-        PRINT_BOUND(b, std.end(), 0);
-        PRINT_BOUND(b1, ft.end(), 1);
     }
+    if (nextTes())
+        return ;
 }
 
 void eqRangeTest() {
@@ -853,109 +960,223 @@ void eqRangeTest() {
     }
     if (nextTes())
         return ;
-    // {
-    //     intmap temp(std_intstr_arr, std_intstr_arr + intstr_size);
-    //     _intmap tem(ft_intstr_arr, ft_intstr_arr + intstr_size);
+    {
+        intmap temp(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap tem(ft_intstr_arr, ft_intstr_arr + intstr_size);
 
-    //     temp.insert(std::make_pair(34, "kljd9834iuhwet"));
-    //     temp.insert(std::make_pair(3468, "dfghe45sywu4hsr"));
-    //     temp.insert(std::make_pair(96533, "sdfghthrdfg5456ik"));
-    //     temp.insert(std::make_pair(1954894589, "jtt5454wujtjse"));
-    //     temp.insert(std::make_pair(7754322, "w4wt5u4wjhstrhj"));
-    //     temp.insert(std::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-    //     temp.insert(std::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-    //     temp.insert(std::make_pair(4, "asdfhfjgh54w3ag"));
-    //     temp.insert(std::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-    //     temp.insert(std::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-    //     temp.insert(std::make_pair(453834782, "juytje54yaerdrj"));
-    //     temp.insert(std::make_pair(19458942, "j567uysdts56y6uj5r"));
-    //     temp.insert(std::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+        temp.insert(std::make_pair(34, "kljd9834iuhwet"));
+        temp.insert(std::make_pair(3468, "dfghe45sywu4hsr"));
+        temp.insert(std::make_pair(96533, "sdfghthrdfg5456ik"));
+        temp.insert(std::make_pair(1954894589, "jtt5454wujtjse"));
+        temp.insert(std::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        temp.insert(std::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        temp.insert(std::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        temp.insert(std::make_pair(4, "asdfhfjgh54w3ag"));
+        temp.insert(std::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        temp.insert(std::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        temp.insert(std::make_pair(453834782, "juytje54yaerdrj"));
+        temp.insert(std::make_pair(19458942, "j567uysdts56y6uj5r"));
+        temp.insert(std::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
-    //     testd.insert(ft::make_pair(34, "kljd9834iuhwet"));
-    //     testd.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
-    //     testd.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
-    //     testd.insert(ft::make_pair(1954894589, "jtt5454wujtjse"));
-    //     testd.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
-    //     testd.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-    //     testd.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-    //     testd.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
-    //     testd.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-    //     testd.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-    //     testd.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
-    //     testd.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
-    //     testd.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+        tem.insert(ft::make_pair(34, "kljd9834iuhwet"));
+        tem.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
+        tem.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+        tem.insert(ft::make_pair(1954894589, "jtt5454wujtjse"));
+        tem.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        tem.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        tem.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        tem.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
+        tem.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        tem.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        tem.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
+        tem.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+        tem.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
-    //     const intmap std(temp);
-    //     const _intmap ft(tem);
+        const intmap std(temp);
+        const _intmap ft(tem);
 
-    //     std::pair<intmap::const_iterator, intmap::const_iterator> eq = std.equal_range(98583944);
-    //     ft::pair<_intmap::const_iterator, _intmap::const_iterator> eq1 = ft.equal_range(98583944);
+        std::pair<intmap::const_iterator, intmap::const_iterator> eq = std.equal_range(98583944);
+        ft::pair<_intmap::const_iterator, _intmap::const_iterator> eq1 = ft.equal_range(98583944);
 
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(209485948);
-    //     eq1 = ft.equal_range(209485948);
+        eq = std.equal_range(209485948);
+        eq1 = ft.equal_range(209485948);
 
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(19458942);
-    //     eq1 = ft.equal_range(19458942);
+        eq = std.equal_range(19458942);
+        eq1 = ft.equal_range(19458942);
 
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(19458941);
-    //     eq1 = ft.equal_range(19458941);
+        eq = std.equal_range(19458941);
+        eq1 = ft.equal_range(19458941);
 
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(19458943);
-    //     eq1 = ft.equal_range(19458943);
+        eq = std.equal_range(19458943);
+        eq1 = ft.equal_range(19458943);
 
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(-1);
-    //     eq1 = ft.equal_range(-1);
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
+        eq = std.equal_range(-1);
+        eq1 = ft.equal_range(-1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
         
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(3);
-    //     eq1 = ft.equal_range(3);
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        eq = std.equal_range(3);
+        eq1 = ft.equal_range(3);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(4);
-    //     eq1 = ft.equal_range(4);
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        eq = std.equal_range(4);
+        eq1 = ft.equal_range(4);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(5);
-    //     eq1 = ft.equal_range(5);
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        eq = std.equal_range(5);
+        eq1 = ft.equal_range(5);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(0);
-    //     eq1 = ft.equal_range(0);
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        eq = std.equal_range(0);
+        eq1 = ft.equal_range(0);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-    //     eq = std.equal_range(std::numeric_limits<int>::max());
-    //     eq1 = ft.equal_range(std::numeric_limits<int>::max());
+        eq = std.equal_range(std::numeric_limits<int>::max());
+        eq1 = ft.equal_range(std::numeric_limits<int>::max());
 
-    //     PRINT_EQ_RANGE(eq, std.end(), 0);
-    //     PRINT_EQ_RANGE(eq1, ft.end(), 1);
-    // }
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+    }
+    if (nextTes())
+        return ;
+}
+void valueCompTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                VALUE_COMP TEST                \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+{
+        strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
+        _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
+
+        strmap::iterator it = std.begin();
+        strmap::const_iterator cit = std.begin();
+        strmap::value_compare comp = std.value_comp();
+
+        _strmap::iterator it1 = ft.begin();
+        _strmap::const_iterator cit1 = ft.begin();
+        _strmap::value_compare comp1 = ft.value_comp();
+        
+        if (comp(*it, *cit)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(*it1, *cit1)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+
+        it++;
+        cit++; cit++;
+        
+        it1++;
+        cit1++; cit1++;
+
+        if (comp(*it, *cit)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(*it1, *cit1)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+
+        it++;
+        
+        it1++;
+
+        if (comp(*it, *cit)) {        
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(*it1, *cit1)) {        
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+ 
+    }
+
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        intmap::iterator it = std.begin();
+        intmap::iterator it1 = std.begin();
+        intmap::value_compare comp = std.value_comp();
+
+        _intmap::iterator it2 = ft.begin();
+        _intmap::iterator it3 = ft.begin();
+        _intmap::value_compare comp1 = ft.value_comp();
+
+        if (comp(*it, *it1)) {
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(*it2, *it3)) {
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+
+        it++;
+        it1++; it1++;
+        
+        it2++;
+        it3++; it3++;
+
+        if (comp(*it, *it1)) {
+            PRINT_LIN("LESS", "", 0);
+        } else {
+            PRINT_LIN("NOT LESS", "", 0);
+        }
+
+        if (comp1(*it2, *it3)) {
+            PRINT_LIN("LESS", "", 1);
+        } else {
+            PRINT_LIN("NOT LESS", "", 1);
+        }
+    }
+    if (nextTes())
+        return ;
 }
 
 void runMapTests() {
 
+    valueCompTest();
+    eqRangeTest();
+    lowerBoundTest();
     upperBoundTest();
-    // eqRangeTest();
     countTest();        //
     emptyMapTest();
     clearMapTest();
