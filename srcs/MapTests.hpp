@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 18:53:35 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:40:02 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void print_map(It first, It last, int type)
         if (type == 0)
             std::cout << "\x1b[34m " << "K: " << first->first << " V: " << first->second << "\x1b[0m ";
         else
-            std::cout << "\x1b[36m " << "K: " << first->first << " V: " << first->second << "\x1b[0m ";
+            std::cout << "\x1b[35m " << "K: " << first->first << " V: " << first->second << "\x1b[0m ";
         std::cout << std::setw(6);
         if (++i % 2 == 0)
             std::cout << std::endl;
@@ -70,7 +70,7 @@ void print_map(It first, It last, int type)
         if (type == 0)                                                                             \
             std::cout << "\x1b[34m " << msg << " " << (value) << "\x1b[0m ";                       \
         else                                                                                       \
-            std::cout << "\x1b[36m " << msg << " " << (value) << "\x1b[0m ";                       \
+            std::cout << "\x1b[35m " << msg << " " << (value) << "\x1b[0m ";                       \
         std::cout << std::endl;                                                                    \
     }
 
@@ -90,6 +90,18 @@ void print_map(It first, It last, int type)
     {                                                                                              \
         PRINT_SIZ(map);                                                                            \
         PRINT_MAP(map, type);                                                                      \
+    }
+
+#define PRINT_INS_PAIR(p, type)                                                                    \
+    {                                                                                              \
+        PRINT_PAIR_REF(*p.first, type);                                                            \
+        PRINT_LIN("Inserted:", p.second ? "true" : "false", type);                                 \
+    }
+
+#define PRINT_PAIR_PTR(p, type)                                                                     \
+    {                                                                                               \
+        PRINT_LIN("Key:", (p)->first, type);                                                        \
+        PRINT_LIN("Value:", (p)->second, type);                                                     \
     }
 
 #define PRINT_PAIR_REF(p, type)                                                                    \

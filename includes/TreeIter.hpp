@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 20:06:24 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:14:29 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,9 +211,8 @@ template <class Node, class pair >
 				return n;
 			}
 			
-			reference operator*() const { return const_cast<reference
-			>(_root->_value); }
-			pointer operator->() const { return &_root->_value; }
+			reference operator*() const { return const_cast<reference> (_root->_value); }
+			pointer operator->() const { return const_cast<pointer> (&_root->_value); }
 			
 	};
 	

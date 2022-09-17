@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 18:46:06 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:04:36 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,7 +558,7 @@ namespace ft
 						return ft::make_pair(tmp, true);
 				}
 				// insert(value);
-				return ft::make_pair(_nil, false);
+				return ft::make_pair(end()._root, false);
 			}
 			
 			template <class K>

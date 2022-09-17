@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Map.hpp                                            :+:      :+:    :+:   */
+/*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 20:36:40 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:34:25 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 
 			key_compare key_comp() const { return this->_comp; }
 
-			value_compare value_comp() const { value_compare	_value_compare; return _value_compare; }
+			value_compare value_comp() const { value_compare _value_compare; return _value_compare; }
 
 
 			iterator find(const key_type& k) { return iterator(this->_tree.find(k).first); }

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/16 21:18:16 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:49:08 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1307,10 +1307,258 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 1);
         }
     }
+    if (nextTes())
+        return ;
 }
 
-void runMapTests() {
+/*
+void findTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      FIND TEST                 \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+        {
+        strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
+        _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
 
+        strmap::iterator it = std.find("ABCD");
+        _strmap::iterator it1 = ft.find("ABCD");
+
+        if (it != std.end()) {
+            PRINT_PAIR_REF(*it, 0);
+        }
+        if (it1 != ft.end()) {
+            PRINT_PAIR_REF(*it1, 1);
+        }
+
+        std.insert(std::make_pair("12345", "etsriueruy394w"));
+        std.insert(std::make_pair("abcd", "sfdge4ta4tqtawefa"));
+        std.insert(std::make_pair("123", "adfgagrawetawtawef"));
+        std.insert(std::make_pair("1234", "asdfgaetfawfasdf"));
+        std.insert(std::make_pair("ab", "adfawtawefgzsdfg"));
+        std.insert(std::make_pair("yz", "gftrjr5y4agwe3ta"));
+        std.insert(std::make_pair("64", "mhj,i;y9o67eysetrgerg"));
+
+        ft.insert(ft::make_pair("12345", "etsriueruy394w"));
+        ft.insert(ft::make_pair("abcd", "sfdge4ta4tqtawefa"));
+        ft.insert(ft::make_pair("123", "adfgagrawetawtawef"));
+        ft.insert(ft::make_pair("1234", "asdfgaetfawfasdf"));
+        ft.insert(ft::make_pair("ab", "adfawtawefgzsdfg"));
+        ft.insert(ft::make_pair("yz", "gftrjr5y4agwe3ta"));
+        ft.insert(ft::make_pair("64", "mhj,i;y9o67eysetrgerg"));
+
+        it = std.find("12345");
+        it1 = ft.find("12345");
+
+        if (it != std.end()) {
+            PRINT_PAIR_REF(*it, 0);
+        }
+        if (it1 != ft.end()) {
+            PRINT_PAIR_REF(*it1, 1);
+        }
+
+        it = std.find("1234");
+        it1 = ft.find("1234");
+
+        if (it != std.end()) {
+            PRINT_PAIR_REF(*it, 0);
+        }
+        if (it1 != ft.end()) {
+            PRINT_PAIR_REF(*it1, 1);
+        }
+
+        it = std.find("123");
+        it1 = ft.find("123");
+
+        if (it != std.end()) {
+            PRINT_PAIR_REF(*it, 0);
+        }
+        if (it1 != ft.end()) {
+            PRINT_PAIR_REF(*it1, 1);
+        }
+
+        it = std.find("123");
+        it1 = ft.find("123");
+
+        if (it != std.end()) {
+            PRINT_PAIR_REF(*it, 0);
+        }
+        if (it1 != ft.end()) {
+            PRINT_PAIR_REF(*it1, 1);
+        }
+
+        // it = std.find("z");
+        // it1 = ft.find("z");
+
+        // // NO DEBERIA ENTRAR Y ESTA ENTRANDO
+        // if (it != std.end()) {
+        //      PRINT_PAIR_REF(*it, 0);
+        // }
+        // if (it1 != ft.end()) {
+        //     PRINT_PAIR_REF(*it1, 1);
+        // }
+
+        const strmap cm(std);
+        const _strmap cm1(ft);
+
+        strmap::const_iterator cit = cm.find("abcd");
+        _strmap::const_iterator cit1 = cm1.find("abcd");
+
+        std::cout << cit->first << " " << cm.end()->first << std::endl;
+        std::cout << cit1->first << " " << cm1.end()._root->_value.first << std::endl;
+
+        if (cit != cm.end()) {
+            PRINT_PAIR_REF(*cit, 0);
+        }
+        if (cit1 != cm1.end()) {
+            PRINT_PAIR_REF(*cit1, 1);
+        }
+
+        cit = std.find("64");
+        cit1 = ft.find("64"); 
+
+        if (cit != cm.end()) {
+            PRINT_PAIR_REF(*cit, 0);
+        }
+        if (cit1 != cm1.end()) {
+            PRINT_PAIR_REF(*cit1, 1);
+        }
+
+        cit = std.find("12345");
+        cit1 = ft.find("12345");
+
+        if (cit != cm.end()) {
+            PRINT_PAIR_REF(*cit, 0);
+        }
+        if (cit1 != cm1.end()) {
+            PRINT_PAIR_REF(*cit1, 1);
+        }
+
+        cit = std.find("1234");
+        cit1 = ft.find("1234");
+
+        if (cit != cm.end()) {
+            PRINT_PAIR_REF(*cit, 0);
+        }
+        if (cit1 != cm1.end()) {
+            PRINT_PAIR_REF(*cit1, 1);
+        }
+
+        cit = std.find("123");
+        cit1 = ft.find("123");
+
+        if (cit != cm.end()) {
+            PRINT_PAIR_REF(*cit, 0);
+        }
+        if (cit1 != cm1.end()) {
+            PRINT_PAIR_REF(*cit1, 1);
+        }
+
+        cit = std.find("123");
+        cit1 = ft.find("123");
+
+        if (cit != cm.end()) {
+            PRINT_PAIR_REF(*cit, 0);
+        }
+        if (cit1 != cm1.end()) {
+            PRINT_PAIR_REF(*cit1, 1);
+        }
+        // DEBERIA ENTRAR Y PETAR?
+        // cit = std.find("z");
+        // cit1 = ft.find("z");
+
+        // if (cit != cm.end()) {
+        //     PRINT_PAIR_REF(*cit, 0);
+        // }
+        // if (cit1 != cm1.end()) {
+        //     PRINT_PAIR_REF(*cit1, 1);
+        // }
+    }
+    
+    {
+        const intmap cm;
+        const _intmap cm1;
+
+        if (cm.find(0) != cm.end()) {
+            PRINT_PAIR_PTR(cm.find(0), 0);
+        }
+        if (cm1.find(0) != cm1.end()) {
+            PRINT_PAIR_PTR(cm1.find(0), 1);
+        }
+
+        // intmap std;
+        // _intmap ft;
+
+        // std.insert(std::make_pair(123, "Hello"));
+        // ft.insert(std::make_pair(123, "Hello"));
+
+        // if (std.find(0) != std.end()) {
+        //     PRINT_PAIR_PTR(std.find(0), 0);
+        // }
+        // if (ft.find(123) != ft.end()) {
+        //     PRINT_PAIR_PTR(ft.find(123), 1);
+        // }
+    }
+    if (nextTes())
+        return ;
+}
+*/
+
+void insertMapTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      INSERT TEST               \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        typedef std::pair<intmap::iterator, bool> std_ins_pair;
+        typedef ft::pair<_intmap::iterator, bool> ft_ins_pair;
+
+        intmap std;
+        _intmap ft;
+
+        std_ins_pair p = std.insert(std::make_pair(64, "64str"));
+        ft_ins_pair p1 = ft.insert(ft::make_pair(64, "64str"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
+        p = std.insert(std::make_pair(64, "Double"));
+        p1 = ft.insert(ft::make_pair(64, "Double"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        p = std.insert(std::make_pair(0, "0str"));
+        p1 = ft.insert(ft::make_pair(0, "0str"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        // p = std.insert(std::make_pair(-23, "-23str"));
+        // p1 = ft.insert(ft::make_pair(-23, "-23str"));
+
+        // PRINT_INS_PAIR(p, 0);
+        // PRINT_INS_PAIR(p1, 1);
+
+        // p = std.insert(std::make_pair(64, "dfgs"));
+        // p1 = ft.insert(ft::make_pair(64, "dfgs"));
+
+        // PRINT_INS_PAIR(p, 0);
+        // PRINT_INS_PAIR(p1, 1);
+    }
+    if (nextTes())
+        return ;
+}
+
+// INSERT -> Follow Malloc-free protecition for each function
+// FIND -> end() should return last value not empty 
+// FIND + ??? -> MAP original = SEGF | MAP mine = PROTECTED
+void runMapTests() {
+    // findTest();
+    insertMapTest();
     keyCompTest();
     swapMapTest();
     valueCompTest();
