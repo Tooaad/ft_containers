@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/17 21:04:36 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:08:22 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ namespace ft
 				// If a Key already exists returns the oldest one
 				else
 				{
-					return ft::make_pair(iterator(this->_root, 0), false);
+					return ft::make_pair(iterator(this->_root, _nil), false);
 				}
 			}
 			tmp = createNode(value);

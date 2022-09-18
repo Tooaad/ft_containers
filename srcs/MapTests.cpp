@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/17 21:49:08 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:11:09 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1531,23 +1531,35 @@ void insertMapTest() {
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
 
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
         p = std.insert(std::make_pair(0, "0str"));
         p1 = ft.insert(ft::make_pair(0, "0str"));
 
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
 
-        // p = std.insert(std::make_pair(-23, "-23str"));
-        // p1 = ft.insert(ft::make_pair(-23, "-23str"));
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
 
-        // PRINT_INS_PAIR(p, 0);
-        // PRINT_INS_PAIR(p1, 1);
+        p = std.insert(std::make_pair(-23, "-23str"));
+        p1 = ft.insert(ft::make_pair(-23, "-23str"));
 
-        // p = std.insert(std::make_pair(64, "dfgs"));
-        // p1 = ft.insert(ft::make_pair(64, "dfgs"));
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
 
-        // PRINT_INS_PAIR(p, 0);
-        // PRINT_INS_PAIR(p1, 1);
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
+        p = std.insert(std::make_pair(64, "dfgs"));
+        p1 = ft.insert(ft::make_pair(64, "dfgs"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
     }
     if (nextTes())
         return ;
@@ -1570,7 +1582,7 @@ void runMapTests() {
     clearMapTest();
     atMapTest();
     opIndexTest();
-    opEqualsTest();
+    // opEqualsTest();
     ctorCopyTest();
     ctorRangeTest();
     ctorTest();
