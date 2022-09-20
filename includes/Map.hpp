@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/17 21:34:25 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:14:23 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 		public:
 			
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) 
-				: _tree(), _alloc(alloc), _comp(comp) {}
+				: _tree(), _alloc(alloc), _comp(comp) {
+				}
 
 			template <class InputIterator>
 				map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())

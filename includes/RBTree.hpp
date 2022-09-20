@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/18 20:08:22 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:28:15 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ namespace ft
 		typedef typename ft::ReverseIter<iterator> reverse_iterator;
 		typedef typename ft::ReverseIter<const_iterator> const_reverse_iterator;
 
-		// private:
+	private:
 		pointer _root;
 		pointer _nil;
 		size_type _size;
 		key_compare _comp;
 		node_alloc _node_alloc;
 
-		// public:
+	public:
 
 		explicit RBTree(const key_compare &comp = key_compare(), const node_alloc &node_allocator = node_alloc())
 			: _root(0), _size(0), _comp(comp), _node_alloc(node_allocator)
@@ -57,6 +57,7 @@ namespace ft
 			_nil = _node_alloc.allocate(1);
 			_node_alloc.construct(_nil, value_type());
 			_nil->_color = BLACK;
+			_root = _nil;
 		}
 
 		RBTree(const RBTree &otherTree)
@@ -81,13 +82,14 @@ namespace ft
 				this->_size = otherTree._size;
 				this->_node_alloc = otherTree._node_alloc;
 				this->_comp = otherTree._comp;
+				this->_nil = otherTree._nil;
 			}
 
 			return *this;
 		}
 
 		~RBTree() {
-			deallocate_node(_nil);
+			// deallocate_node(_nil);
 		}
 
 		pointer createNode(const value_type &value)
@@ -108,18 +110,14 @@ namespace ft
 
 		ft::pair<iterator, bool> insert(const value_type &value)
 		{
-			if (!this->_root)
+			if (this->_root == _nil)
 			{
+				// deallocate_node(this->_root);
 				this->_root = createNode(value);
 				this->_root->_color = BLACK;
-				return ft::make_pair(iterator(this->_root, _nil), true);
+				return ft::make_pair(iterator(this->_root, 0), true);
 			}	
 			pointer tmp = this->_root;
-			while (tmp && tmp->_right)
-				tmp = tmp->_right;
-			delNil(tmp->_parent->_right);
-			
-			tmp = this->_root;
 			pointer parent;
 			while (tmp)
 			{
@@ -138,7 +136,7 @@ namespace ft
 				// If a Key already exists returns the oldest one
 				else
 				{
-					return ft::make_pair(iterator(this->_root, _nil), false);
+					return ft::make_pair(iterator(tmp, 0), false);
 				}
 			}
 			tmp = createNode(value);
@@ -215,7 +213,7 @@ namespace ft
 				}
 			}
 			this->_root->_color = BLACK;
-			return ft::make_pair(iterator(this->_root, _nil), true);
+			return ft::make_pair(iterator(newNode, 0), true);
 		}
 
 		void rotateRight(pointer parent)
@@ -291,7 +289,7 @@ namespace ft
 		}
 
 		bool isNil(pointer node) {
-			if (node == _nil)
+			if (node && node == _nil)
 				return true;
 			return false;
 		}
@@ -509,14 +507,14 @@ namespace ft
 			iterator begin() { return iterator(min()); }
 			const_iterator begin() const { return const_iterator(min()); }
 
-			iterator end() { return iterator(max()); }
-			const_iterator end() const { return const_iterator(max()); }
+			iterator end() { return iterator(_nil); }
+			const_iterator end() const { return const_iterator(_nil); }
 
-			reverse_iterator rbegin() { return reverse_iterator(this->end(), 0); }
-			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end(), 0); }
+			reverse_iterator rbegin() { return reverse_iterator(_nil, 0); }
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(_nil, 0); }
 
-			reverse_iterator rend() { return reverse_iterator(this->begin(), 0); }
-			const_reverse_iterator rend() const { return const_reverse_iterator(this->begin(), 0); }
+			reverse_iterator rend() { return reverse_iterator(min(), 0); }
+			const_reverse_iterator rend() const { return const_reverse_iterator(min(), 0); }
 
 			// CAPACITY
 			void increment_size() { this->_size++; }

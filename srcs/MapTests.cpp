@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/18 20:11:09 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:34:09 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int nextTes() {
     std::string action;
-    std::getline(std::cin, action);
+    // std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -1177,13 +1177,16 @@ void swapMapTest() {
     std::cout << "\x1b[41m                      SWAP TEST                 \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
-        intmap std(std_intstr_arr, std_intstr_arr + 32);
+        intmap std(std_intstr_arr, std_intstr_arr + 5);
         intmap std1;
-        _intmap ft(ft_intstr_arr, ft_intstr_arr + 32);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 5);
         _intmap ft1;
 
         std::swap(std, std1);
         ft::swap(ft, ft1);
+
+        std::cout << " " << std.begin()->first << std::endl;
+        std::cout << " " << ft.begin()._root->_value.first << std::endl;
 
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -1565,7 +1568,7 @@ void insertMapTest() {
         return ;
 }
 
-// INSERT -> Follow Malloc-free protecition for each function
+// SWAP -> Mirar como es el ultimo elemento  del std cuando itera
 // FIND -> end() should return last value not empty 
 // FIND + ??? -> MAP original = SEGF | MAP mine = PROTECTED
 void runMapTests() {
