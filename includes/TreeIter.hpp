@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/20 18:12:08 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:46:13 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,11 @@ template <class Node, class pair >
 			TreeIter() : _root(0) {}
 			explicit TreeIter(node_ptr root) : _root(root) {}
 			explicit TreeIter(node_ptr root, node_ptr nil): _root(root) {
-				(void) nil;
-				// if (nil) {
-				// 	node_ptr last = max(_root);
-				// 	last->_right = nil;
-				// 	nil->_parent = last;
-				// }
+				if (nil) {
+					node_ptr last = max(getRoot(root));
+					last->_right = nil;
+					nil->_parent = last;
+				}
 			}
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
@@ -199,7 +198,13 @@ template <class Node, class pair >
 			}  
 			TreeIter operator--(int) { TreeIter tmp(*this); --(*this); return tmp; }
 */
-			
+
+			node_ptr getRoot(node_ptr n) {
+				while (n->_parent)
+					n = n->_parent;
+				return n;
+			}
+
 			node_ptr min(node_ptr n) {
 				while (n->_left)
 					n = n->_left;

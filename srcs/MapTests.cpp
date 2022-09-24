@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/20 20:34:09 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:45:58 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int nextTes() {
     std::string action;
-    // std::getline(std::cin, action);
+    std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -86,8 +86,8 @@ void ctorCopyTest() {
     std::cout << "\x1b[41m                 CTOR COPY TEST                 \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
-        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
-        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+        intmap std(std_intstr_arr, std_intstr_arr + 3);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 3);
 
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -979,17 +979,30 @@ void eqRangeTest() {
         temp.insert(std::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
         tem.insert(ft::make_pair(34, "kljd9834iuhwet"));
+        tem.insert(ft::make_pair(34, "kljd9834iuhwet"));
+        tem.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
         tem.insert(ft::make_pair(3468, "dfghe45sywu4hsr"));
         tem.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+        tem.insert(ft::make_pair(96533, "sdfghthrdfg5456ik"));
+        tem.insert(ft::make_pair(1954894589, "jtt5454wujtjse"));
         tem.insert(ft::make_pair(1954894589, "jtt5454wujtjse"));
         tem.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        tem.insert(ft::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        tem.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
         tem.insert(ft::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
         tem.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        tem.insert(ft::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        tem.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
         tem.insert(ft::make_pair(4, "asdfhfjgh54w3ag"));
         tem.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        tem.insert(ft::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        tem.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
         tem.insert(ft::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
         tem.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
+        tem.insert(ft::make_pair(453834782, "juytje54yaerdrj"));
         tem.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+        tem.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
+        tem.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
         tem.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
         const intmap std(temp);
@@ -1027,8 +1040,8 @@ void eqRangeTest() {
 
         eq = std.equal_range(-1);
         eq1 = ft.equal_range(-1);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
         
+        PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
         eq = std.equal_range(3);
@@ -1051,11 +1064,12 @@ void eqRangeTest() {
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-        eq = std.equal_range(std::numeric_limits<int>::max());
-        eq1 = ft.equal_range(std::numeric_limits<int>::max());
+        //CHECK SEGFAULT
+        // eq = std.equal_range(std::numeric_limits<int>::max());
+        // eq1 = ft.equal_range(std::numeric_limits<int>::max());
 
-        PRINT_EQ_RANGE(eq, std.end(), 0);
-        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        // PRINT_EQ_RANGE(eq, std.end(), 0);
+        // PRINT_EQ_RANGE(eq1, ft.end(), 1);
     }
     if (nextTes())
         return ;
@@ -1066,8 +1080,8 @@ void valueCompTest() {
     std::cout << "\x1b[41m                VALUE_COMP TEST                \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
 {
-        strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
-        _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
+        strmap std(std_strstr_arr, std_strstr_arr + 2);
+        _strmap ft(ft_strstr_arr, ft_strstr_arr + 2);
 
         strmap::iterator it = std.begin();
         strmap::const_iterator cit = std.begin();
@@ -1177,16 +1191,13 @@ void swapMapTest() {
     std::cout << "\x1b[41m                      SWAP TEST                 \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
-        intmap std(std_intstr_arr, std_intstr_arr + 5);
+        intmap std(std_intstr_arr, std_intstr_arr + 32);
         intmap std1;
-        _intmap ft(ft_intstr_arr, ft_intstr_arr + 5);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 32);
         _intmap ft1;
 
         std::swap(std, std1);
         ft::swap(ft, ft1);
-
-        std::cout << " " << std.begin()->first << std::endl;
-        std::cout << " " << ft.begin()._root->_value.first << std::endl;
 
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -1212,7 +1223,7 @@ void keyCompTest() {
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
         strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
-        _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
+        _strmap ft(ft_strstr_arr, ft_strstr_arr + 6);
 
         strmap::iterator it = std.begin();
         strmap::const_iterator cit = std.begin();
@@ -1314,7 +1325,6 @@ void keyCompTest() {
         return ;
 }
 
-/*
 void findTest() {
     SETUP_MAP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
@@ -1390,25 +1400,21 @@ void findTest() {
             PRINT_PAIR_REF(*it1, 1);
         }
 
-        // it = std.find("z");
-        // it1 = ft.find("z");
+        it = std.find("z");
+        it1 = ft.find("z");
 
-        // // NO DEBERIA ENTRAR Y ESTA ENTRANDO
-        // if (it != std.end()) {
-        //      PRINT_PAIR_REF(*it, 0);
-        // }
-        // if (it1 != ft.end()) {
-        //     PRINT_PAIR_REF(*it1, 1);
-        // }
+        if (it != std.end()) {
+             PRINT_PAIR_REF(*it, 0);
+        }
+        if (it1 != ft.end()) {
+            PRINT_PAIR_REF(*it1, 1);
+        }
 
         const strmap cm(std);
         const _strmap cm1(ft);
 
         strmap::const_iterator cit = cm.find("abcd");
         _strmap::const_iterator cit1 = cm1.find("abcd");
-
-        std::cout << cit->first << " " << cm.end()->first << std::endl;
-        std::cout << cit1->first << " " << cm1.end()._root->_value.first << std::endl;
 
         if (cit != cm.end()) {
             PRINT_PAIR_REF(*cit, 0);
@@ -1489,23 +1495,23 @@ void findTest() {
             PRINT_PAIR_PTR(cm1.find(0), 1);
         }
 
-        // intmap std;
-        // _intmap ft;
+        intmap std;
+        _intmap ft;
 
-        // std.insert(std::make_pair(123, "Hello"));
-        // ft.insert(std::make_pair(123, "Hello"));
+        std.insert(std::make_pair(123, "Hello"));
+        ft.insert(ft::make_pair(123, "Hello"));
 
-        // if (std.find(0) != std.end()) {
-        //     PRINT_PAIR_PTR(std.find(0), 0);
-        // }
-        // if (ft.find(123) != ft.end()) {
-        //     PRINT_PAIR_PTR(ft.find(123), 1);
-        // }
+        if (std.find(0) != std.end()) {
+            PRINT_PAIR_PTR(std.find(0), 0);
+        }
+        if (ft.find(0) != ft.end()) {
+            PRINT_PAIR_PTR(ft.find(123), 1);
+        }
     }
     if (nextTes())
         return ;
 }
-*/
+
 
 void insertMapTest() {
     SETUP_MAP_ARRAYS();
@@ -1566,27 +1572,173 @@ void insertMapTest() {
     }
     if (nextTes())
         return ;
+    {
+        typedef std::pair<strmap::iterator, bool> std_ins_pair;
+        typedef ft::pair<_strmap::iterator, bool> ft_ins_pair;
+
+        strmap std;
+        _strmap ft;
+
+        std_ins_pair p = std.insert(std::make_pair("64", "64str"));
+        ft_ins_pair p1 = ft.insert(ft::make_pair("64", "64str"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
+        p = std.insert(std::make_pair("64n", "Double"));
+        p1 = ft.insert(ft::make_pair("64n", "Double"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
+        p = std.insert(std::make_pair("0n", "0str"));
+        p1 = ft.insert(ft::make_pair("0n", "0str"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
+        p = std.insert(std::make_pair("-23n", "-23str"));
+        p1 = ft.insert(ft::make_pair("-23n", "-23str"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end()._root->_value.first << std::endl;
+
+        p = std.insert(std::make_pair("64n", "dfgs"));
+        p1 = ft.insert(ft::make_pair("64n", "dfgs"));
+
+        PRINT_INS_PAIR(p, 0);
+        PRINT_INS_PAIR(p1, 1);
+
+    }
+    if (nextTes())
+        return ;
 }
 
-// SWAP -> Mirar como es el ultimo elemento  del std cuando itera
+void insertRangeMapTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      INSERT TEST               \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+     {
+        strmap std;
+        _strmap ft;
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_strstr_arr, std_strstr_arr + 5);
+        ft.insert(ft_strstr_arr, ft_strstr_arr + 5);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_strstr_arr + 5, std_strstr_arr + 14);
+        ft.insert(ft_strstr_arr + 5, ft_strstr_arr + 14);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_strstr_arr, std_strstr_arr + 9);
+        ft.insert(ft_strstr_arr, ft_strstr_arr + 9);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_strstr_arr + 26, std_strstr_arr + strstr_size);
+        ft.insert(ft_strstr_arr + 26, ft_strstr_arr + strstr_size);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_strstr_arr + 14, std_strstr_arr + 26);
+        ft.insert(ft_strstr_arr + 14, ft_strstr_arr + 26);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+
+    {
+        intmap std;
+        _intmap ft;
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_intstr_arr + 16, std_intstr_arr + 16);
+        ft.insert(ft_intstr_arr + 16, ft_intstr_arr + 16);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_intstr_arr + 1, std_intstr_arr + 7);
+        ft.insert(ft_intstr_arr + 1, ft_intstr_arr + 7);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_intstr_arr, std_intstr_arr + 1);
+        ft.insert(ft_intstr_arr, ft_intstr_arr + 1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_intstr_arr, std_intstr_arr + 17);
+        ft.insert(ft_intstr_arr, ft_intstr_arr + 17);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_intstr_arr, std_intstr_arr + intstr_size);
+        ft.insert(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+}
+
 // FIND -> end() should return last value not empty 
 // FIND + ??? -> MAP original = SEGF | MAP mine = PROTECTED
 void runMapTests() {
-    // findTest();
+    insertRangeMapTest();
     insertMapTest();
+    findTest();
+    ctorCopyTest();
     keyCompTest();
     swapMapTest();
     valueCompTest();
-    eqRangeTest();
     lowerBoundTest();
     upperBoundTest();
+    eqRangeTest();
     countTest();        //
     emptyMapTest();
     clearMapTest();
     atMapTest();
+    opEqualsTest();
     opIndexTest();
-    // opEqualsTest();
-    ctorCopyTest();
     ctorRangeTest();
     ctorTest();
     

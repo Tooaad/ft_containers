@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/20 20:33:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:40:02 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int compareMap(Iter first, Iter last, Iter2 first_, Iter2 last_)
 template <typename It>
 void print_map(It first, It last, int type)
 {
-    for (int i = 0;first != last; ++first) {
+    for (int i = 0; first != last; ++first) {
         if (type == 0)
             std::cout << "\x1b[34m " << "K: " << first->first << " V: " << first->second << "\x1b[0m ";
         else
