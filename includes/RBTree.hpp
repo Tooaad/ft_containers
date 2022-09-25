@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/24 13:16:13 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:48:13 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ namespace ft
 			{
 				this->_root = createNode(value);
 				this->_root->_color = BLACK;
+				this->_size++;
 				return ft::make_pair(iterator(this->_root, _nil), true);
 			}	
 			pointer tmp = this->_root;
@@ -140,9 +141,6 @@ namespace ft
 				// If a Key already exists returns the oldest one
 				else
 				{
-					// while (tmp && tmp->_right)
-					// 	tmp = tmp->_right;
-					// setNil(tmp->_parent->_right);
 					return ft::make_pair(iterator(tmp, _nil), false);
 				}
 			}
@@ -220,6 +218,7 @@ namespace ft
 				}
 			}
 			this->_root->_color = BLACK;
+			this->_size++;
 			return ft::make_pair(iterator(newNode, _nil), true);
 		}
 
@@ -341,9 +340,12 @@ namespace ft
 						std::cout << "L2:"  << std::endl;
 						nodeAux->_color = RED;
 						//----
-						nodeAux->_left = NULL;
-						nodeAux->_right = NULL;
-						nodeAux->_parent->_left = NULL;
+						delNil(nodeAux->_left);
+						delNil(nodeAux->_right);
+						delNil(nodeAux->_parent->_left);
+						// nodeAux->_left = NULL;
+						// nodeAux->_right = NULL;
+						// nodeAux->_parent->_left = NULL;
 						//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
@@ -397,9 +399,9 @@ namespace ft
 						std::cout << "R2:"  << std::endl;
 						nodeAux->_color = RED;
 					//----
-						nodeAux->_left = NULL;
-						nodeAux->_right = NULL;
-						nodeAux->_parent->_right = NULL;
+						delNil(nodeAux->_left);
+						delNil(nodeAux->_right);
+						delNil(nodeAux->_parent->_right);
 					//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
@@ -435,43 +437,46 @@ namespace ft
 			nodeToRemove->_color = BLACK;
 		}
 
-			void erase(pointer & nodeToRemove)
+			void erase(pointer& nodeToRemove)
 			{
 				pointer nodeAux, copyRemove;
+				// nodeAux = _node_alloc.allocate(1);
+				// _node_alloc.construct(nodeAux, value_type());
+				// nodeAux->_color = BLACK;
 				copyRemove = nodeToRemove;
 				int copy_color = copyRemove->_color;
 				if (!nodeToRemove->_left)
 				{
-					if (!nodeToRemove->_right) {
-						nodeAux = _nil;
-						std::cout << "<" << std::endl;
-						nodeAux->_parent = nodeToRemove->_parent;
-						if (nodeToRemove->isLeft())
-							nodeToRemove->_parent->_left = nodeAux;
-						else
-							nodeToRemove->_parent->_right = nodeAux;
-					}
-					else {
+					// if (!nodeToRemove->_right) {
+					// 	nodeAux = _nil;
+					// 	std::cout << "<" << std::endl;
+					// 	nodeAux->_parent = nodeToRemove->_parent;
+					// 	if (nodeToRemove->isLeft())
+					// 		nodeToRemove->_parent->_left = nodeAux;
+					// 	else
+					// 		nodeToRemove->_parent->_right = nodeAux;
+					// }
+					// else {
 						nodeAux = nodeToRemove->_right;
-						nodeTransplant(nodeToRemove, nodeToRemove->_right);
-					}
+						nodeTransplant(nodeToRemove, nodeAux);
+					// }
 					std::cout << "01:"  << std::endl;
 				}
 				else if (!nodeToRemove->_right)
 				{
-					if (!nodeToRemove->_left) {
-						nodeAux = _nil;
-						std::cout << "<" << std::endl;
-						nodeAux->_parent = nodeToRemove->_parent;
-						if (nodeToRemove->isRight())
-							nodeToRemove->_parent->_left = nodeAux;
-						else
-							nodeToRemove->_parent->_right = nodeAux;
-					}
-					else {
+					// if (!nodeToRemove->_left) {
+					// 	nodeAux = _nil;
+					// 	std::cout << "<" << std::endl;
+					// 	nodeAux->_parent = nodeToRemove->_parent;
+					// 	if (nodeToRemove->isRight())
+					// 		nodeToRemove->_parent->_left = nodeAux;
+					// 	else
+					// 		nodeToRemove->_parent->_right = nodeAux;
+					// }
+					// else {
 						nodeAux = nodeToRemove->_left;
-						nodeTransplant(nodeToRemove, nodeToRemove->_left);
-					}
+						nodeTransplant(nodeToRemove, nodeAux); 
+					// }
 					std::cout << "02:" << std::endl;
 				}
 				else
@@ -508,6 +513,7 @@ namespace ft
 						nodeAux->_parent->_right = NULL;
 				}
 			//----
+			// iterator(this->_root, _nil);
 			}
 
 			// ITERATORS

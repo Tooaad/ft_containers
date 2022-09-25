@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/24 12:46:13 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:24:52 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,26 +178,29 @@ template <class Node, class pair >
 				return *this;
 			}
 			TreeIter operator++(int) { TreeIter tmp(*this); ++(*this); return tmp; }
-/*
-			TreeIter& operator--() { 
-				if (this->_node->_parent->_parent == this->_node && this->_node->color == 1)
-					this->_node = this->_node->_left;
-					
-				else if (this->_node->_left) { 
-					this->_node = max(this->tmp);
+
+			TreeIter& operator--()
+			{
+				if (this->_root->_left)
+				{
+					// The next access is the first node in the middle order in the right tree
+					node_ptr tmp = this->_root->_left;
+					tmp = max(tmp);
+					this->_root = tmp;
 				}
 				else {
-					node_ptr tmp_parent = this->_node->parent;
-					while (tmp_parent->_left == this->_node) {
-						this->_node = tmp_parent->_parent;
-						tmp_parent = tmp_parent->_parent;
-					} 
-					this->_node = tmp_parent;
-				}			
+					node_ptr tmp = this->_root;
+					node_ptr tmpParent = this->_root->_parent;
+					while (tmpParent && tmp == tmpParent->_left) {
+						tmp = tmp->_parent;
+						tmpParent = tmpParent->_parent;
+					}
+					this->_root = tmpParent;
+				}
 				return *this;
-			}  
-			TreeIter operator--(int) { TreeIter tmp(*this); --(*this); return tmp; }
-*/
+			}
+
+			TreeIter operator--(int) {TreeIter tmp(*this); --(*this); return tmp;}
 
 			node_ptr getRoot(node_ptr n) {
 				while (n->_parent)

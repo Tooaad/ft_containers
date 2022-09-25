@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/24 13:45:58 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:34:21 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1629,7 +1629,7 @@ void insertMapTest() {
 void insertRangeMapTest() {
     SETUP_MAP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
-    std::cout << "\x1b[41m                      INSERT TEST               \x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      INSERT-RANGE TEST               \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
      {
         strmap std;
@@ -1674,7 +1674,8 @@ void insertRangeMapTest() {
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
     }
-
+    if (nextTes())
+        return ;
     {
         intmap std;
         _intmap ft;
@@ -1718,11 +1719,181 @@ void insertRangeMapTest() {
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
     }
+    if (nextTes())
+        return ;
+}
+
+void insertPosMapTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      INSERT-POS TEST               \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std;
+        _intmap ft;
+
+        intmap::iterator it = std.insert(std.end(), std::make_pair(64, "Gamepak"));
+        _intmap::iterator it1 = ft.insert(ft.end(), ft::make_pair(64, "Gamepak"));
+
+        PRINT_PAIR_REF(*it, 0);
+        PRINT_PAIR_REF(*it1, 1);
+
+        it = std.insert(std.end(), std::make_pair(64, "Test"));
+        it1 = ft.insert(ft.end(), ft::make_pair(64, "Test"));
+
+        PRINT_PAIR_REF(*it, 0);
+        PRINT_PAIR_REF(*it1, 1);
+
+        it = std.insert(std.end(), std::make_pair(100, "100$"));
+        it1 = ft.insert(ft.end(), ft::make_pair(100, "100$"));
+
+        PRINT_PAIR_REF(*it, 0);
+        PRINT_PAIR_REF(*it1, 1);
+
+        it = std.end();
+        it1 = ft.end();
+        --it;
+        --it1;
+
+        it = std.insert(it, std::make_pair(100, "12345"));
+        it1 = ft.insert(it1, ft::make_pair(100, "12345"));
+
+        PRINT_PAIR_REF(*it, 0);
+        PRINT_PAIR_REF(*it1, 1);
+
+        it = std.insert(it, std::make_pair(69, "420"));
+        it1 = ft.insert(it1, ft::make_pair(69, "420"));
+
+        PRINT_PAIR_REF(*it, 0);
+        PRINT_PAIR_REF(*it1, 1);
+    }
+    if (nextTes())
+        return ;
+}
+
+void eraseMapTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                      ERASE TEST                \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + 25);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 25);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+
+        intmap::iterator it = std.begin();
+        _intmap::iterator it1 = ft.begin();
+
+        std.erase(it);
+        ft.erase(it1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.begin();
+        it1 = ft.begin();
+
+        for (int i = 0; i < 21; i++) {
+            it++;
+            it1++;
+        }
+
+        std.erase(it);
+        ft.erase(it1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+        
+        std::cout << std.size() << std::endl;
+        std::cout << ft.size() << std::endl;
+
+        it = std.end();
+        it1 = ft.end();
+
+        for (int i = 0; i < 1; i++) {
+            it--;
+            it1--;
+        }
+
+        std::cout << it->first << std::endl;
+        std::cout << it1._root->_value.first << std::endl;
+
+        std.erase(it);
+        ft.erase(it1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.end();
+        it1 = ft.end();
+
+        for (int i = 0; i < 3; i++) {
+            it--;
+            it1--;
+        }
+
+        std.erase(it);
+        ft.erase(it1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.end();
+        it1 = ft.end();
+
+        for (int i = 0; i < 1; i++) {
+            it--;
+            it1--;
+        }
+
+        std.erase(it);
+        ft.erase(it1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.begin();
+        it1 = ft.begin();
+
+        for (int i = 0; i < 1; i++) {
+            it++;
+            it1++;
+        }
+
+        std.erase(it);
+        ft.erase(it1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        for (it = std.begin(); it != std.end(); it = std.begin()) {
+            std.erase(it);
+            PRINT_AL(std, 0);
+        }
+        
+        for (it1 = ft.begin(); it1 != ft.end(); it1 = ft.begin()) {
+            ft.erase(it1);
+            PRINT_AL(ft, 1);
+        }
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
 }
 
 // FIND -> end() should return last value not empty 
 // FIND + ??? -> MAP original = SEGF | MAP mine = PROTECTED
 void runMapTests() {
+    eraseMapTest();
+    insertPosMapTest();
     insertRangeMapTest();
     insertMapTest();
     findTest();

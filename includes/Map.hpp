@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/24 13:07:32 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:34:54 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 	//	Modifiers
 
 			ft::pair<iterator, bool> insert(const value_type& val) {
-				this->_tree.increment_size();
 				return this->_tree.insert(val);
 			}
 
