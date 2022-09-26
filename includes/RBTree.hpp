@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:17:32 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:18:20 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,7 +441,7 @@ namespace ft
 				int copy_color = copyRemove->_color;
 				if (!nodeToRemove->_left)
 				{
-					if (nodeToRemove->_right != nodeAux) {
+					if (!nodeToRemove->_right) {
 						nodeAux = _node_alloc.allocate(1);
 						_node_alloc.construct(nodeAux, value_type());
 						nodeAux->_color = BLACK;
