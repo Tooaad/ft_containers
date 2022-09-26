@@ -76,7 +76,7 @@ template <typename T>
 
 	template <typename A, typename B>
 	ptrdiff_t		operator-(const vectorIter<A>& lhs, const vectorIter<B>& rhs) {
-		return rhs.base() - lhs.base();
+		return lhs.base() - rhs.base();
 	}
 
 	template <typename A>

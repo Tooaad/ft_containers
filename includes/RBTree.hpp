@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/25 20:48:13 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:17:32 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ namespace ft
 		typedef typename ft::ReverseIter<iterator> reverse_iterator;
 		typedef typename ft::ReverseIter<const_iterator> const_reverse_iterator;
 
-		// private:
+	private:
 		pointer _root;
 		pointer _nil;
 		size_type _size;
 		key_compare _comp;
 		node_alloc _node_alloc;
 
-		// public:
+	public:
 
 		explicit RBTree(const key_compare &comp = key_compare(), const node_alloc &node_allocator = node_alloc())
 			: _root(0), _size(0), _comp(comp), _node_alloc(node_allocator)
@@ -294,12 +294,6 @@ namespace ft
 			nodeToTransplant->_parent = nodeToRemove->_parent;
 		}
 
-		bool isNil(pointer node) {
-			if (node && node == _nil)
-				return true;
-			return false;
-		}
-
 		bool setNil(pointer& node) {
 			if (node)
 				return true;
@@ -316,7 +310,7 @@ namespace ft
 		void deleteFix(pointer &nodeToRemove)
 		{
 			pointer nodeAux;
-			
+			//nodeToRemove
 			while (nodeToRemove != this->_root && nodeToRemove->_color == BLACK)
 			{
 				std::cout << "+++++" << std::endl;
@@ -343,9 +337,6 @@ namespace ft
 						delNil(nodeAux->_left);
 						delNil(nodeAux->_right);
 						delNil(nodeAux->_parent->_left);
-						// nodeAux->_left = NULL;
-						// nodeAux->_right = NULL;
-						// nodeAux->_parent->_left = NULL;
 						//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
@@ -439,52 +430,60 @@ namespace ft
 
 			void erase(pointer& nodeToRemove)
 			{
+				pointer tmp = this->_root;
+				while (tmp && tmp->_right)
+					tmp = tmp->_right;
+				delNil(tmp->_parent->_right);
+				delNil(tmp);
+				//-----
 				pointer nodeAux, copyRemove;
-				// nodeAux = _node_alloc.allocate(1);
-				// _node_alloc.construct(nodeAux, value_type());
-				// nodeAux->_color = BLACK;
 				copyRemove = nodeToRemove;
 				int copy_color = copyRemove->_color;
 				if (!nodeToRemove->_left)
 				{
-					// if (!nodeToRemove->_right) {
-					// 	nodeAux = _nil;
-					// 	std::cout << "<" << std::endl;
-					// 	nodeAux->_parent = nodeToRemove->_parent;
-					// 	if (nodeToRemove->isLeft())
-					// 		nodeToRemove->_parent->_left = nodeAux;
-					// 	else
-					// 		nodeToRemove->_parent->_right = nodeAux;
-					// }
-					// else {
+					if (nodeToRemove->_right != nodeAux) {
+						nodeAux = _node_alloc.allocate(1);
+						_node_alloc.construct(nodeAux, value_type());
+						nodeAux->_color = BLACK;
+						std::cout << "<" << std::endl;
+						// nodeAux->_parent = nodeToRemove->_parent;
+						// if (nodeToRemove->isLeft())
+						// 	nodeToRemove->_parent->_left = nodeAux;
+						// else
+						// 	nodeToRemove->_parent->_right = nodeAux;
+					}
+					else
 						nodeAux = nodeToRemove->_right;
-						nodeTransplant(nodeToRemove, nodeAux);
-					// }
+					nodeTransplant(nodeToRemove, nodeAux);
 					std::cout << "01:"  << std::endl;
 				}
 				else if (!nodeToRemove->_right)
 				{
-					// if (!nodeToRemove->_left) {
-					// 	nodeAux = _nil;
-					// 	std::cout << "<" << std::endl;
-					// 	nodeAux->_parent = nodeToRemove->_parent;
-					// 	if (nodeToRemove->isRight())
-					// 		nodeToRemove->_parent->_left = nodeAux;
-					// 	else
-					// 		nodeToRemove->_parent->_right = nodeAux;
-					// }
-					// else {
+					if (!nodeToRemove->_left) {
+						nodeAux = _node_alloc.allocate(1);
+						_node_alloc.construct(nodeAux, value_type());
+						nodeAux->_color = BLACK;
+						std::cout << "<" << std::endl;
+						// nodeAux->_parent = nodeToRemove->_parent;
+						// if (nodeToRemove->isRight())
+						// 	nodeToRemove->_parent->_left = nodeAux;
+						// else
+						// 	nodeToRemove->_parent->_right = nodeAux;
+					}
+					else
 						nodeAux = nodeToRemove->_left;
-						nodeTransplant(nodeToRemove, nodeAux); 
-					// }
+					nodeTransplant(nodeToRemove, nodeAux); 
 					std::cout << "02:" << std::endl;
 				}
 				else
 				{
 					copyRemove = nodeToRemove->subMin();
 					copy_color = copyRemove->_color;
-					if (!copyRemove->_right)
-						copyRemove->_right = _nil;
+					if (!copyRemove->_right) {
+						copyRemove->_right = _node_alloc.allocate(1);
+						_node_alloc.construct(copyRemove->_right, value_type());
+						copyRemove->_right->_color = BLACK;
+					}
 					nodeAux = copyRemove->_right;
 					if (copyRemove->_parent == nodeToRemove) {
 						nodeAux->_parent = copyRemove;
@@ -502,18 +501,20 @@ namespace ft
 					std::cout << "04:" << std::endl;
 					copyRemove->_color = nodeToRemove->_color;
 				}
-				deallocate_node(nodeToRemove);
-				if (copy_color == BLACK)
+				this->_size--;
+				_node_alloc.destroy(nodeToRemove);
+				_node_alloc.deallocate(nodeToRemove, 1);
+				if (min() != nodeAux && max() != nodeAux && copy_color == BLACK)
 					deleteFix(nodeAux);
 			//----
 				else {
-					if (nodeAux->_parent->_left == _nil)
+					if (nodeAux->_parent->_left == nodeAux)
 						nodeAux->_parent->_left = NULL;
-					if (nodeAux->_parent->_right == _nil)
+					if (nodeAux->_parent->_right == nodeAux)
 						nodeAux->_parent->_right = NULL;
 				}
 			//----
-			// iterator(this->_root, _nil);
+			iterator(this->_root, _nil);
 			}
 
 			// ITERATORS
@@ -589,6 +590,10 @@ namespace ft
 				return ft::make_pair(_nil, false);
 			}
 
+			pointer getRoot() const {
+				return this->_root;
+			}
+
 			pointer min() const
 			{
 				pointer tmp = this->_root;
@@ -624,7 +629,7 @@ namespace ft
 				std::cout << std::endl;
 				for (int i = COUNT; i < space; i++)
 					std::cout << " ";
-				std::cout << root->_value.second;
+				std::cout << root->_value.first;
 				if (root->_color == 0)
 					std::cout << "-N" << "\n";
 				else 

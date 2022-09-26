@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/25 17:34:54 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:57:56 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 					this->_tree = x._tree;
 					this->_comp = x._comp;
 					this->_alloc = x._alloc;
-					
 				}
 				return *this;
 			}
@@ -151,7 +150,6 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				}
 
 			void erase(iterator position) {
-				this->_tree.decrement_size();
 				return this->_tree.erase(position._root);
 			}
 			

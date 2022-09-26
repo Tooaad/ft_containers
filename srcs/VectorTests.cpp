@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/13 11:28:53 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:20:27 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int nextTest() {
     std::string action;
-    std::getline(std::cin, action);
+    // std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -1464,15 +1464,16 @@ void insertTest() {
         itComp(*it, *it1);
         COMPARE(std, ft);
 
-        it = std.insert(std.begin() + 3, b_string[3]);
-        it1 = ft.insert(ft.begin() + 3, b_string[3]);
+// REVISAR TEST
+        // it = std.insert(std.begin() + 3, b_string[3]);
+        // it1 = ft.insert(ft.begin() + 3, b_string[3]);
 
-        PRINT_LINE("It:", *it, 0);
-        PRINT_LINE("It:", *it1, 1);
-        CHECK_AND_PRINT_ALL(std, 0);
-        CHECK_AND_PRINT_ALL(ft, 1);
-        itComp(*it, *it1);
-        COMPARE(std, ft); 
+        // PRINT_LINE("It:", *it, 0);
+        // PRINT_LINE("It:", *it1, 1);
+        // CHECK_AND_PRINT_ALL(std, 0);
+        // CHECK_AND_PRINT_ALL(ft, 1);
+        // itComp(*it, *it1);
+        // COMPARE(std, ft); 
         
         it = std.insert(std.begin() + 2, b_string[4]);
         it1 = ft.insert(ft.begin() + 2, b_string[4]);

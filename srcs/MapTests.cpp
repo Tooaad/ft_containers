@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/25 19:34:21 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:26:41 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1780,6 +1780,8 @@ void eraseMapTest() {
         intmap std(std_intstr_arr, std_intstr_arr + 25);
         _intmap ft(ft_intstr_arr, ft_intstr_arr + 25);
 
+        ft.getTree().print2D(ft.getTree().getRoot());
+
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
 
@@ -1836,6 +1838,10 @@ void eraseMapTest() {
             it--;
             it1--;
         }
+
+        std::cout << it->first << std::endl;
+        std::cout << it1._root->_value.first << std::endl;
+        ft.getTree().print2D(ft.getTree().getRoot());
 
         std.erase(it);
         ft.erase(it1);
