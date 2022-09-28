@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:18:20 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:09:07 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,21 +436,17 @@ namespace ft
 				delNil(tmp->_parent->_right);
 				delNil(tmp);
 				//-----
-				pointer nodeAux, copyRemove;
+				pointer nodeAux, copyRemove, nilAux;
+				nilAux = _node_alloc.allocate(1);
+				_node_alloc.construct(nilAux, value_type());
+				nilAux->_color = BLACK;
 				copyRemove = nodeToRemove;
 				int copy_color = copyRemove->_color;
 				if (!nodeToRemove->_left)
 				{
 					if (!nodeToRemove->_right) {
-						nodeAux = _node_alloc.allocate(1);
-						_node_alloc.construct(nodeAux, value_type());
-						nodeAux->_color = BLACK;
+						nodeAux = nilAux;
 						std::cout << "<" << std::endl;
-						// nodeAux->_parent = nodeToRemove->_parent;
-						// if (nodeToRemove->isLeft())
-						// 	nodeToRemove->_parent->_left = nodeAux;
-						// else
-						// 	nodeToRemove->_parent->_right = nodeAux;
 					}
 					else
 						nodeAux = nodeToRemove->_right;
@@ -460,15 +456,8 @@ namespace ft
 				else if (!nodeToRemove->_right)
 				{
 					if (!nodeToRemove->_left) {
-						nodeAux = _node_alloc.allocate(1);
-						_node_alloc.construct(nodeAux, value_type());
-						nodeAux->_color = BLACK;
+						nodeAux = nilAux;
 						std::cout << "<" << std::endl;
-						// nodeAux->_parent = nodeToRemove->_parent;
-						// if (nodeToRemove->isRight())
-						// 	nodeToRemove->_parent->_left = nodeAux;
-						// else
-						// 	nodeToRemove->_parent->_right = nodeAux;
 					}
 					else
 						nodeAux = nodeToRemove->_left;
@@ -504,7 +493,8 @@ namespace ft
 				this->_size--;
 				_node_alloc.destroy(nodeToRemove);
 				_node_alloc.deallocate(nodeToRemove, 1);
-				if (min() != nodeAux && max() != nodeAux && copy_color == BLACK)
+				ft::swap(this->_nil, nilAux);
+				if (copy_color == BLACK)
 					deleteFix(nodeAux);
 			//----
 				else {
@@ -514,7 +504,8 @@ namespace ft
 						nodeAux->_parent->_right = NULL;
 				}
 			//----
-			iterator(this->_root, _nil);
+				ft::swap(_nil, nilAux);
+				iterator(this->_root, _nil);
 			}
 
 			// ITERATORS
