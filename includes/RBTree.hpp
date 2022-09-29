@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/28 17:09:07 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:52:10 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -505,7 +505,10 @@ namespace ft
 				}
 			//----
 				ft::swap(_nil, nilAux);
-				iterator(this->_root, _nil);
+				if (this->_size > 0)
+					iterator(this->_root, _nil);
+				else
+					iterator();
 			}
 
 			// ITERATORS

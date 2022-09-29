@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/28 18:34:01 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:56:19 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1875,16 +1875,15 @@ void eraseMapTest() {
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
-        
-        for (int i = 0; i < 2; i++) {
-            it--;
-            it1--;
-        }
+
+        it = std.begin();
+        it1 = ft.begin();
 
         // std::cout << it->first << std::endl;
+
         // std::cout << it1._root->_value.first << std::endl;
         
-        // ft.getTree().print2D(ft.getTree().getRoot());
+        ft.getTree().print2D(ft.getTree().getRoot());
         std.erase(it);
         ft.erase(it1);
 
@@ -1892,16 +1891,16 @@ void eraseMapTest() {
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
 
-        // for (it = std.begin(); it != std.end(); it = std.begin()) {
-        //     std.erase(it);
-        //     PRINT_AL(std, 0);
-        // }
+        for (it = std.begin(); it != std.end(); it = std.begin()) {
+            std.erase(it);
+            PRINT_AL(std, 0);
+        }
         
-        // for (it1 = ft.begin(); it1 != ft.end(); it1 = ft.begin()) {
-        //     ft.erase(it1);
-        //     PRINT_AL(ft, 1);
-        // }
-        // COMPAR(std, ft);
+        for (it1 = ft.begin(); it1 != ft.end(); it1 = ft.begin()) {
+            ft.erase(it1);
+            PRINT_AL(ft, 1);
+        }
+        COMPAR(std, ft);
     }
     if (nextTes())
         return ;

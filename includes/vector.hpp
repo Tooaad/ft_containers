@@ -205,6 +205,7 @@ template <class T, class Allocator = std::allocator<T> >
 					return end() - 1;
 				}
 				ft::vector<T> newvector;
+				size_type	elem_pos = position - this->begin();
 				
 				if (size() + 1 > capacity())
 					reserve(capacity() * 2 > 1 + size() && size() > 0? capacity() * 2 : 1 + size());
@@ -213,13 +214,12 @@ template <class T, class Allocator = std::allocator<T> >
 					newvector.push_back(*it);
 
 				newvector.push_back(val);
-				iterator aux = newvector.end() - 1;
 
 				for (iterator it = position; it < end(); it++)
 					newvector.push_back(*it);
 
 				*this = newvector;
-				return aux;
+				return (this->begin() + elem_pos);
 			}
 
 			void insert(iterator position, size_type n, const value_type& val) {

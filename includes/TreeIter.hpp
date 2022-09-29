@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/25 18:24:52 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:07:19 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,15 +242,5 @@ template <class Node, class pair >
 
 	template <typename U, typename V, typename P1, typename P2>
 	bool		operator<=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() <= b.baseNode(); }
-
-	// template <typename U, typename V, typename P1, typename P2>
-	// ptrdiff_t		operator-(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) {
-	// 	return a.baseNode() - b.baseNode();
-	// }
-
-	// template <typename U, typename P1>
-	// TreeIter<U,P1>		operator+(typename TreeIter<U,P1>::difference_type n, const TreeIter<U,P1>& b) {
-	// 	return (TreeIter<U,P1>)(b.baseNode() + n);
-	// }
 
 }

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/26 13:20:27 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:42:28 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1425,15 +1425,15 @@ void insertTest() {
         COMPARE(std, ft);
 
 // EL UNICO TEST QUE ME DA MAL????????????
-        // it = std.insert(std.begin(), b_string[19]);
-        // it1 = ft.insert(ft.begin(), b_string[19]);
+        it = std.insert(std.begin(), b_string[19]);
+        it1 = ft.insert(ft.begin(), b_string[19]);
 
-        // PRINT_LINE("It:", *it, 0);
-        // PRINT_LINE("It:", *it1, 1);
-        // CHECK_AND_PRINT_ALL(std, 0);
-        // CHECK_AND_PRINT_ALL(ft, 1);
-        // itComp(*it, *it1);
-        // COMPARE(std, ft);
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        itComp(*it, *it1);
+        COMPARE(std, ft);
 
         it = std.insert(std.begin() + 1, b_string[0]);
         it1 = ft.insert(ft.begin() + 1, b_string[0]);
@@ -1465,15 +1465,15 @@ void insertTest() {
         COMPARE(std, ft);
 
 // REVISAR TEST
-        // it = std.insert(std.begin() + 3, b_string[3]);
-        // it1 = ft.insert(ft.begin() + 3, b_string[3]);
+        it = std.insert(std.begin() + 3, b_string[3]);
+        it1 = ft.insert(ft.begin() + 3, b_string[3]);
 
-        // PRINT_LINE("It:", *it, 0);
-        // PRINT_LINE("It:", *it1, 1);
-        // CHECK_AND_PRINT_ALL(std, 0);
-        // CHECK_AND_PRINT_ALL(ft, 1);
-        // itComp(*it, *it1);
-        // COMPARE(std, ft); 
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        itComp(*it, *it1);
+        COMPARE(std, ft); 
         
         it = std.insert(std.begin() + 2, b_string[4]);
         it1 = ft.insert(ft.begin() + 2, b_string[4]);
@@ -1735,26 +1735,26 @@ void insertMixTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        // intvector::iterator it = std.insert(std.begin(), 64);
-        // _intvector::iterator it1 = ft.insert(ft.begin(), 64);
+        intvector::iterator it = std.insert(std.begin(), 64);
+        _intvector::iterator it1 = ft.insert(ft.begin(), 64);
 
-        // PRINT_LINE("It:", *it, 0);
-        // PRINT_LINE("It:", *it1, 1);
-        // CHECK_AND_PRINT_ALL(std, 0);
-        // CHECK_AND_PRINT_ALL(ft, 1);
-        // itComp(*it, *it1);
-        // COMPARE(std, ft);
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        itComp(*it, *it1);
+        COMPARE(std, ft);
 
-        // for (int i = 0; i < 23; ++i) {
-        //     it = std.insert(std.begin() + i + 2, i);
-        //     it1 = ft.insert(ft.begin() + i + 2, i);
-        //     PRINT_LINE("It:", *it, 0);
-        //     PRINT_LINE("It:", *it1, 1);
-        //     CHECK_AND_PRINT_ALL(std, 0);
-        //     CHECK_AND_PRINT_ALL(ft, 1);
-        //     itComp(*it, *it1);
-        //     COMPARE(std, ft);
-        // }
+        for (int i = 0; i < 23; ++i) {
+            it = std.insert(std.begin() + i + 2, i);
+            it1 = ft.insert(ft.begin() + i + 2, i);
+            PRINT_LINE("It:", *it, 0);
+            PRINT_LINE("It:", *it1, 1);
+            CHECK_AND_PRINT_ALL(std, 0);
+            CHECK_AND_PRINT_ALL(ft, 1);
+            itComp(*it, *it1);
+            COMPARE(std, ft);
+        }
 
         std.insert(std.end(), 12, 42);
         ft.insert(ft.end(), 12, 42);
@@ -2018,6 +2018,7 @@ void runTests() {
 
 
     // Problemas en los iterators y errores aleatorios
+    reserveTest();
     insertTest();
     insertSizeTest();
     insertRangeTest();
@@ -2040,7 +2041,6 @@ void runTests() {
     operatorEquals();
     popbackTest();
     pushbackTest();
-    reserveTest();
     resizeTest();
     reverseIteratorCompTest();
     swapTest();
