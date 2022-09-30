@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/29 21:52:10 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:37:10 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,6 @@ namespace ft
 
 		void nodeTransplant(pointer nodeToRemove, pointer nodeToTransplant)
 		{
-			std::cout << "----------------" << std::endl;
 			if (!nodeToRemove->_parent)
 				_root = nodeToTransplant;
 			else if (nodeToRemove->isLeft())
@@ -313,13 +312,11 @@ namespace ft
 			//nodeToRemove
 			while (nodeToRemove != this->_root && nodeToRemove->_color == BLACK)
 			{
-				std::cout << "+++++" << std::endl;
 				if (nodeToRemove->isLeft())
 				{
 					nodeAux = nodeToRemove->_parent->_right;
 					if (nodeAux->_color == RED)
 					{
-						std::cout << "L1:"  << std::endl;
 						nodeAux->_color = BLACK;
 						nodeToRemove->_parent->_color = RED;
 						//----
@@ -331,7 +328,6 @@ namespace ft
 					if (setNil(nodeAux->_left) && setNil(nodeAux->_right)
 						&& nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
 					{
-						std::cout << "L2:"  << std::endl;
 						nodeAux->_color = RED;
 						//----
 						delNil(nodeAux->_left);
@@ -346,7 +342,6 @@ namespace ft
 						delNil(nodeAux->_right);
 						if (setNil(nodeAux->_right) && nodeAux->_right->_color == BLACK)
 						{
-							std::cout << "L3:"  << std::endl;
 							nodeAux->_left->_color = BLACK;
 							nodeAux->_color = RED;
 							//----
@@ -355,8 +350,6 @@ namespace ft
 							rotateRight(nodeAux);
 							nodeAux = nodeToRemove->_parent->_right;
 						}
-						std::cout << "*******" << nodeAux->_value.first << std::endl;
-						std::cout << "L4:"  << std::endl;
 						nodeAux->_color = nodeToRemove->_parent->_color;
 						nodeToRemove->_parent->_color = BLACK;
 						nodeAux->_right->_color = BLACK;
@@ -371,11 +364,9 @@ namespace ft
 				}
 				else 
 				{
-					std::cout << "@@@@@@" << std::endl;
 					nodeAux = nodeToRemove->_parent->_left;
 					if (nodeAux->_color == RED)
 					{
-						std::cout << "R1:"  << std::endl;
 						nodeAux->_color = BLACK;
 						nodeToRemove->_parent->_color = RED;
 					//----
@@ -387,7 +378,6 @@ namespace ft
 					if (setNil(nodeAux->_left) && setNil(nodeAux->_right) &&
 						nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
 					{
-						std::cout << "R2:"  << std::endl;
 						nodeAux->_color = RED;
 					//----
 						delNil(nodeAux->_left);
@@ -402,7 +392,6 @@ namespace ft
 						delNil(nodeAux->_right);
 						if (setNil(nodeAux->_left) && nodeAux->_left->_color == BLACK)
 						{
-							std::cout << "R3:"  << std::endl;
 							nodeAux->_right->_color = BLACK;
 							nodeAux->_color = RED;
 						//----
@@ -411,7 +400,6 @@ namespace ft
 							rotateLeft(nodeAux->_parent);
 							nodeAux = nodeToRemove->_parent->_left;
 						}
-						std::cout << "R4:"  << std::endl;
 						nodeAux->_color = nodeToRemove->_parent->_color;
 						nodeToRemove->_parent->_color = BLACK;
 						nodeAux->_left->_color = BLACK;
@@ -446,32 +434,26 @@ namespace ft
 				{
 					if (!nodeToRemove->_right) {
 						nodeAux = nilAux;
-						std::cout << "<" << std::endl;
 					}
 					else
 						nodeAux = nodeToRemove->_right;
 					nodeTransplant(nodeToRemove, nodeAux);
-					std::cout << "01:"  << std::endl;
 				}
 				else if (!nodeToRemove->_right)
 				{
 					if (!nodeToRemove->_left) {
 						nodeAux = nilAux;
-						std::cout << "<" << std::endl;
 					}
 					else
 						nodeAux = nodeToRemove->_left;
 					nodeTransplant(nodeToRemove, nodeAux); 
-					std::cout << "02:" << std::endl;
 				}
 				else
 				{
 					copyRemove = nodeToRemove->subMin();
 					copy_color = copyRemove->_color;
 					if (!copyRemove->_right) {
-						copyRemove->_right = _node_alloc.allocate(1);
-						_node_alloc.construct(copyRemove->_right, value_type());
-						copyRemove->_right->_color = BLACK;
+						copyRemove->_right = nilAux;
 					}
 					nodeAux = copyRemove->_right;
 					if (copyRemove->_parent == nodeToRemove) {
@@ -479,7 +461,6 @@ namespace ft
 					}
 					else
 					{
-						std::cout << "03:" << std::endl;
 						nodeTransplant(copyRemove, copyRemove->_right);
 						copyRemove->_right = nodeToRemove->_right;
 						copyRemove->_right->_parent = copyRemove;
@@ -487,7 +468,6 @@ namespace ft
 					nodeTransplant(nodeToRemove, copyRemove);
 					copyRemove->_left = nodeToRemove->_left;
 					copyRemove->_left->_parent = copyRemove;
-					std::cout << "04:" << std::endl;
 					copyRemove->_color = nodeToRemove->_color;
 				}
 				this->_size--;
@@ -505,10 +485,11 @@ namespace ft
 				}
 			//----
 				ft::swap(_nil, nilAux);
+				_node_alloc.deallocate(nilAux, 1);
 				if (this->_size > 0)
 					iterator(this->_root, _nil);
 				else
-					iterator();
+					this->_root = NULL;
 			}
 
 			// ITERATORS

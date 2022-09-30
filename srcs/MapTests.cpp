@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/29 21:56:19 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:52:05 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -524,11 +524,12 @@ void emptyMapTest() {
 
 
         // ERASE SIN TERMINAR
-        // std.erase(std.begin());
-        // ft.erase(ft.begin());
+        std.erase(std.begin());
+        ft.erase(ft.begin());
 
-        // PRINT_LIN("Empty:", std.empty() ? "true" : "false", 0);
-        // PRINT_LIN("Empty:", ft.empty() ? "true" : "false", 1);
+        PRINT_LIN("Empty:", std.empty() ? "true" : "false", 0);
+        PRINT_LIN("Empty:", ft.empty() ? "true" : "false", 1);
+        COMPAR(std, ft);
     }
 
     {
@@ -603,14 +604,14 @@ void countTest() {
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
-        // std.erase(9);
-        // ft.erase(9);
+        std.erase(9);
+        ft.erase(9);
 
-        // c = std.count(9);
-        // c1 = ft.count(9);
+        c = std.count(9);
+        c1 = ft.count(9);
 
-        // PRINT_LIN("STD:", c, 0);
-        // PRINT_LIN("FT:", c1, 1);
+        PRINT_LIN("STD:", c, 0);
+        PRINT_LIN("FT:", c1, 1);
 
         c = std.count(10);
         c1 = ft.count(10);
@@ -1064,12 +1065,11 @@ void eqRangeTest() {
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
-        //CHECK SEGFAULT
-        // eq = std.equal_range(std::numeric_limits<int>::max());
-        // eq1 = ft.equal_range(std::numeric_limits<int>::max());
+        eq = std.equal_range(std::numeric_limits<int>::max());
+        eq1 = ft.equal_range(std::numeric_limits<int>::max());
 
-        // PRINT_EQ_RANGE(eq, std.end(), 0);
-        // PRINT_EQ_RANGE(eq1, ft.end(), 1);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
     }
     if (nextTes())
         return ;
@@ -1862,7 +1862,7 @@ void eraseMapTest() {
         it = std.begin();
         it1 = ft.begin();
 
-        std::cout << it1._root->_value.first << std::endl;
+        // --Al inicio deberia petar y no
         for (int i = 0; i < 1; i++) {
             it++;
             it1++;
@@ -1878,10 +1878,6 @@ void eraseMapTest() {
 
         it = std.begin();
         it1 = ft.begin();
-
-        // std::cout << it->first << std::endl;
-
-        // std::cout << it1._root->_value.first << std::endl;
         
         ft.getTree().print2D(ft.getTree().getRoot());
         std.erase(it);
@@ -1901,14 +1897,444 @@ void eraseMapTest() {
             PRINT_AL(ft, 1);
         }
         COMPAR(std, ft);
+
+        it = std.insert(std.end(), std::make_pair(64, "Test"));
+        it1 = ft.insert(ft.end(), ft::make_pair(64, "Test"));
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
     }
     if (nextTes())
         return ;
 }
 
-// FIND -> end() should return last value not empty 
-// FIND + ??? -> MAP original = SEGF | MAP mine = PROTECTED
+void eraseMapRangeTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                  ERASERANGE TEST               \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        strmap std;
+        _strmap ft;
+
+        std.erase(std.begin(), std.end());
+        ft.erase(ft.begin(), ft.end());
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std_strstr_arr, std_strstr_arr + strstr_size);
+        ft.insert(ft_strstr_arr, ft_strstr_arr + strstr_size);
+
+        std.erase(std.begin(), std.end());
+        ft.erase(ft.begin(), ft.end());
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        intmap::iterator it(std.begin());
+        intmap::iterator end(it);
+        _intmap::iterator it1(ft.begin());
+        _intmap::iterator end1(it1);
+
+        end++;
+        end1++;
+
+        std.erase(it, end);
+        ft.erase(it1, end1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.begin();
+        end = it;
+        it1 = ft.begin();
+        end1 = it1;
+
+        for (int i = 0; i < 24; i++) {
+            it++;
+            it1++;
+        }
+        
+        for (int i = 0; i < 30; i++) {
+            end++;
+            end1++;
+        }
+
+        std.erase(it, end);
+        ft.erase(it1, end1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.begin();
+        end = it;
+        it1 = ft.begin();
+        end1 = it1;
+
+        for (int i = 0; i < 34; i++) {
+            it++;
+            it1++;
+        }
+        
+        for (int i = 0; i < 55; i++) {
+            end++;
+            end1++;
+        }
+
+        std.erase(it, end);
+        ft.erase(it1, end1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.begin();
+        end = it;
+        it1 = ft.begin();
+        end1 = it1;
+        for (int i = 0; i < 1; i++) {
+            end++;
+            end1++;
+        }
+
+        std.erase(it, end);
+        ft.erase(it1, end1);
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.erase(std.begin(), std.end());
+        ft.erase(ft.begin(), ft.end());
+
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
+}
+
+void eraseMapKeyTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                  ERASE KEY TEST                \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std;
+        _intmap ft;
+
+        intmap::size_type size = std.erase(64);
+        _intmap::size_type size1 = ft.erase(64);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+    }
+    if (nextTes())
+        return ;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + 16);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 16);
+
+        intmap::size_type size = std.erase(64);
+        _intmap::size_type size1 = ft.erase(64);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+
+        std.erase(std.begin(), std.end());
+        ft.erase(ft.begin(), ft.end());
+
+        std.insert(std::make_pair(23, "23n"));
+        std.insert(std::make_pair(25, "asdasdfsdfsafdsf"));
+        std.insert(std::make_pair(1, "asdssdfdfdffffff"));
+        std.insert(std::make_pair(2, "dsfdffffdfdfdsdfdffa"));
+        std.insert(std::make_pair(3, "sssdfs"));
+        std.insert(std::make_pair(75, "dfse"));
+        std.insert(std::make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
+        std.insert(std::make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
+        std.insert(std::make_pair(-23, "sdffgdfgrefet34thfgheewt"));
+        std.insert(std::make_pair(0, "98y4rtuohwidsjusdossefsse"));
+
+        ft.insert(ft::make_pair(23, "23n"));
+        ft.insert(ft::make_pair(25, "asdasdfsdfsafdsf"));
+        ft.insert(ft::make_pair(1, "asdssdfdfdffffff"));
+        ft.insert(ft::make_pair(2, "dsfdffffdfdfdsdfdffa"));
+        ft.insert(ft::make_pair(3, "sssdfs"));
+        ft.insert(ft::make_pair(75, "dfse"));
+        ft.insert(ft::make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
+        ft.insert(ft::make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
+        ft.insert(ft::make_pair(-23, "sdffgdfgrefet34thfgheewt"));
+        ft.insert(ft::make_pair(0, "98y4rtuohwidsjusdossefsse"));
+
+        size = std.erase(64);
+        size1 = ft.erase(64);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(0);
+        size1 = ft.erase(0);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(75);
+        size1 = ft.erase(75);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(1);
+        size1 = ft.erase(1);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(2);
+        size1 = ft.erase(2);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(3);
+        size1 = ft.erase(3);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(23);
+        size1 = ft.erase(23);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(23);
+        size1 = ft.erase(23);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(30);
+        size1 = ft.erase(30);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(-22);
+        size1 = ft.erase(-22);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(-23);
+        size1 = ft.erase(-23);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(-23);
+        size1 = ft.erase(-23);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(25);
+        size1 = ft.erase(25);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(-23);
+        size1 = ft.erase(-23);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase(25);
+        size1 = ft.erase(25);
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
+    {
+        strmap std;
+        _strmap ft;
+
+        strmap::size_type size = std.erase("");
+        _strmap::size_type size1 = ft.erase("");
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        std.insert(std::make_pair("", ""));
+        std.insert(std::make_pair("123", "kjhgfdsdffghsfghdfgh"));
+        std.insert(std::make_pair("1234", "gfdsadgg"));
+        std.insert(std::make_pair("123456789123456789123456789", "49857459898674568464"));
+        std.insert(std::make_pair("0", "2345456456456456"));
+        std.insert(std::make_pair("", ""));
+        std.insert(std::make_pair("", "9459845984598498"));
+        std.insert(std::make_pair("000000000000000000000000", "1111111111111111111111111111"));
+
+        ft.insert(ft::make_pair("", ""));
+        ft.insert(ft::make_pair("123", "kjhgfdsdffghsfghdfgh"));
+        ft.insert(ft::make_pair("1234", "gfdsadgg"));
+        ft.insert(ft::make_pair("123456789123456789123456789", "49857459898674568464"));
+        ft.insert(ft::make_pair("0", "2345456456456456"));
+        ft.insert(ft::make_pair("", ""));
+        ft.insert(ft::make_pair("", "9459845984598498"));
+        ft.insert(ft::make_pair("000000000000000000000000", "1111111111111111111111111111"));
+
+        size = std.erase("1");
+        size1 = ft.erase("1");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("123");
+        size1 = ft.erase("123");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("123");
+        size1 = ft.erase("123");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("");
+        size1 = ft.erase("");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("1234");
+        size1 = ft.erase("1234");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("123456789123456789123456789");
+        size1 = ft.erase("123456789123456789123456789");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("000000000000000000000000");
+        size1 = ft.erase("000000000000000000000000");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("0");
+        size1 = ft.erase("0");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        size = std.erase("000000000000000000000000");
+        size1 = ft.erase("000000000000000000000000");
+
+        PRINT_LIN("Erased?:", size, 0);
+        PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
+}
+
 void runMapTests() {
+
+    // eraseMapKeyTest();
+    eraseMapRangeTest();
     eraseMapTest();
     insertPosMapTest();
     insertRangeMapTest();

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/26 13:57:56 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:51:29 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,22 +150,21 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				}
 
 			void erase(iterator position) {
-				return this->_tree.erase(position._root);
+				this->_tree.erase(position._root);
 			}
 			
 			size_type erase(const key_type& k) {
-				node_pointer element = _tree.find(k);
+				node_pointer element = _tree.find(k).first;
 				if (!element || (element == end()._root && k != end()._root->_value.first))
 					return 0;
 				this->_tree.erase(element);
-				_tree.print2D(this->_tree._root);
 				return 1;
 			}
 			
-			template <class InputIterator>
 			void erase(iterator first, iterator last) {
-				for(InputIterator it = first; it != last; it++) {
-					erase(*it);
+				for(iterator it = first; it != last; it++) {
+					std::cout << size() << std::endl;
+					erase(it);
 				}
 			}
 

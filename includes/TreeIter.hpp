@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/29 22:07:19 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:29:57 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,8 @@ template <class T>
 				Node* tmp = this->_right;
 				while (tmp->_left)
 					tmp = tmp->_left;
-				// tmp->_parent->_left = NULL;
 				return tmp;
 			}
-
-			// void rewire(Node* node) // this = 38 || node = 30
-			// {
-			// 	this->_right = node->_right;
-			// 	this->_left = node->_left;
-			// 	this->_parent = node->_parent;
-			// 	node->_parent->_right = this;
-			// 	node->_right->_parent = this;
-			// 	node->_left->_parent = this;  
-			// 	node->_right = NULL;
-			// 	node->_left = NULL;
-			// }
 
 			void leftRotate(Node* _root) {
 				Node* nodeAux = this->_right;
@@ -147,14 +134,12 @@ template <class Node, class pair >
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
 				this->_root = it._root;
-				// this->_nil = it._nil;
 			}
 			~TreeIter() {}
 
 			template <class U, class P>
 			TreeIter&	operator=(const TreeIter<U, P>& other) {
 				this->_root = other._root;
-				// this->_nil = other._nil;
 				return *this;
 			}
 			pointer base() const { return this; }
@@ -163,7 +148,6 @@ template <class Node, class pair >
 				if (this->_root->_right) {
 					node_ptr tmp = this->_root->_right;
 					tmp = min(tmp);
-					// std::cout << "\n" << tmp->_value._first << std::endl;
 					this->_root = tmp;
 				}
 				else {
@@ -232,15 +216,15 @@ template <class Node, class pair >
 	bool	operator!=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() != b.baseNode(); }
 
 	template <typename U, typename V, typename P1, typename P2>
-	bool		operator>(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() > b.baseNode(); }
+	bool	operator>(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() > b.baseNode(); }
 
 	template <typename U, typename V, typename P1, typename P2>
-	bool		operator<(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() < b.baseNode(); }
+	bool	operator<(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() < b.baseNode(); }
 
 	template <typename U, typename V, typename P1, typename P2>
-	bool		operator>=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() >= b.baseNode(); }
+	bool	operator>=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() >= b.baseNode(); }
 
 	template <typename U, typename V, typename P1, typename P2>
-	bool		operator<=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() <= b.baseNode(); }
+	bool	operator<=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() <= b.baseNode(); }
 
 }
