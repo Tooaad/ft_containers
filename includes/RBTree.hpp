@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/30 12:37:10 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/02 14:11:47 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,7 +358,7 @@ namespace ft
 						delNil(nodeToRemove->_parent->_left);
 						delNil(nodeAux->_left);
 					//----
-						rotateLeft(nodeAux->_parent);
+						rotateLeft(nodeToRemove->_parent);
 						nodeToRemove = this->_root;
 					}
 				}
@@ -397,7 +397,7 @@ namespace ft
 						//----
 							
 						//----
-							rotateLeft(nodeAux->_parent);
+							rotateLeft(nodeAux);
 							nodeAux = nodeToRemove->_parent->_left;
 						}
 						nodeAux->_color = nodeToRemove->_parent->_color;
@@ -408,7 +408,7 @@ namespace ft
 						delNil(nodeToRemove->_parent->_right);
 						delNil(nodeAux->_right);
 					//----
-						rotateRight(nodeAux->_parent);
+						rotateRight(nodeToRemove->_parent);
 						nodeToRemove = this->_root;
 					}
 				}

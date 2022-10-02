@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/30 13:52:05 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:06:02 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1801,7 +1801,7 @@ void eraseMapTest() {
 
         for (int i = 0; i < 21; i++) {
             it++;
-            it1++;
+            it1--;
         }
 
         std.erase(it);
@@ -2041,6 +2041,9 @@ void eraseMapKeyTest() {
 
         PRINT_LIN("Erased?:", size, 0);
         PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
     }
     if (nextTes())
         return ;
@@ -2053,6 +2056,9 @@ void eraseMapKeyTest() {
 
         PRINT_LIN("Erased?:", size, 0);
         PRINT_LIN("Erased?:", size1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
 
         std.erase(std.begin(), std.end());
         ft.erase(ft.begin(), ft.end());
@@ -2333,9 +2339,9 @@ void eraseMapKeyTest() {
 
 void runMapTests() {
 
-    // eraseMapKeyTest();
-    eraseMapRangeTest();
     eraseMapTest();
+    eraseMapKeyTest();
+    eraseMapRangeTest();
     insertPosMapTest();
     insertRangeMapTest();
     insertMapTest();
