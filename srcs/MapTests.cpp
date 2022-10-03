@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/02 15:06:02 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/03 12:03:46 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int nextTes() {
     std::string action;
-    std::getline(std::cin, action);
+    // std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -1801,7 +1801,7 @@ void eraseMapTest() {
 
         for (int i = 0; i < 21; i++) {
             it++;
-            it1--;
+            it1++;
         }
 
         std.erase(it);

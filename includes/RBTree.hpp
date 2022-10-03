@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/02 14:11:47 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/03 12:06:39 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,6 @@ namespace ft
 
 		RBTree &operator=(const RBTree &otherTree)
 		{
-			// if (this != &otherTree) {
-			// 	this->value_compare() = otherTree.value_compare();
-			// 	if (this->node_alloc() != otherTree.node_alloc())
-			// 		clear();
-			// 	this->node_alloc() = otherTree.node_alloc();
-
-			// }
-
 			if (this != &otherTree)
 			{
 				clear();

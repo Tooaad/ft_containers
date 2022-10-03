@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/02 15:06:56 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:58:26 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ template <class Node, class pair >
 					tmp = min(tmp);
 					this->_root = tmp;
 				}
-				else {
+				else if (max(getRoot(this->_root)) != this->_root) {
 					node_ptr tmp = this->_root;
 					node_ptr tmpParent = this->_root->_parent;
 					while (tmpParent && tmp == tmpParent->_right) {
@@ -159,6 +159,8 @@ template <class Node, class pair >
 					}
 					this->_root = tmpParent;
 				}
+				else
+					this->_root->_right->_color = BLACK;
 				return *this;
 			}
 			TreeIter operator++(int) { TreeIter tmp(*this); ++(*this); return tmp; }
@@ -172,7 +174,7 @@ template <class Node, class pair >
 					tmp = max(tmp);
 					this->_root = tmp;
 				}
-				else {
+				else if (min(getRoot(this->_root)) != this->_root) {
 					node_ptr tmp = this->_root;
 					node_ptr tmpParent = this->_root->_parent;
 					while (tmpParent && tmp == tmpParent->_left) {
@@ -181,6 +183,8 @@ template <class Node, class pair >
 					}
 					this->_root = tmpParent;
 				}
+				else
+					this->_root->_left->_color = BLACK;
 				return *this;
 			}
 
