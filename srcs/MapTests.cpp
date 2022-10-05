@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/03 12:37:17 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:52:45 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,15 @@ void opEqualsTest() {
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
 
-        std1 = intmap(std_intstr_arr, std_intstr_arr + intstr_size);
-        ft1 = _intmap(ft_intstr_arr, ft_intstr_arr + intstr_size);
+        std = intmap(std_intstr_arr, std_intstr_arr + intstr_size);
+        ft = _intmap(ft_intstr_arr, ft_intstr_arr + intstr_size);
 
-        PRINT_AL(std1, 0);
-        PRINT_AL(ft1, 1);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
         COMPAR(std, ft);
 
-        std = std1;
-        ft = ft1;
+        std1 = std;
+        ft1 = ft;
 
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -232,7 +232,7 @@ void atMapTest() {
         try {
             std::string& x = ft.at(6);
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", 6, 1);
         }
@@ -255,7 +255,7 @@ void atMapTest() {
         try {
             std::string& x = ft.at("Hello");
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", "Hello", 1);
         }
@@ -275,7 +275,7 @@ void atMapTest() {
         try {
             std::string& x = ft.at("");
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", "", 1);
         }
@@ -293,9 +293,9 @@ void atMapTest() {
             PRINT_LIN("Out of range exception", 6, 0);
         }
         try {
-            const std::string& x = std.at(6);
+            const std::string& x = ft.at(6);
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", 6, 1);
         }
@@ -321,7 +321,7 @@ void atMapTest() {
         try {
             const std::string& x = ft.at(64);
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", 64, 1);
         }
@@ -347,7 +347,7 @@ void atMapTest() {
         try {
             const std::string& x = ft.at("Hello");
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", "Hello", 1);
         }
@@ -367,7 +367,7 @@ void atMapTest() {
         try {
             const std::string& x = ft.at("");
 
-            PRINT_LIN("At:", x, 0);
+            PRINT_LIN("At:", x, 1);
         } catch (std::out_of_range& e) {
             PRINT_LIN("Out of range exception", "", 1);
         }
@@ -484,8 +484,8 @@ void clearMapTest() {
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
 
-        std.insert(std_strstr_arr, std_strstr_arr + 16);
-        ft.insert(ft_strstr_arr, ft_strstr_arr + 16);
+        std.insert(std_strstr_arr, std_strstr_arr + 2);
+        ft.insert(ft_strstr_arr, ft_strstr_arr + 2);
 
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -2346,7 +2346,6 @@ void runMapTests() {
     // insertRangeMapTest();
     // insertMapTest();
     // findTest();
-    // ctorCopyTest();
     // keyCompTest();
     // swapMapTest();
     // valueCompTest();
@@ -2355,9 +2354,10 @@ void runMapTests() {
     // eqRangeTest();
     // countTest();        //
     // emptyMapTest();
-    // clearMapTest();
+    // ctorCopyTest();
     // atMapTest();
-    opEqualsTest();
+    // opEqualsTest();
+    clearMapTest();
     opIndexTest();
     ctorRangeTest();
     ctorTest();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/03 13:38:15 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:54:55 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1424,7 +1424,6 @@ void insertTest() {
         itComp(*it, *it1);
         COMPARE(std, ft);
 
-// EL UNICO TEST QUE ME DA MAL????????????
         it = std.insert(std.begin(), b_string[19]);
         it1 = ft.insert(ft.begin(), b_string[19]);
 
@@ -1464,7 +1463,6 @@ void insertTest() {
         itComp(*it, *it1);
         COMPARE(std, ft);
 
-// REVISAR TEST
         it = std.insert(std.begin() + 3, b_string[3]);
         it1 = ft.insert(ft.begin() + 3, b_string[3]);
 
@@ -2016,7 +2014,6 @@ void swapTest() {
 
 void runTests() {
     
-    pushbackTest();
     insertTest();
     insertSizeTest();
     insertRangeTest();
@@ -2038,6 +2035,7 @@ void runTests() {
     indexOpTest();
     iteratorCompTest();     //
     operatorEquals();
+    pushbackTest();
     popbackTest();
     resizeTest();
     reverseIteratorCompTest();

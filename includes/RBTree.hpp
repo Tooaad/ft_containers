@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/03 12:48:44 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:05:50 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ namespace ft
 		~RBTree() {
 			if (!this->_root)
 				deallocate_node(_nil);
-			deallocate_tree(_root);
+			clear();
+			
 		}
 
 		pointer createNode(const value_type &value)
@@ -107,8 +108,8 @@ namespace ft
 				deallocate_tree(node->_right);
 				_node_alloc.destroy(node);
 				_node_alloc.deallocate(node, 1);
-			}
-			this->_size = 0;
+			}	
+
 		}
 
 		// MODIFIERS
@@ -117,9 +118,9 @@ namespace ft
 			if (this->size() > 0)
 			{
 				deallocate_tree(this->_root);
-				this->_size = 0;
 				// this->_root = _nil;
 			}
+			this->_size = 0;
 		}
 
 		ft::pair<iterator, bool> insert(const value_type &value)
@@ -500,6 +501,7 @@ namespace ft
 				}
 			//----
 				ft::swap(_nil, nilAux);
+				_node_alloc.destroy(nilAux);
 				_node_alloc.deallocate(nilAux, 1);
 				if (this->_size > 0)
 					iterator(this->_root, _nil);

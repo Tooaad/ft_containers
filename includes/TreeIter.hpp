@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/03 11:58:26 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:03:50 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ template <class T>
 				}
 				return *this;
 			}
-			~Node() {}
+			~Node() { }
 
 			Node* subMax()
 			{
