@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/03 12:03:46 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/03 12:37:17 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2339,24 +2339,24 @@ void eraseMapKeyTest() {
 
 void runMapTests() {
 
-    eraseMapTest();
-    eraseMapKeyTest();
-    eraseMapRangeTest();
-    insertPosMapTest();
-    insertRangeMapTest();
-    insertMapTest();
-    findTest();
-    ctorCopyTest();
-    keyCompTest();
-    swapMapTest();
-    valueCompTest();
-    lowerBoundTest();
-    upperBoundTest();
-    eqRangeTest();
-    countTest();        //
-    emptyMapTest();
-    clearMapTest();
-    atMapTest();
+    // eraseMapTest();
+    // eraseMapKeyTest();
+    // eraseMapRangeTest();
+    // insertPosMapTest();
+    // insertRangeMapTest();
+    // insertMapTest();
+    // findTest();
+    // ctorCopyTest();
+    // keyCompTest();
+    // swapMapTest();
+    // valueCompTest();
+    // lowerBoundTest();
+    // upperBoundTest();
+    // eqRangeTest();
+    // countTest();        //
+    // emptyMapTest();
+    // clearMapTest();
+    // atMapTest();
     opEqualsTest();
     opIndexTest();
     ctorRangeTest();

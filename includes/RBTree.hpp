@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/03 12:06:39 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/03 12:48:44 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ namespace ft
 		}
 
 		~RBTree() {
-			// deallocate_node(_nil);
+			if (!this->_root)
+				deallocate_node(_nil);
+			deallocate_tree(_root);
 		}
 
 		pointer createNode(const value_type &value)
@@ -96,6 +98,27 @@ namespace ft
 			{
 				_node_alloc.destroy(node);
 				_node_alloc.deallocate(node, 1);
+			}
+		}
+
+		void deallocate_tree(pointer node) {
+			if (node) {
+				deallocate_tree(node->_left);
+				deallocate_tree(node->_right);
+				_node_alloc.destroy(node);
+				_node_alloc.deallocate(node, 1);
+			}
+			this->_size = 0;
+		}
+
+		// MODIFIERS
+		void clear()
+		{
+			if (this->size() > 0)
+			{
+				deallocate_tree(this->_root);
+				this->_size = 0;
+				// this->_root = _nil;
 			}
 		}
 
@@ -507,18 +530,6 @@ namespace ft
 			size_type max_size() const { return _node_alloc().max_size(); }
 
 			bool empty() const { return !this->_root; }
-
-			// MODIFIERS
-
-			void clear()
-			{
-				if (this->size() > 0)
-				{
-					deallocate_node(this->_root);
-					this->_size = 0;
-					this->_root = _nil;
-				}
-			}
 
 			// OPERATIONS
 			// map->Tree->Iter->Node->pair

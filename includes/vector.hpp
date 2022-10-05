@@ -108,29 +108,31 @@ template <class T, class Allocator = std::allocator<T> >
 			}
 
 			void resize(size_type n, value_type val = value_type()) {
-				if (n > capacity()) {
-					size_type oldCapacity = this->_capacity;
-					reserve(oldCapacity * 2 > n && size() > 0? capacity() * 2 : n);
-					pointer newData = this->_alloc.allocate(capacity());
+				if (n > size() && n > capacity())
+					reserve(this->_capacity * 2 > n && size() > 0? this->_capacity * 2 : n);
 
-					// Para copiar lo antiguo en lo nuevo
-					for (size_type i = 0; i < size(); i++)
-						this->_alloc.construct(&newData[i], this->_data[i]);
-					this->_alloc.deallocate(this->_data, oldCapacity);
-					this->_data = newData;
-				}
-				while (size() > capacity() || n < size())
+				while (n < size())
 					pop_back();
 				
-				while (size() < n && val != value_type())
+				while (size() < n)
 					push_back(val);
 			}
 
 			void reserve(size_type n) {
 				if (n > max_size())
 					throw std::length_error("Trying to allocate more than the allowed max_size");
-				if (capacity() <= n)
+				if (n > capacity()) {
+					pointer newData = this->_alloc.allocate(n);
+
+					// Para copiar lo antiguo en lo nuevo
+					for (size_type i = 0; i < size(); i++)
+						this->_alloc.construct(&newData[i], this->_data[i]);
+					if (!empty())
+						this->_alloc.destroy(this->_data);
+					this->_alloc.deallocate(this->_data, capacity());
+					this->_data = newData;
 					this->_capacity = n;
+				}
 			}
 
 			size_type capacity() const {
@@ -169,7 +171,7 @@ template <class T, class Allocator = std::allocator<T> >
 					for (InputIterator it = first; it != last; it++)
 						n++;
 					if (n > capacity())
-						resize(n);
+						reserve(n);
 					for (InputIterator it = first; it != last; it++)
 						push_back(*it);
 			}
@@ -177,7 +179,7 @@ template <class T, class Allocator = std::allocator<T> >
 			void assign(size_type n, const value_type& value) {
 				clear();
 				if (n > capacity())
-					resize(n);
+					reserve(n);
 
 				while (size() < n)
 					push_back(value);
@@ -185,7 +187,7 @@ template <class T, class Allocator = std::allocator<T> >
 
 			void push_back(const value_type& val) {
 				if (size() == capacity())
-					resize(capacity() < 1 ? 1 : capacity() * 2);
+					reserve(this->_capacity * 2 > size() + 1 && size() > 0? this->_capacity * 2 : size() + 1);
 				this->_alloc.construct(&this->_data[size()], val);
 				this->_size++;
 			}
@@ -204,21 +206,16 @@ template <class T, class Allocator = std::allocator<T> >
 					push_back(val);
 					return end() - 1;
 				}
-				ft::vector<T> newvector;
 				size_type	elem_pos = position - this->begin();
 				
 				if (size() + 1 > capacity())
 					reserve(capacity() * 2 > 1 + size() && size() > 0? capacity() * 2 : 1 + size());
 
-				for (iterator it = begin(); it < position; it++)
-					newvector.push_back(*it);
+				for (size_type i = size(); i > elem_pos; i--)
+					this->_data[i] = this->_data[i - 1];
+				this->_alloc.construct(&this->_data[elem_pos], val);
+				this->_size++;
 
-				newvector.push_back(val);
-
-				for (iterator it = position; it < end(); it++)
-					newvector.push_back(*it);
-
-				*this = newvector;
 				return (this->begin() + elem_pos);
 			}
 
@@ -229,21 +226,21 @@ template <class T, class Allocator = std::allocator<T> >
 						resize(n, val);
 					else
 						for (size_type i = 0; i < n; i++)
-							this->push_back(val);
+							push_back(val);
 					return ;
 				}
-				ft::vector<T> newvector;
+				size_type	elem_pos = position - this->begin();
+
 				if (size() + n > capacity())
 					reserve(capacity() * 2 > n + size() && size() > 0? capacity() * 2 : n + size());
 
-				for (iterator it = begin(); it < position; it++)
-					newvector.push_back(*it);
-				for (size_type i = 0; i < n; i++)
-					newvector.push_back(val);
-				for (iterator it = position; it < end(); it++)
-					newvector.push_back(*it);
+				for (size_type i = size() + n - 1; i > elem_pos + n - 1; i--)
+					this->_data[i] = this->_data[i - n];
 
-				*this = newvector;
+				for (size_type i = elem_pos; i < elem_pos + n; i++) {
+					this->_alloc.construct(&this->_data[i], val);
+					this->_size++;
+				}
 			}
 
 			template <class InputIterator>
@@ -253,24 +250,26 @@ template <class T, class Allocator = std::allocator<T> >
 						n++;
 					if (position == end())
 					{
-						if (empty())
-							resize(n);
+						if (size() + n > capacity())
+							reserve(capacity() * 2 > n + size() && size() > 0? capacity() * 2 : n + size());
 						for (InputIterator it = first; it != last; it++)
-							this->push_back(*it);
+							push_back(*it);
 						return ;
 					}
-					ft::vector<T> newvector;
+					
+					size_type	elem_pos = position - this->begin();
 					if (size() + n > capacity())
 						reserve(capacity() * 2 > n + size() && size() > 0? capacity() * 2 : n + size());
 
-					for (iterator it = begin(); it < position; it++)
-						newvector.push_back(*it);
-					for (InputIterator i = first; i != last; i++)
-						newvector.push_back(*i);
-					for (iterator it = position; it < end(); it++)
-						newvector.push_back(*it);
-
-					*this = newvector;
+					for (size_type i = this->_size + n - 1; i > elem_pos + n - 1; i--)
+						this->_data[i] = this->_data[i - n];
+					
+					size_type i = elem_pos;
+					for (InputIterator it = first; it != last; it++)
+					{
+						this->_alloc.construct(&this->_data[i++], *it);
+						this->_size++;
+					}
 				}
 
 			iterator erase (iterator position) {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/29 20:42:28 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:38:15 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2015,15 +2015,14 @@ void swapTest() {
 }
 
 void runTests() {
-
-
-    // Problemas en los iterators y errores aleatorios
-    reserveTest();
+    
+    pushbackTest();
     insertTest();
     insertSizeTest();
     insertRangeTest();
     insertMixTest();
-    
+
+    reserveTest();
     assignTest();
     assignRangeTest();
     assignMixedTest();
@@ -2040,11 +2039,9 @@ void runTests() {
     iteratorCompTest();     //
     operatorEquals();
     popbackTest();
-    pushbackTest();
     resizeTest();
     reverseIteratorCompTest();
     swapTest();
-    
     
 }
 
