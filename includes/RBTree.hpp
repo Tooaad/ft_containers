@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/06 13:47:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/06 21:50:37 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TREEITER NOW HAS 2 PARAMS some iterators have 3
 
 #pragma once
 
@@ -64,13 +62,13 @@ namespace ft
 			*this = otherTree;
 		}
 
-		RBTree &operator=(const RBTree &otherTree)
+		RBTree& operator=(const RBTree &otherTree)
 		{
 			if (this != &otherTree)
 			{
 				clear();
-				if (_nil)
-					deallocate_node(_nil);
+				if (this->_nil)
+					deallocate_node(this->_nil);
 				this->_root = otherTree._root;
 				this->_size = otherTree._size;
 				this->_node_alloc = otherTree._node_alloc;
@@ -102,13 +100,12 @@ namespace ft
 			}
 		}
 
-		void deallocate_tree(pointer& node) {
+		void deallocate_tree(pointer node) {
 			if (node && node != _nil) {
 				deallocate_tree(node->_left);
 				deallocate_tree(node->_right);
 				_node_alloc.destroy(node);
 				_node_alloc.deallocate(node, 1);
-				node = NULL;
 			}
 		}
 
@@ -119,6 +116,7 @@ namespace ft
 				deallocate_tree(this->_root);
 				this->_size = 0;
 			}
+			this->_root = NULL;
 		}
 
 		ft::pair<iterator, bool> insert(const value_type &value)

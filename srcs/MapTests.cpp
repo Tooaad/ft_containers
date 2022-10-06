@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/06 13:39:27 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/06 21:54:00 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2352,9 +2352,9 @@ void runMapTests() {
     // lowerBoundTest();
     // upperBoundTest();
     // eqRangeTest();
-    // ctorCopyTest();
+    // atMapTest();
     // opEqualsTest();
-    atMapTest();
+    ctorCopyTest();
     countTest();        //
     emptyMapTest();
     clearMapTest();
