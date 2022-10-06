@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/05 20:05:50 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:47:31 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,21 @@ namespace ft
 			if (this != &otherTree)
 			{
 				clear();
+				if (_nil)
+					deallocate_node(_nil);
 				this->_root = otherTree._root;
 				this->_size = otherTree._size;
 				this->_node_alloc = otherTree._node_alloc;
 				this->_comp = otherTree._comp;
 				this->_nil = otherTree._nil;
 			}
-
 			return *this;
 		}
 
 		~RBTree() {
-			if (!this->_root)
-				deallocate_node(_nil);
 			clear();
-			
+			if (_nil)
+				deallocate_node(_nil);
 		}
 
 		pointer createNode(const value_type &value)
@@ -102,25 +102,23 @@ namespace ft
 			}
 		}
 
-		void deallocate_tree(pointer node) {
-			if (node) {
+		void deallocate_tree(pointer& node) {
+			if (node && node != _nil) {
 				deallocate_tree(node->_left);
 				deallocate_tree(node->_right);
 				_node_alloc.destroy(node);
 				_node_alloc.deallocate(node, 1);
-			}	
-
+				node = NULL;
+			}
 		}
 
 		// MODIFIERS
 		void clear()
 		{
-			if (this->size() > 0)
-			{
+			if (this->size() > 0) {
 				deallocate_tree(this->_root);
-				// this->_root = _nil;
+				this->_size = 0;
 			}
-			this->_size = 0;
 		}
 
 		ft::pair<iterator, bool> insert(const value_type &value)
