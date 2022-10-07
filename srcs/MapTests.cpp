@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/06 21:54:00 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:12:25 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MapTests.hpp"
+#include <list>
 #include <ios>
+
 
 int nextTes() {
     std::string action;
@@ -30,9 +32,16 @@ void ctorTest() {
     std::cout << "\x1b[41m                    CTOR TEST                   \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
+        start = std::chrono::high_resolution_clock::now();
         intmap std;
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _intmap ft;
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
         COMPAR(std, ft);
@@ -1472,16 +1481,6 @@ void findTest() {
         if (cit1 != cm1.end()) {
             PRINT_PAIR_REF(*cit1, 1);
         }
-        // DEBERIA ENTRAR Y PETAR?
-        // cit = std.find("z");
-        // cit1 = ft.find("z");
-
-        // if (cit != cm.end()) {
-        //     PRINT_PAIR_REF(*cit, 0);
-        // }
-        // if (cit1 != cm1.end()) {
-        //     PRINT_PAIR_REF(*cit1, 1);
-        // }
     }
     
     {
@@ -2339,27 +2338,27 @@ void eraseMapKeyTest() {
 
 void runMapTests() {
 
-    // eraseMapTest();
-    // eraseMapKeyTest();
-    // eraseMapRangeTest();
-    // insertPosMapTest();
-    // insertRangeMapTest();
-    // insertMapTest();
-    // findTest();
-    // keyCompTest();
-    // swapMapTest();
-    // valueCompTest();
-    // lowerBoundTest();
-    // upperBoundTest();
-    // eqRangeTest();
-    // atMapTest();
-    // opEqualsTest();
+    ctorTest();
+    eraseMapTest();
+    eraseMapKeyTest();
+    eraseMapRangeTest();
+    insertPosMapTest();
+    insertRangeMapTest();
+    insertMapTest();
+    findTest();
+    keyCompTest();
+    swapMapTest();
+    valueCompTest();
+    lowerBoundTest();
+    upperBoundTest();
+    eqRangeTest();
+    atMapTest();
+    opEqualsTest();
     ctorCopyTest();
     countTest();        //
     emptyMapTest();
     clearMapTest();
     opIndexTest();
     ctorRangeTest();
-    ctorTest();
     
 }

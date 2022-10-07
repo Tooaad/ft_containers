@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/09/04 19:49:48 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:09:23 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,14 @@ void itComp(T std, T ft)
 
 #define TIMER(t1, t2)                                                                                    \
     {                                                                                                     \
-            std::cout << "\x1b[32m " << t1.count() << "\x1b[0m ";                                                \
+            std::cout << "\x1b[32m " << t1.count() << "\x1b[0m ";                                        \
             std::cout << " vs ";                                                                          \
-            std::cout << "\x1b[32m " << t2.count() << "\x1b[0m " << std::endl;                                    \
+            std::cout << "\x1b[32m " << t2.count() << "\x1b[0m " << std::endl;                           \
+            if (t2.count() > t1.count() * 20 )                                                           \
+            {                                                                                            \
+               std::cout << "\x1b[31m--------------❌❌❌❌❌❌TIME❌❌❌❌❌-------------\x1b[0m" << std::endl; \
+               exit(1);                                                                                   \
+            }                                                                                             \
     }
     
 #define COMPARE(std, ft)                                                                                  \
@@ -160,6 +165,10 @@ void init_array(T* arr, std::size_t size)
     std::size_t b_size = 64;                                                                       \
     (void)s_size;                                                                                  \
     (void)b_size;                                                                                  \
+    std::__1::chrono::steady_clock::time_point start;                                              \
+    std::__1::chrono::steady_clock::time_point end;                                                \
+    std::chrono::duration<double, std::milli> t1;                                                  \
+    std::chrono::duration<double, std::milli> t2;                                                  \
     std::string s_string[32] = {                                                                   \
         "QExoqp0nICr0sXsHqty2", "naax9QcpJhvaL7DezsNQ", "25ZTtB6wbptfbxM8AvHB",                    \
         "tShYNtc0MkdjqLrOatgz", "7Z3kf1Qec0NnsLSEpbOt", "WhkSNrKJC966fvjZ2Or1",                    \

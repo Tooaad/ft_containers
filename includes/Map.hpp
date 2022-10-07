@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/06 20:51:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:39:28 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,16 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			tree_type		_tree;
 			allocator_type	_alloc;
 			key_compare		_comp;
+			value_compare	_value_compare;
 
 		public:
 			
 			explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) 
-				: _tree(), _alloc(alloc), _comp(comp) {}
+				: _tree(), _alloc(alloc), _comp(comp), _value_compare(value_compare()) {}
 
 			template <class InputIterator>
 				map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-					: _alloc(alloc), _comp(comp) {
+					: _alloc(alloc), _comp(comp), _value_compare(value_compare()) {
 					insert(first, last);
 				}
 			
@@ -76,6 +77,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 					this->_tree = x._tree;
 					this->_comp = x._comp;
 					this->_alloc = x._alloc;
+					this->_value_compare = x._value_compare;
 				}
 				return *this;
 			}
@@ -111,23 +113,28 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			// BUSCA LA CLAVE NO LA POSICION
 			mapped_type& operator[](const key_type& k) 
 			{
-				if (this->_tree.find(k).second == false)
-					((this->insert(ft::make_pair(k,mapped_type()))));
-				return (this->_tree.find(k).first->_value.second);
+				// ft::pair<node_pointer, bool> found = this->_tree.find(k);
+				// if (found.second == false) {
+					return ((this->insert(ft::make_pair(k,mapped_type()))).first)._root->_value.second;
+				// }
+				// return (found.first->_value.second);
 			}
 
 			mapped_type& at(const key_type& k)
 			{
-				if (this->_tree.find(k).second == false)
+				ft::pair<node_pointer, bool> found = this->_tree.find(k);
+				if (found.second == false)
 					throw std::out_of_range("Index out of range");
-				return (this->_tree.find(k).first->_value.second);
+				return (found.first->_value.second);
 			}
+
 			
 			const mapped_type& at(const key_type& k) const
 			{
-				if (this->_tree.find(k).second == false)
+				ft::pair<node_pointer, bool> found = this->_tree.find(k);
+				if (found.second == false)
 					throw std::out_of_range("Index out of range");
-				return (this->_tree.find(k).first->_value.second);
+				return (found.first->_value.second);
 			}
 
 	//	Modifiers
@@ -170,15 +177,15 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			void swap(map& x) {
 				ft::swap(this->_alloc, x._alloc);
 				ft::swap(this->_comp, x._comp);
-				ft::swap(this->_tree, x._tree);
+				ft::swap(this->_value_compare, x._value_compare);
+				this->_tree.swap(x._tree);
 			}
 
 			void clear() { this->_tree.clear(); }
 
 			key_compare key_comp() const { return this->_comp; }
 
-			value_compare value_comp() const { value_compare _value_compare; return _value_compare; }
-
+			value_compare value_comp() const { return _value_compare; }
 
 			iterator find(const key_type& k) { return iterator(this->_tree.find(k).first); }
 			const_iterator find(const key_type& k) const { return const_iterator(this->_tree.find(k).first); }
@@ -190,28 +197,24 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				return 1;
 			}
 			iterator lower_bound(const key_type& k) {
-				value_compare	_value_compare;
 				for (iterator it = begin(); it != end(); it++)
 					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value) || !_value_compare(it.baseNode()->_value, ft::make_pair(k, mapped_type())))
 						return it;
 				return end();
 			}
 			const_iterator lower_bound(const key_type& k) const {
-				value_compare	_value_compare;
 				for (const_iterator it = begin(); it != end(); it++)
 					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value) || !_value_compare(it.baseNode()->_value, ft::make_pair(k, mapped_type())))
 						return it;
 				return end();
 			}
 			iterator upper_bound(const key_type& k) {
-				value_compare	_value_compare;
 				for (iterator it = begin(); it != end(); it++)
 					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value))
 						return it;
 				return end();
 			}
 			const_iterator upper_bound(const key_type& k) const {
-				value_compare	_value_compare;
 				for (const_iterator it = begin(); it != end(); it++)
 					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value))
 						return it;
@@ -222,4 +225,41 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			
 			allocator_type get_allocator() const { return allocator_type(this->_tree._node_alloc); }
 	};
+	
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator==(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs) {
+		if (lhs.size() != rhs.size())
+			return false;
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	}
+
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator!=(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs) {
+		return !(lhs == rhs);
+	}
+
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator<(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs) {
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
+
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs) {
+		return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+	}
+
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator<=(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs) {
+		return (lhs == rhs || lhs < rhs);
+	}
+
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>=(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs) {
+		return (lhs == rhs || lhs > rhs);
+	}
+
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	void	swap(ft::map<Key, T, Compare, Alloc>& x, ft::map<Key, T, Compare, Alloc>& y) {
+		x.swap(y);
+	}
 }

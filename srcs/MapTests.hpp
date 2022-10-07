@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/06 12:28:49 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:08:30 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,18 @@ void print_map(It first, It last, int type)
             std::cout << "--------------------------------\n";                                     \
         PRINT_BOUND(p.first, end, type);                                                           \
         PRINT_BOUND(p.second, end, type);                                                          \
+    }
+
+#define TIMER_(t1, t2)                                                                                    \
+    {                                                                                                     \
+            std::cout << "\x1b[32m " << t1.count() << "\x1b[0m ";                                        \
+            std::cout << " vs ";                                                                          \
+            std::cout << "\x1b[32m " << t2.count() << "\x1b[0m " << std::endl;                           \
+            if (t2.count() > t1.count() * 20 )                                                           \
+            {                                                                                            \
+               std::cout << "\x1b[31m--------------❌❌❌❌❌❌TIME❌❌❌❌❌-------------\x1b[0m" << std::endl; \
+               exit(1);                                                                                   \
+            }                                                                                             \
     }
 
 template <typename T>
@@ -270,7 +282,11 @@ void init_array_str_str(ft::pair<std::string, std::string>* arr, std::size_t siz
     (void)std_strstr_arr;                                                                          \
     (void)ft_strstr_arr;                                                                           \
     (void)intstr_size;                                                                             \
-    (void)strstr_size;                                                                         
+    (void)strstr_size;
+    std::__1::chrono::steady_clock::time_point start;                                              \
+    std::__1::chrono::steady_clock::time_point end;                                                \
+    std::chrono::duration<double, std::milli> t1;                                                  \
+    std::chrono::duration<double, std::milli> t2;                                                                        
 
 typedef std::map<int, std::string, std::less<int> > intmap;
 typedef std::map<std::string, std::string, std::less<std::string> > strmap;

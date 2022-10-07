@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/05 20:03:50 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:19:54 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ template <class Node, class pair >
 
 		// protected:
 			node_ptr	_root;
-			// node_ptr	_nil;
+
 		public:
 			TreeIter() : _root(0) {}
 			explicit TreeIter(node_ptr root) : _root(root) {}

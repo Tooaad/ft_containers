@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/06 21:50:37 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:39:12 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,14 @@ namespace ft
 				clear();
 				if (this->_nil)
 					deallocate_node(this->_nil);
-				this->_root = otherTree._root;
-				this->_size = otherTree._size;
 				this->_node_alloc = otherTree._node_alloc;
 				this->_comp = otherTree._comp;
-				this->_nil = otherTree._nil;
+				this->_nil = _node_alloc.allocate(1);
+				_node_alloc.construct(_nil, value_type());
+				_nil->_color = BLACK;
+				this->_root = 0;
+				for (const_iterator it = otherTree.begin(); it != otherTree.end(); it++)
+					insert(*it);
 			}
 			return *this;
 		}
@@ -519,10 +522,7 @@ namespace ft
 			const_reverse_iterator rend() const { return const_reverse_iterator(this->begin(), 0); }
 
 			// CAPACITY
-			void increment_size() { this->_size++; }
-
-			void decrement_size() { this->_size--; }
-
+			
 			size_type size() const { return this->_size; }
 
 			size_type max_size() const { return _node_alloc().max_size(); }
@@ -564,6 +564,14 @@ namespace ft
 				}
 				// insert(value);
 				return ft::make_pair(_nil, false);
+			}
+
+			void swap(RBTree& otherTree) {
+				ft::swap(_root, otherTree._root);
+				ft::swap(_size, otherTree._size);
+				ft::swap(_nil, otherTree._nil);
+				ft::swap(_node_alloc, otherTree._node_alloc);
+				ft::swap(_comp, otherTree._comp);
 			}
 
 			pointer getRoot() const {
