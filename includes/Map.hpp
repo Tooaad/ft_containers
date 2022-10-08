@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 15:04:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 22:34:17 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			// BUSCA LA CLAVE NO LA POSICION
 			mapped_type& operator[](const key_type& k) 
 			{
-				// ft::pair<node_pointer, bool> found = this->_tree.find(k);
-				// if (found.second == false) {
+				ft::pair<node_pointer, bool> found = this->_tree.find(k);
+				if (found.second == false) {
 					return ((this->insert(ft::make_pair(k,mapped_type()))).first).baseNode()->_value.second;
-				// }
-				// return (found.first->_value.second);
+				}
+				return (found.first->_value.second);
 			}
 
 			mapped_type& at(const key_type& k)
@@ -162,7 +162,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			
 			size_type erase(const key_type& k) {
 				node_pointer element = _tree.find(k).first;
-				if (element == end()._root)
+				if (element == end().baseNode())
 					return 0;
 				this->_tree.erase(element);
 				return 1;
@@ -192,31 +192,35 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			
 			size_type count(const key_type& k) {
 				iterator found = this->find(k);
-				if (found == end() && k != end()._root->_value.first)
+				if (found == end() && k != end().baseNode()->_value.first)
 					return 0;
 				return 1;
 			}
 			iterator lower_bound(const key_type& k) {
-				for (iterator it = begin(); it != end(); it++)
-					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value) || !_value_compare(it.baseNode()->_value, ft::make_pair(k, mapped_type())))
+				iterator it = begin();
+				for (; it != end(); ++it)
+					if (!_comp(it.baseNode()->_value.first, k))
 						return it;
-				return end();
+				return it;
 			}
 			const_iterator lower_bound(const key_type& k) const {
-				for (const_iterator it = begin(); it != end(); it++)
-					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value) || !_value_compare(it.baseNode()->_value, ft::make_pair(k, mapped_type())))
+				const_iterator it = begin();
+				for (; it != end(); ++it)
+					if (!_comp(it.baseNode()->_value.first, k))
 						return it;
-				return end();
+				return it;
 			}
 			iterator upper_bound(const key_type& k) {
-				for (iterator it = begin(); it != end(); it++)
-					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value))
+				iterator it = begin();
+				for (; it != end(); ++it)
+					if (!_comp(k, it.baseNode()->_value.first) && it.baseNode()->_value.first != k)
 						return it;
 				return end();
 			}
 			const_iterator upper_bound(const key_type& k) const {
-				for (const_iterator it = begin(); it != end(); it++)
-					if (_value_compare(ft::make_pair(k, mapped_type()), it.baseNode()->_value))
+				const_iterator it = begin();
+				for (; it != end(); ++it)
+					if (!_comp(k, it.baseNode()->_value.first) && it.baseNode()->_value.first != k)
 						return it;
 				return end();
 			}

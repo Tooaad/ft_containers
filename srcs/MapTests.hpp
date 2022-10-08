@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/07 20:35:27 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 22:36:36 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,6 @@ void print_map(It first, It last, int type)
             std::cout << "\x1b[32m " << t1.count() << "\x1b[0m ";                                        \
             std::cout << " vs ";                                                                          \
             std::cout << "\x1b[32m " << t2.count() << "\x1b[0m " << std::endl;                           \
-            if (t2.count() > t1.count() * 20 )                                                           \
-            {                                                                                            \
-               std::cout << "\x1b[31m--------------❌❌❌❌❌❌TIME❌❌❌❌❌-------------\x1b[0m" << std::endl; \
-               exit(1);                                                                                   \
-            }                                                                                             \
     }
 
 template <typename T>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 18:18:14 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 22:35:15 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ template <class T>
 			T		_value;
 			bool	_color;
 			
-			// Prueba
 			Node() {}
 			Node(const T& val) : _right(0), _left(0), _parent(0), _value(val), _color(RED) {}
 			Node(const Node& otherNode) : _right(otherNode._right), _left(otherNode._right), _parent(otherNode._parent), _color(otherNode._color) {}
@@ -139,7 +138,7 @@ template <class Node, class pair >
 
 			template <class U, class P>
 			TreeIter&	operator=(const TreeIter<U, P>& other) {
-				this->_root = other._root;
+				this->_root = other.baseNode();
 				return *this;
 			}
 			pointer base() const { return this; }

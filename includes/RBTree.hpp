@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 15:03:49 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 22:37:43 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,7 +324,6 @@ namespace ft
 		void deleteFix(pointer &nodeToRemove)
 		{
 			pointer nodeAux;
-			//nodeToRemove
 			while (nodeToRemove != this->_root && nodeToRemove->_color == BLACK)
 			{
 				if (nodeToRemove->isLeft())
@@ -334,9 +333,7 @@ namespace ft
 					{
 						nodeAux->_color = BLACK;
 						nodeToRemove->_parent->_color = RED;
-						//----
-							
-						//----
+
 						rotateLeft(nodeToRemove->_parent);
 						nodeAux = nodeToRemove->_parent->_right;
 					}
@@ -344,11 +341,9 @@ namespace ft
 						&& nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
 					{
 						nodeAux->_color = RED;
-						//----
 						delNil(nodeAux->_left);
 						delNil(nodeAux->_right);
 						delNil(nodeAux->_parent->_left);
-						//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
 					else
@@ -359,20 +354,16 @@ namespace ft
 						{
 							nodeAux->_left->_color = BLACK;
 							nodeAux->_color = RED;
-							//----
-							
-							//----
+
 							rotateRight(nodeAux);
 							nodeAux = nodeToRemove->_parent->_right;
 						}
 						nodeAux->_color = nodeToRemove->_parent->_color;
 						nodeToRemove->_parent->_color = BLACK;
 						nodeAux->_right->_color = BLACK;
-					//----
 						delNil(nodeAux->_right->_right);
 						delNil(nodeToRemove->_parent->_left);
 						delNil(nodeAux->_left);
-					//----
 						rotateLeft(nodeToRemove->_parent);
 						nodeToRemove = this->_root;
 					}
@@ -384,9 +375,7 @@ namespace ft
 					{
 						nodeAux->_color = BLACK;
 						nodeToRemove->_parent->_color = RED;
-					//----
-							
-					//----
+
 						rotateRight(nodeToRemove->_parent);
 						nodeAux = nodeToRemove->_parent->_left;
 					}
@@ -394,11 +383,9 @@ namespace ft
 						nodeAux->_left->_color == BLACK && nodeAux->_right->_color == BLACK)
 					{
 						nodeAux->_color = RED;
-					//----
 						delNil(nodeAux->_left);
 						delNil(nodeAux->_right);
 						delNil(nodeAux->_parent->_right);
-					//----
 						nodeToRemove = nodeToRemove->_parent;
 					}
 					else
@@ -409,20 +396,16 @@ namespace ft
 						{
 							nodeAux->_right->_color = BLACK;
 							nodeAux->_color = RED;
-						//----
-							
-						//----
+
 							rotateLeft(nodeAux);
 							nodeAux = nodeToRemove->_parent->_left;
 						}
 						nodeAux->_color = nodeToRemove->_parent->_color;
 						nodeToRemove->_parent->_color = BLACK;
 						nodeAux->_left->_color = BLACK;
-					//----
 						delNil(nodeAux->_left->_left);
 						delNil(nodeToRemove->_parent->_right);
 						delNil(nodeAux->_right);
-					//----
 						rotateRight(nodeToRemove->_parent);
 						nodeToRemove = this->_root;
 					}
@@ -491,14 +474,13 @@ namespace ft
 				ft::swap(this->_nil, nilAux);
 				if (copy_color == BLACK)
 					deleteFix(nodeAux);
-			//----
-				else {
+				else
+				{
 					if (nodeAux->_parent->_left == nodeAux)
 						nodeAux->_parent->_left = NULL;
 					if (nodeAux->_parent->_right == nodeAux)
 						nodeAux->_parent->_right = NULL;
 				}
-			//----
 				ft::swap(_nil, nilAux);
 				_node_alloc.destroy(nilAux);
 				_node_alloc.deallocate(nilAux, 1);
@@ -515,11 +497,11 @@ namespace ft
 			iterator end() { return iterator(_nil); }
 			const_iterator end() const { return const_iterator(_nil); }
 
-			reverse_iterator rbegin() { return reverse_iterator(this->end(), 0); }
-			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end(), 0); }
+			reverse_iterator rbegin() { return reverse_iterator(end(), 0); }
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(end(), 0); }
 
-			reverse_iterator rend() { return reverse_iterator(this->begin(), 0); }
-			const_reverse_iterator rend() const { return const_reverse_iterator(this->begin(), 0); }
+			reverse_iterator rend() { return reverse_iterator(begin(), 0); }
+			const_reverse_iterator rend() const { return const_reverse_iterator(begin(), 0); }
 
 			// CAPACITY
 			
@@ -545,7 +527,6 @@ namespace ft
 					else
 						return ft::make_pair(tmp, true);
 				}
-				// insert(value);
 				return ft::make_pair(end().baseNode(), false);
 			}
 			
@@ -562,7 +543,6 @@ namespace ft
 					else
 						return ft::make_pair(tmp, true);
 				}
-				// insert(value);
 				return ft::make_pair(_nil, false);
 			}
 
@@ -574,7 +554,7 @@ namespace ft
 				ft::swap(_comp, otherTree._comp);
 			}
 
-			pointer getRoot() const {
+			pointer getTreeRoot() const {
 				return this->_root;
 			}
 
