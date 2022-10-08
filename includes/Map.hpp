@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/07 13:39:28 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:04:31 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			{
 				// ft::pair<node_pointer, bool> found = this->_tree.find(k);
 				// if (found.second == false) {
-					return ((this->insert(ft::make_pair(k,mapped_type()))).first)._root->_value.second;
+					return ((this->insert(ft::make_pair(k,mapped_type()))).first).baseNode()->_value.second;
 				// }
 				// return (found.first->_value.second);
 			}

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 14:34:22 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:02:14 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2321,7 +2321,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair(64, "Double"));
         p1 = ft.insert(ft::make_pair(64, "Double"));
@@ -2330,7 +2330,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair(0, "0str"));
         p1 = ft.insert(ft::make_pair(0, "0str"));
@@ -2339,7 +2339,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair(-23, "-23str"));
         p1 = ft.insert(ft::make_pair(-23, "-23str"));
@@ -2348,7 +2348,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair(64, "dfgs"));
         p1 = ft.insert(ft::make_pair(64, "dfgs"));
@@ -2357,7 +2357,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
     }
     if (nextTes())
         return ;
@@ -2375,7 +2375,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair("64n", "Double"));
         p1 = ft.insert(ft::make_pair("64n", "Double"));
@@ -2384,7 +2384,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair("0n", "0str"));
         p1 = ft.insert(ft::make_pair("0n", "0str"));
@@ -2393,7 +2393,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair("-23n", "-23str"));
         p1 = ft.insert(ft::make_pair("-23n", "-23str"));
@@ -2402,7 +2402,7 @@ void insertMapTest() {
         PRINT_INS_PAIR(p1, 1);
 
         std::cout << " " << std.end()->first << std::endl;
-        std::cout << " " << ft.end()._root->_value.first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         p = std.insert(std::make_pair("64n", "dfgs"));
         p1 = ft.insert(ft::make_pair("64n", "dfgs"));

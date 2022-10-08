@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/07 13:19:54 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:18:14 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ template <class Node, class pair >
 			}
 			template <class N, class P>
 			TreeIter(const TreeIter<N, P>& it) {
-				this->_root = it._root;
+				this->_root = it.baseNode();
 			}
 			~TreeIter() {}
 
