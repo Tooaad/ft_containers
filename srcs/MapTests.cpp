@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/07 23:16:49 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:34:22 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -815,6 +815,7 @@ void emptyMapTest() {
         PRINT_LIN("Empty:", ft.empty() ? "true" : "false", 1);
         end = std::chrono::high_resolution_clock::now();
         t2 = end - start;
+        
         TIMER_(t1, t2);
         COMPAR(std, ft);
     }
@@ -846,21 +847,42 @@ void countTest() {
         intmap std(std_intstr_arr, std_intstr_arr + intstr_size);
         _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
 
+        start = std::chrono::high_resolution_clock::now();
         intmap::size_type c = std.count(64);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _intmap::size_type c1 = ft.count(64);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
-
+        
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(145);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(145);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(11);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(11);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
@@ -879,43 +901,84 @@ void countTest() {
         ft.insert(ft::make_pair(22, "j564wedfshgj6ee5yegrs"));
         ft.insert(ft::make_pair(10, "cfngcvcx56;oiliuee"));
 
-
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(34);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(34);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(2);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(2);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(9);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(9);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
         std.erase(9);
         ft.erase(9);
 
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(9);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(9);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(10);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(10);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
 
+        start = std::chrono::high_resolution_clock::now();
         c = std.count(22);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         c1 = ft.count(22);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_LIN("STD:", c, 0);
         PRINT_LIN("FT:", c1, 1);
     }
@@ -960,75 +1023,148 @@ void lowerBoundTest() {
         ft.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
         ft.insert(ft::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
+        start = std::chrono::high_resolution_clock::now();
         intmap::iterator b = std.lower_bound(98583944);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _intmap::iterator b1 = ft.lower_bound(98583944);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(239485948);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(239485948);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(19458942);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(19458942);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(19458941);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(19458941);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(19458943);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(19458943);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
         
+        start = std::chrono::high_resolution_clock::now();        
         b = std.lower_bound(-1);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(-1);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(3);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(3);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(4);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(4);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(5);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(5);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(0);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(0);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.lower_bound(std::numeric_limits<int>::max());
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.lower_bound(std::numeric_limits<int>::max());
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
-
-        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
-        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
-
     }
     if (nextTes())
         return ;
@@ -1071,75 +1207,149 @@ void upperBoundTest() {
         ft.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
         ft.insert(ft::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
+        start = std::chrono::high_resolution_clock::now();
         intmap::iterator b = std.upper_bound(98583944);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _intmap::iterator b1 = ft.upper_bound(98583944);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(239485948);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(239485948);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(19458942);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(19458942);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(19458941);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(19458941);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(19458943);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(19458943);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
         
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(-1);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(-1);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(3);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(3);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
 
+        start = std::chrono::high_resolution_clock::now();
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(4);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(4);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(5);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(5);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(0);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(0);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         b = std.upper_bound(std::numeric_limits<int>::max());
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         b1 = ft.upper_bound(std::numeric_limits<int>::max());
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_BOUND(b, std.end(), 0);
         PRINT_BOUND(b1, ft.end(), 1);
-
-        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
-        std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
-
     }
     if (nextTes())
         return ;
@@ -1147,7 +1357,7 @@ void upperBoundTest() {
 
 void eqRangeTest() {
     SETUP_MAP_ARRAYS();
-    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[33m******************************1******************\x1b[0m" << std::endl;
     std::cout << "\x1b[41m                EQUAL_RANGE TEST                \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
@@ -1182,74 +1392,157 @@ void eqRangeTest() {
         ft.insert(ft::make_pair(19458942, "j567uysdts56y6uj5r"));
         ft.insert(ft::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
-
+        start = std::chrono::high_resolution_clock::now();
         std::pair<intmap::iterator, intmap::iterator> eq = std.equal_range(98583944);
-        ft::pair<_intmap::iterator, _intmap::iterator> eq1 = ft.equal_range(98583944);
-
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();ft::pair<_intmap::iterator, _intmap::iterator>
+        eq1 = ft.equal_range(98583944);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(209485948);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(209485948);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(19458942);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(19458942);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(19458941);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(19458941);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(19458943);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(19458943);
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(-1);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(-1);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+                end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(3);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(3);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+                end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(4);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(4);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(5);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(5);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(0);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(0);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(std::numeric_limits<int>::max());
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(std::numeric_limits<int>::max());
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
         std.insert(std::make_pair(std::numeric_limits<int>::max(), "max"));
         ft.insert(ft::make_pair(std::numeric_limits<int>::max(), "max"));
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(std::numeric_limits<int>::max());
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(std::numeric_limits<int>::max());
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
         
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
     }
@@ -1303,65 +1596,142 @@ void eqRangeTest() {
         const intmap std(temp);
         const _intmap ft(tem);
 
+        start = std::chrono::high_resolution_clock::now();
         std::pair<intmap::const_iterator, intmap::const_iterator> eq = std.equal_range(98583944);
-        ft::pair<_intmap::const_iterator, _intmap::const_iterator> eq1 = ft.equal_range(98583944);
-
-        PRINT_EQ_RANGE(eq, std.end(), 0);
-        PRINT_EQ_RANGE(eq1, ft.end(), 1);
-
-        eq = std.equal_range(209485948);
-        eq1 = ft.equal_range(209485948);
-
-        PRINT_EQ_RANGE(eq, std.end(), 0);
-        PRINT_EQ_RANGE(eq1, ft.end(), 1);
-
-        eq = std.equal_range(19458942);
-        eq1 = ft.equal_range(19458942);
-
-        PRINT_EQ_RANGE(eq, std.end(), 0);
-        PRINT_EQ_RANGE(eq1, ft.end(), 1);
-
-        eq = std.equal_range(19458941);
-        eq1 = ft.equal_range(19458941);
-
-        PRINT_EQ_RANGE(eq, std.end(), 0);
-        PRINT_EQ_RANGE(eq1, ft.end(), 1);
-
-        eq = std.equal_range(19458943);
-        eq1 = ft.equal_range(19458943);
-
-        PRINT_EQ_RANGE(eq, std.end(), 0);
-        PRINT_EQ_RANGE(eq1, ft.end(), 1);
-
-        eq = std.equal_range(-1);
-        eq1 = ft.equal_range(-1);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();ft::pair<_intmap::const_iterator, _intmap::const_iterator>
+        eq1 = ft.equal_range(98583944);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
         
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
+        eq = std.equal_range(209485948);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        eq1 = ft.equal_range(209485948);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        start = std::chrono::high_resolution_clock::now();
+        eq = std.equal_range(19458942);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        eq1 = ft.equal_range(19458942);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        start = std::chrono::high_resolution_clock::now();
+        eq = std.equal_range(19458941);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        eq1 = ft.equal_range(19458941);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        start = std::chrono::high_resolution_clock::now();
+        eq = std.equal_range(19458943);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        eq1 = ft.equal_range(19458943);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        start = std::chrono::high_resolution_clock::now();
+        eq = std.equal_range(-1);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        eq1 = ft.equal_range(-1);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
+        PRINT_EQ_RANGE(eq, std.end(), 0);
+        PRINT_EQ_RANGE(eq1, ft.end(), 1);
+
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(3);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(3);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(4);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(4);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(5);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(5);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(0);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(0);
-        PRINT_EQ_RANGE(eq, std.end(), 0);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
 
+        start = std::chrono::high_resolution_clock::now();
         eq = std.equal_range(std::numeric_limits<int>::max());
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         eq1 = ft.equal_range(std::numeric_limits<int>::max());
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
         PRINT_EQ_RANGE(eq, std.end(), 0);
         PRINT_EQ_RANGE(eq1, ft.end(), 1);
     }
@@ -1379,12 +1749,19 @@ void valueCompTest() {
 
         strmap::iterator it = std.begin();
         strmap::const_iterator cit = std.begin();
+        start = std::chrono::high_resolution_clock::now();
         strmap::value_compare comp = std.value_comp();
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
 
         _strmap::iterator it1 = ft.begin();
         _strmap::const_iterator cit1 = ft.begin();
+        start = std::chrono::high_resolution_clock::now();
         _strmap::value_compare comp1 = ft.value_comp();
-        
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
+
         if (comp(*it, *cit)) {        
             PRINT_LIN("LESS", "", 0);
         } else {
@@ -1439,11 +1816,18 @@ void valueCompTest() {
 
         intmap::iterator it = std.begin();
         intmap::iterator it1 = std.begin();
+        start = std::chrono::high_resolution_clock::now();
         intmap::value_compare comp = std.value_comp();
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
 
         _intmap::iterator it2 = ft.begin();
         _intmap::iterator it3 = ft.begin();
+        start = std::chrono::high_resolution_clock::now();
         _intmap::value_compare comp1 = ft.value_comp();
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (comp(*it, *it1)) {
             PRINT_LIN("LESS", "", 0);
@@ -1535,12 +1919,20 @@ void keyCompTest() {
 
         strmap::iterator it = std.begin();
         strmap::const_iterator cit = std.begin();
+        start = std::chrono::high_resolution_clock::now();
         strmap::key_compare comp = std.key_comp();
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
 
         _strmap::iterator it1 = ft.begin();
         _strmap::const_iterator cit1 = ft.begin();
+        start = std::chrono::high_resolution_clock::now();
         _strmap::key_compare comp1 = ft.key_comp();
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        TIMER_(t1, t2);
+        
         if (comp(it->first, cit->first)) {        
             PRINT_LIN("LESS", "", 0);
         } else {
@@ -1593,12 +1985,19 @@ void keyCompTest() {
 
         intmap::iterator it = std.begin();
         intmap::iterator it1 = std.begin();
+        start = std::chrono::high_resolution_clock::now();
         intmap::key_compare comp = std.key_comp();
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
 
         _intmap::iterator it2 = ft.begin();
         _intmap::iterator it3 = ft.begin();
+        start = std::chrono::high_resolution_clock::now();
         _intmap::key_compare comp1 = ft.key_comp();
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
+        
         if (comp(it->first, it1->first)) {        
             PRINT_LIN("LESS", "", 0);
         } else {
@@ -1642,8 +2041,15 @@ void findTest() {
         strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
         _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
 
+        start = std::chrono::high_resolution_clock::now();
         strmap::iterator it = std.find("ABCD");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _strmap::iterator it1 = ft.find("ABCD");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
             PRINT_PAIR_REF(*it, 0);
@@ -1668,8 +2074,15 @@ void findTest() {
         ft.insert(ft::make_pair("yz", "gftrjr5y4agwe3ta"));
         ft.insert(ft::make_pair("64", "mhj,i;y9o67eysetrgerg"));
 
+        start = std::chrono::high_resolution_clock::now();
         it = std.find("12345");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         it1 = ft.find("12345");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
             PRINT_PAIR_REF(*it, 0);
@@ -1677,9 +2090,16 @@ void findTest() {
         if (it1 != ft.end()) {
             PRINT_PAIR_REF(*it1, 1);
         }
-
+        
+        start = std::chrono::high_resolution_clock::now();
         it = std.find("1234");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         it1 = ft.find("1234");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
             PRINT_PAIR_REF(*it, 0);
@@ -1688,8 +2108,15 @@ void findTest() {
             PRINT_PAIR_REF(*it1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         it = std.find("123");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         it1 = ft.find("123");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
             PRINT_PAIR_REF(*it, 0);
@@ -1698,8 +2125,15 @@ void findTest() {
             PRINT_PAIR_REF(*it1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         it = std.find("123");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         it1 = ft.find("123");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
             PRINT_PAIR_REF(*it, 0);
@@ -1708,8 +2142,15 @@ void findTest() {
             PRINT_PAIR_REF(*it1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         it = std.find("z");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         it1 = ft.find("z");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
              PRINT_PAIR_REF(*it, 0);
@@ -1721,8 +2162,15 @@ void findTest() {
         const strmap cm(std);
         const _strmap cm1(ft);
 
+        start = std::chrono::high_resolution_clock::now();
         strmap::const_iterator cit = cm.find("abcd");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _strmap::const_iterator cit1 = cm1.find("abcd");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (cit != cm.end()) {
             PRINT_PAIR_REF(*cit, 0);
@@ -1731,8 +2179,15 @@ void findTest() {
             PRINT_PAIR_REF(*cit1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         cit = std.find("64");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         cit1 = ft.find("64"); 
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (cit != cm.end()) {
             PRINT_PAIR_REF(*cit, 0);
@@ -1741,9 +2196,16 @@ void findTest() {
             PRINT_PAIR_REF(*cit1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         cit = std.find("12345");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         cit1 = ft.find("12345");
-
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
+        
         if (cit != cm.end()) {
             PRINT_PAIR_REF(*cit, 0);
         }
@@ -1751,8 +2213,15 @@ void findTest() {
             PRINT_PAIR_REF(*cit1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         cit = std.find("1234");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         cit1 = ft.find("1234");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (cit != cm.end()) {
             PRINT_PAIR_REF(*cit, 0);
@@ -1771,8 +2240,15 @@ void findTest() {
             PRINT_PAIR_REF(*cit1, 1);
         }
 
+        start = std::chrono::high_resolution_clock::now();
         cit = std.find("123");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         cit1 = ft.find("123");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (cit != cm.end()) {
             PRINT_PAIR_REF(*cit, 0);
@@ -1781,16 +2257,24 @@ void findTest() {
             PRINT_PAIR_REF(*cit1, 1);
         }
     }
-    
+    if (nextTes())
+        return ;
     {
         const intmap cm;
         const _intmap cm1;
 
         if (cm.find(0) != cm.end()) {
+            start = std::chrono::high_resolution_clock::now();
             PRINT_PAIR_PTR(cm.find(0), 0);
+            end = std::chrono::high_resolution_clock::now();
+            t1 = end - start;
         }
         if (cm1.find(0) != cm1.end()) {
+            start = std::chrono::high_resolution_clock::now();
             PRINT_PAIR_PTR(cm1.find(0), 1);
+            end = std::chrono::high_resolution_clock::now();
+            t2 = end - start;
+            TIMER_(t1, t2);
         }
 
         intmap std;
@@ -1800,10 +2284,17 @@ void findTest() {
         ft.insert(ft::make_pair(123, "Hello"));
 
         if (std.find(0) != std.end()) {
+            start = std::chrono::high_resolution_clock::now();
             PRINT_PAIR_PTR(std.find(0), 0);
+            end = std::chrono::high_resolution_clock::now();
+            t1 = end - start;
         }
         if (ft.find(0) != ft.end()) {
+            start = std::chrono::high_resolution_clock::now();
             PRINT_PAIR_PTR(ft.find(123), 1);
+            end = std::chrono::high_resolution_clock::now();
+            t2 = end - start;
+            TIMER_(t1, t2);
         }
     }
     if (nextTes())
