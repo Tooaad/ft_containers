@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 20:31:57 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:10:31 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "../utils/pair.hpp"
 #include "../utils/utils.hpp"
 #include "../includes/ReverseIter.hpp"
-#include "allocator_traits.hpp"
 #define COUN 4
 
 namespace ft
@@ -32,7 +31,7 @@ namespace ft
 		typedef ptrdiff_t 											difference_type;
 		typedef ft::Node<pair>										node_type;
 		typedef typename Alloc::template rebind<node_type>::other 	node_alloc;
-		typedef ft::allocator<node_alloc> 							node_traits;
+		typedef std::allocator<node_alloc> 							node_traits;
 		typedef typename node_alloc::pointer 						pointer;
 		typedef typename node_alloc::const_pointer 					const_pointer;
 		typedef typename ft::TreeIter<pointer, pair> 				iterator;
