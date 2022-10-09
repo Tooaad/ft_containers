@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 13:57:11 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:31:57 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../utils/utils.hpp"
 #include "../includes/ReverseIter.hpp"
 #include "allocator_traits.hpp"
-#define COUNT 4
+#define COUN 4
 
 namespace ft
 {
@@ -25,20 +25,20 @@ namespace ft
 	class RBTree
 	{
 	public:
-		typedef pair value_type;
-		typedef Compare key_compare;
-		typedef Alloc allocator;
-		typedef size_t size_type;
-		typedef ptrdiff_t difference_type;
-		typedef ft::Node<pair> node_type;
-		typedef typename Alloc::template rebind<node_type>::other node_alloc;
-		typedef ft::allocator<node_alloc> node_traits;
-		typedef typename node_alloc::pointer pointer;
-		typedef typename node_alloc::const_pointer const_pointer;
-		typedef typename ft::TreeIter<pointer, pair> iterator;
-		typedef typename ft::TreeIter<const_pointer, pair> const_iterator;
-		typedef typename ft::ReverseIter<iterator> reverse_iterator;
-		typedef typename ft::ReverseIter<const_iterator> const_reverse_iterator;
+		typedef pair 												value_type;
+		typedef Compare 											key_compare;
+		typedef Alloc 												allocator;
+		typedef size_t 												size_type;
+		typedef ptrdiff_t 											difference_type;
+		typedef ft::Node<pair>										node_type;
+		typedef typename Alloc::template rebind<node_type>::other 	node_alloc;
+		typedef ft::allocator<node_alloc> 							node_traits;
+		typedef typename node_alloc::pointer 						pointer;
+		typedef typename node_alloc::const_pointer 					const_pointer;
+		typedef typename ft::TreeIter<pointer, pair> 				iterator;
+		typedef typename ft::TreeIter<const_pointer, 				pair> const_iterator;
+		typedef typename ft::ReverseIter<iterator> 					reverse_iterator;
+		typedef typename ft::ReverseIter<const_iterator> 			const_reverse_iterator;
 
 	private:
 		pointer _root;
@@ -554,9 +554,6 @@ namespace ft
 				ft::swap(_comp, otherTree._comp);
 			}
 
-			pointer getTreeRoot() const {
-				return this->_root;
-			}
 
 			pointer min() const
 			{
@@ -576,6 +573,10 @@ namespace ft
 				return tmp;
 			}
 
+			pointer getTreeRoot() const {
+				return this->_root;
+			}
+
 			void print2DUtil(pointer root, int space)
 			{
 				// Base case
@@ -583,15 +584,15 @@ namespace ft
 					return;
 
 				// Increase distance between levels
-				space += COUNT;
+				space += COUN;
 
 				// Process right child first
 				print2DUtil(root->_right, space);
 
 				// Print current node after space
-				// count
+				// coun
 				std::cout << std::endl;
-				for (int i = COUNT; i < space; i++)
+				for (int i = COUN; i < space; i++)
 					std::cout << " ";
 				std::cout << root->_value.first;
 				if (root->_color == 0)
@@ -606,7 +607,7 @@ namespace ft
 			// Wrapper over print2DUtil()
 			void print2D(pointer root)
 			{
-				// Pass initial space count as 0
+				// Pass initial space coun as 0
 				print2DUtil(root, 0);
 			}
 		};

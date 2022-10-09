@@ -32,6 +32,7 @@ template <class T, class Allocator = std::allocator<T> >
 		public:
 
 			explicit vector(const allocator_type& alloc = allocator_type())
+			
 				: _size(0), _capacity(0), _alloc(alloc) {
 					this->_data = this->_alloc.allocate(this->_capacity);
 				}

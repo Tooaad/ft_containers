@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:49:05 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/07 20:18:51 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:13:12 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ void itComp(T std, T ft)
             std::cout << "\x1b[32m " << t1.count() << "\x1b[0m ";                                        \
             std::cout << " vs ";                                                                          \
             std::cout << "\x1b[32m " << t2.count() << "\x1b[0m " << std::endl;                           \
-            if (t2.count() > t1.count() * 20 )                                                           \
-            {                                                                                            \
-               std::cout << "\x1b[31m--------------❌❌❌❌❌❌TIME❌❌❌❌❌-------------\x1b[0m" << std::endl; \
-               exit(1);                                                                                   \
-            }                                                                                             \
     }
     
 #define COMPARE(std, ft)                                                                                  \
@@ -221,4 +216,4 @@ typedef std::vector<long> longvector;
 typedef std::vector<double> doublevector;
 typedef std::vector<char> charvector;
 
-void runTests();
+void runVectTests();

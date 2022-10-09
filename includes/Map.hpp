@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 13:57:17 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:34:37 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				return (found.first->_value.second);
 			}
 
-			
 			const mapped_type& at(const key_type& k) const
 			{
 				ft::pair<node_pointer, bool> found = this->_tree.find(k);
@@ -137,13 +136,11 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				return (found.first->_value.second);
 			}
 
-	//	Modifiers
-
+			//	Modifiers
 			ft::pair<iterator, bool> insert(const value_type& val) {
 				return this->_tree.insert(val);
 			}
 
-			//PROBAR
 			iterator insert(iterator position, const value_type& val) {
 				(void) position;
 				return insert(val).first;
@@ -157,7 +154,8 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				}
 
 			void erase(iterator position) {
-				this->_tree.erase(position._root);
+				node_pointer t = position.baseNode();
+				this->_tree.erase(t);
 			}
 			
 			size_type erase(const key_type& k) {
@@ -210,13 +208,13 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			}
 			iterator upper_bound(const key_type& k) {
 				for (iterator it = begin(); it != end(); ++it)
-					if (!_comp(k, it.baseNode()->_value.first) && it.baseNode()->_value.first != k)
+					if (!_comp(it.baseNode()->_value.first, k) && it.baseNode()->_value.first != k)
 						return it;
 				return end();
 			}
 			const_iterator upper_bound(const key_type& k) const {
 				for (const_iterator it = begin(); it != end(); ++it)
-					if (!_comp(k, it.baseNode()->_value.first) && it.baseNode()->_value.first != k)
+					if (!_comp(it.baseNode()->_value.first, k) && it.baseNode()->_value.first != k)
 						return it;
 				return end();
 			}

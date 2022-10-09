@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/07 17:12:44 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:36:55 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int nextTest() {
     std::string action;
-    // std::getline(std::cin, action);
+    std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -34,13 +34,10 @@ void assignRangeTest() {
         start = std::chrono::high_resolution_clock::now();
         strvector std;
         end = std::chrono::high_resolution_clock::now();
-        
         t1 = end - start;
-        
         start = std::chrono::high_resolution_clock::now();
         _strvector ft;
         end = std::chrono::high_resolution_clock::now();
-        
         t2 = end - start;
 
         TIMER(t1, t2);
@@ -982,7 +979,7 @@ void clearTest() {
 void ctor_copy() {
     SETUP_ARRAYS();
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
-    std::cout << "\x1b[41m                    CTOR TEST                   \x1b[0m" << std::endl;
+    std::cout << "\x1b[41m                    CTOR-COPY TEST              \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
     {
         start = std::chrono::high_resolution_clock::now();
@@ -2221,16 +2218,22 @@ void insertTest() {
         itComp(*it, *it1);
         COMPARE(std, ft);
 
-// EL UNICO TEST QUE ME DA MAL????????????
-        // it = std.insert(std.begin(), b_string[19]);
-        // it1 = ft.insert(ft.begin(), b_string[19]);
+        start = std::chrono::high_resolution_clock::now();
+        it = std.insert(std.begin(), b_string[19]);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        it1 = ft.insert(ft.begin(), b_string[19]);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
 
-        // PRINT_LINE("It:", *it, 0);
-        // PRINT_LINE("It:", *it1, 1);
-        // CHECK_AND_PRINT_ALL(std, 0);
-        // CHECK_AND_PRINT_ALL(ft, 1);
-        // itComp(*it, *it1);
-        // COMPARE(std, ft);
+        TIMER(t1, t2);
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        itComp(*it, *it1);
+        COMPARE(std, ft);
 
         start = std::chrono::high_resolution_clock::now();
         it = std.insert(std.begin() + 1, b_string[0]);
@@ -2473,9 +2476,7 @@ void insertRangeTest() {
         start = std::chrono::high_resolution_clock::now();
         std.insert(std.end(), b_string + 10, b_string + 15);
         end = std::chrono::high_resolution_clock::now();
-        t2 = end - start;
-
-        TIMER(t1, t2);
+        t1 = end - start;
         ft.insert(ft.end(), b_string + 10, b_string + 15);
         end = std::chrono::high_resolution_clock::now();
         t2 = end - start;
@@ -2739,26 +2740,33 @@ void insertMixTest() {
         CHECK_AND_PRINT_ALL(ft, 1);
         COMPARE(std, ft);
 
-        // intvector::iterator it = std.insert(std.begin(), 64);
-        // _intvector::iterator it1 = ft.insert(ft.begin(), 64);
+        start = std::chrono::high_resolution_clock::now();
+        intvector::iterator it = std.insert(std.begin(), 64);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        _intvector::iterator it1 = ft.insert(ft.begin(), 64);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
 
-        // PRINT_LINE("It:", *it, 0);
-        // PRINT_LINE("It:", *it1, 1);
-        // CHECK_AND_PRINT_ALL(std, 0);
-        // CHECK_AND_PRINT_ALL(ft, 1);
-        // itComp(*it, *it1);
-        // COMPARE(std, ft);
+        TIMER(t1, t2);
+        PRINT_LINE("It:", *it, 0);
+        PRINT_LINE("It:", *it1, 1);
+        CHECK_AND_PRINT_ALL(std, 0);
+        CHECK_AND_PRINT_ALL(ft, 1);
+        itComp(*it, *it1);
+        COMPARE(std, ft);
 
-        // for (int i = 0; i < 23; ++i) {
-        //     it = std.insert(std.begin() + i + 2, i);
-        //     it1 = ft.insert(ft.begin() + i + 2, i);
-        //     PRINT_LINE("It:", *it, 0);
-        //     PRINT_LINE("It:", *it1, 1);
-        //     CHECK_AND_PRINT_ALL(std, 0);
-        //     CHECK_AND_PRINT_ALL(ft, 1);
-        //     itComp(*it, *it1);
-        //     COMPARE(std, ft);
-        // }
+        for (int i = 0; i < 23; ++i) {
+            it = std.insert(std.begin() + i + 2, i);
+            it1 = ft.insert(ft.begin() + i + 2, i);
+            PRINT_LINE("It:", *it, 0);
+            PRINT_LINE("It:", *it1, 1);
+            CHECK_AND_PRINT_ALL(std, 0);
+            CHECK_AND_PRINT_ALL(ft, 1);
+            itComp(*it, *it1);
+            COMPARE(std, ft);
+        }
 
         start = std::chrono::high_resolution_clock::now();
         std.insert(std.end(), 12, 42);
@@ -3100,13 +3108,12 @@ void swapTest() {
         return ;
 }
 
-void runTests() {
+void runVectTests() {
     
     insertTest();
     insertSizeTest();
     insertRangeTest();
     insertMixTest();
-
     reserveTest();
     assignTest();
     assignRangeTest();
@@ -3130,6 +3137,3 @@ void runTests() {
     swapTest();
     
 }
-
-        // std::cout << std[0] << "----" << ft[0] << std::endl;
-        // exit(1);
