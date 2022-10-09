@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 22:34:17 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 13:57:17 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,29 +197,25 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 				return 1;
 			}
 			iterator lower_bound(const key_type& k) {
-				iterator it = begin();
-				for (; it != end(); ++it)
+				for (iterator it = begin(); it != end(); ++it)
 					if (!_comp(it.baseNode()->_value.first, k))
 						return it;
-				return it;
+				return end();
 			}
 			const_iterator lower_bound(const key_type& k) const {
-				const_iterator it = begin();
-				for (; it != end(); ++it)
+				for (const_iterator it = begin(); it != end(); ++it)
 					if (!_comp(it.baseNode()->_value.first, k))
 						return it;
-				return it;
+				return end();
 			}
 			iterator upper_bound(const key_type& k) {
-				iterator it = begin();
-				for (; it != end(); ++it)
+				for (iterator it = begin(); it != end(); ++it)
 					if (!_comp(k, it.baseNode()->_value.first) && it.baseNode()->_value.first != k)
 						return it;
 				return end();
 			}
 			const_iterator upper_bound(const key_type& k) const {
-				const_iterator it = begin();
-				for (; it != end(); ++it)
+				for (const_iterator it = begin(); it != end(); ++it)
 					if (!_comp(k, it.baseNode()->_value.first) && it.baseNode()->_value.first != k)
 						return it;
 				return end();

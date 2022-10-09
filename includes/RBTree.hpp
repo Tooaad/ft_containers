@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 22:37:43 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 13:57:11 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,7 +414,7 @@ namespace ft
 			nodeToRemove->_color = BLACK;
 		}
 
-			void erase(pointer& nodeToRemove)
+		void erase(pointer& nodeToRemove)
 			{
 				pointer tmp = this->_root;
 				while (tmp && tmp->_right)

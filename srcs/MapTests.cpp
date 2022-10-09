@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 22:37:24 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 13:25:00 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int nextTes() {
     std::string action;
-    // std::getline(std::cin, action);
+    std::getline(std::cin, action);
     if (action == "q") {
         std::cout << "\33c\e[3J" << std::endl;
         return 1;
@@ -3613,6 +3613,7 @@ void runMapTests() {
 
     lowerBoundTest();
     upperBoundTest();
+    eqRangeTest();
     ctorTest();
     eraseMapTest();
     eraseMapKeyTest();
@@ -3625,7 +3626,6 @@ void runMapTests() {
     valueCompTest();    //
     opIndexTest();
     swapMapTest();
-    eqRangeTest();
     atMapTest();
     opEqualsTest();
     ctorCopyTest();

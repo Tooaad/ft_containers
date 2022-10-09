@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/08 22:35:15 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/09 14:00:45 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ template <class T>
 			T		_value;
 			bool	_color;
 			
+			// Prueba
 			Node() {}
 			Node(const T& val) : _right(0), _left(0), _parent(0), _value(val), _color(RED) {}
 			Node(const Node& otherNode) : _right(otherNode._right), _left(otherNode._right), _parent(otherNode._parent), _color(otherNode._color) {}
@@ -119,6 +120,7 @@ template <class Node, class pair >
 
 		// protected:
 			node_ptr	_root;
+			node_ptr	_nil;
 
 		public:
 			TreeIter() : _root(0) {}
@@ -128,6 +130,7 @@ template <class Node, class pair >
 					node_ptr last = max(getRoot(root));
 					last->_right = nil;
 					nil->_parent = last;
+					_nil = nil;
 				}
 			}
 			template <class N, class P>
@@ -144,12 +147,10 @@ template <class Node, class pair >
 			pointer base() const { return this; }
 			node_ptr baseNode() const { return _root; }
 			TreeIter& operator++() {
-				if (this->_root->_right) {
-					node_ptr tmp = this->_root->_right;
-					tmp = min(tmp);
-					this->_root = tmp;
-				}
-				else if (max(getRoot(this->_root)) != this->_root) {
+				if (this->_root->_right)
+					this->_root = min(this->_root->_right);
+					
+				else if (this->_root != _nil) {
 					node_ptr tmp = this->_root;
 					node_ptr tmpParent = this->_root->_parent;
 					while (tmpParent && tmp == tmpParent->_right) {
@@ -166,14 +167,11 @@ template <class Node, class pair >
 
 			TreeIter& operator--()
 			{
-				if (this->_root->_left)
-				{
 					// The next access is the first node in the middle order in the right tree
-					node_ptr tmp = this->_root->_left;
-					tmp = max(tmp);
-					this->_root = tmp;
-				}
-				else if (min(getRoot(this->_root)) != this->_root) {
+				if (this->_root->_left)
+					this->_root = max(this->_root->_left);
+					
+				else if (this->_root != _nil) {
 					node_ptr tmp = this->_root;
 					node_ptr tmpParent = this->_root->_parent;
 					while (tmpParent && tmp == tmpParent->_left) {
