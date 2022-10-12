@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 21:10:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:55:47 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
 		typedef typename node_alloc::pointer 						pointer;
 		typedef typename node_alloc::const_pointer 					const_pointer;
 		typedef typename ft::TreeIter<pointer, pair> 				iterator;
-		typedef typename ft::TreeIter<const_pointer, 				pair> const_iterator;
+		typedef typename ft::TreeIter<const_pointer, pair>			const_iterator;
 		typedef typename ft::ReverseIter<iterator> 					reverse_iterator;
 		typedef typename ft::ReverseIter<const_iterator> 			const_reverse_iterator;
 
@@ -496,11 +496,11 @@ namespace ft
 			iterator end() { return iterator(_nil); }
 			const_iterator end() const { return const_iterator(_nil); }
 
-			reverse_iterator rbegin() { return reverse_iterator(end(), 0); }
-			const_reverse_iterator rbegin() const { return const_reverse_iterator(end(), 0); }
+			reverse_iterator rbegin() { return reverse_iterator(end()); }
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(end()); }
 
-			reverse_iterator rend() { return reverse_iterator(begin(), 0); }
-			const_reverse_iterator rend() const { return const_reverse_iterator(begin(), 0); }
+			reverse_iterator rend() { return reverse_iterator(begin()); }
+			const_reverse_iterator rend() const { return const_reverse_iterator(begin()); }
 
 			// CAPACITY
 			

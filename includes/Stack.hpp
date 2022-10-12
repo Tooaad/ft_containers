@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 21:25:45 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 20:29:11 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:50:53 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ template <class T, class Container = vector<T> >
 			
 			void push(const value_type& val) { c.push_back(val); }
 			void pop() { c.pop_back(); }
+
+			template <class T1, class C1>
+    			friend bool operator==(const stack<T1, C1>& x, const stack<T1, C1>& y);
+
+    		template <class T1, class C1>
+				friend bool operator< (const stack<T1, C1>& x, const stack<T1, C1>& y);
 	};
 
 	template <class T, class Container>

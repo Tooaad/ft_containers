@@ -347,7 +347,7 @@ template <class T, class Allocator = std::allocator<T> >
 		}
 	template <class T, class Alloc>
 		bool operator>  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs) {
-			return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+			return (rhs < lhs);
 		}
 
 	template <class T, class Alloc>

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 20:43:16 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:52:07 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2737,6 +2737,32 @@ void eraseMapTest() {
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
     std::cout << "\x1b[41m                      ERASE TEST                \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + 1);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 1);
+
+        intmap::iterator it = std.end();
+        _intmap::iterator it1 = ft.end();
+
+        it--;
+        it1--;
+
+        start = std::chrono::high_resolution_clock::now();
+        std.erase(it);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        ft.erase(it1);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+
+        TIMER_(t1, t2);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
     {
         intmap std(std_intstr_arr, std_intstr_arr + 25);
         _intmap ft(ft_intstr_arr, ft_intstr_arr + 25);
