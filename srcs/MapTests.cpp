@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 20:43:16 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:00:07 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1941,7 +1941,7 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 0);
         }
 
-        if (comp1(it1->first, cit1->first)) {        
+        if (comp1(it1->first, cit->first)) {        
             PRINT_LIN("LESS", "", 1);
         } else {
             PRINT_LIN("NOT LESS", "", 1);
@@ -1959,7 +1959,7 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 0);
         }
 
-        if (comp1(it1->first, cit1->first)) {        
+        if (comp1(it1->first, cit->first)) {        
             PRINT_LIN("LESS", "", 1);
         } else {
             PRINT_LIN("NOT LESS", "", 1);
@@ -1975,7 +1975,7 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 0);
         }
 
-        if (comp1(it1->first, cit1->first)) {        
+        if (comp1(it1->first, cit->first)) {        
             PRINT_LIN("LESS", "", 1);
         } else {
             PRINT_LIN("NOT LESS", "", 1);
@@ -2043,8 +2043,15 @@ void findTest() {
         strmap std(std_strstr_arr, std_strstr_arr + strstr_size);
         _strmap ft(ft_strstr_arr, ft_strstr_arr + strstr_size);
 
+        start = std::chrono::high_resolution_clock::now();
         strmap::iterator it = std.find("ABCD");
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
         _strmap::iterator it1 = ft.find("ABCD");
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        TIMER_(t1, t2);
 
         if (it != std.end()) {
             PRINT_PAIR_REF(*it, 0);
@@ -2321,7 +2328,6 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
 
         std::cout << " " << std.end()->first << std::endl;
         std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
@@ -2338,7 +2344,6 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
 
         std::cout << " " << std.end()->first << std::endl;
         std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
@@ -2355,7 +2360,6 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
 
         std::cout << " " << std.end()->first << std::endl;
         std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
@@ -2372,7 +2376,6 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
 
         std::cout << " " << std.end()->first << std::endl;
         std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
@@ -2389,7 +2392,6 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
 
         std::cout << " " << std.end()->first << std::endl;
         std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
@@ -2415,7 +2417,9 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         start = std::chrono::high_resolution_clock::now();
         p = std.insert(std::make_pair("64n", "Double"));
@@ -2429,7 +2433,9 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         start = std::chrono::high_resolution_clock::now();
         p = std.insert(std::make_pair("0n", "0str"));
@@ -2443,7 +2449,9 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         start = std::chrono::high_resolution_clock::now();
         p = std.insert(std::make_pair("-23n", "-23str"));
@@ -2457,7 +2465,9 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
+
+        std::cout << " " << std.end()->first << std::endl;
+        std::cout << " " << ft.end().baseNode()->_value.first << std::endl;
 
         start = std::chrono::high_resolution_clock::now();
         p = std.insert(std::make_pair("64n", "dfgs"));
@@ -2471,7 +2481,7 @@ void insertMapTest() {
         TIMER_(t1, t2);
         PRINT_INS_PAIR(p, 0);
         PRINT_INS_PAIR(p1, 1);
-        COMPAR(std, ft);
+
     }
     if (nextTes())
         return ;
@@ -2665,7 +2675,6 @@ void insertPosMapTest() {
         TIMER_(t1, t2);
         PRINT_PAIR_REF(*it, 0);
         PRINT_PAIR_REF(*it1, 1);
-        COMPAR(std, ft);
 
         start = std::chrono::high_resolution_clock::now();
         it = std.insert(std.end(), std::make_pair(64, "Test"));
@@ -2679,8 +2688,7 @@ void insertPosMapTest() {
         TIMER_(t1, t2);
         PRINT_PAIR_REF(*it, 0);
         PRINT_PAIR_REF(*it1, 1);
-        COMPAR(std, ft);
-        
+
         start = std::chrono::high_resolution_clock::now();
         it = std.insert(std.end(), std::make_pair(100, "100$"));
         end = std::chrono::high_resolution_clock::now();
@@ -2693,8 +2701,7 @@ void insertPosMapTest() {
         TIMER_(t1, t2);
         PRINT_PAIR_REF(*it, 0);
         PRINT_PAIR_REF(*it1, 1);
-        COMPAR(std, ft);
-        
+
         it = std.end();
         it1 = ft.end();
         --it;
@@ -2712,7 +2719,6 @@ void insertPosMapTest() {
         TIMER_(t1, t2);
         PRINT_PAIR_REF(*it, 0);
         PRINT_PAIR_REF(*it1, 1);
-        COMPAR(std, ft);
 
         start = std::chrono::high_resolution_clock::now();
         it = std.insert(it, std::make_pair(69, "420"));
@@ -2726,7 +2732,6 @@ void insertPosMapTest() {
         TIMER_(t1, t2);
         PRINT_PAIR_REF(*it, 0);
         PRINT_PAIR_REF(*it1, 1);
-        COMPAR(std, ft);
     }
     if (nextTes())
         return ;
@@ -2737,6 +2742,32 @@ void eraseMapTest() {
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
     std::cout << "\x1b[41m                      ERASE TEST                \x1b[0m" << std::endl;
     std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        intmap std(std_intstr_arr, std_intstr_arr + 1);
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + 1);
+        
+        intmap::iterator it = std.end();
+        _intmap::iterator it1 = ft.end();
+        
+        it--;
+        it1--;
+
+        start = std::chrono::high_resolution_clock::now();
+        std.erase(it);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        ft.erase(it1);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+
+        TIMER_(t1, t2);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+    }
+    if (nextTes())
+        return ;
     {
         intmap std(std_intstr_arr, std_intstr_arr + 25);
         _intmap ft(ft_intstr_arr, ft_intstr_arr + 25);
@@ -2813,6 +2844,29 @@ void eraseMapTest() {
         it = std.end();
         it1 = ft.end();
 
+        for (int i = 0; i < 8; i++) {
+            it--;
+            it1--;
+        }
+
+        start = std::chrono::high_resolution_clock::now();
+        std.erase(it);
+        end = std::chrono::high_resolution_clock::now();
+        t1 = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        ft.erase(it1);
+        end = std::chrono::high_resolution_clock::now();
+        t2 = end - start;
+        
+        ft.getTree().print2D(ft.getTree().getTreeRoot());
+        TIMER_(t1, t2);
+        PRINT_AL(std, 0);
+        PRINT_AL(ft, 1);
+        COMPAR(std, ft);
+
+        it = std.end();
+        it1 = ft.end();
+
         for (int i = 0; i < 3; i++) {
             it--;
             it1--;
@@ -2841,6 +2895,7 @@ void eraseMapTest() {
             it1--;
         }
 
+        ft.getTree().print2D(ft.getTree().getTreeRoot());
         start = std::chrono::high_resolution_clock::now();
         std.erase(it);
         end = std::chrono::high_resolution_clock::now();
@@ -2850,7 +2905,6 @@ void eraseMapTest() {
         end = std::chrono::high_resolution_clock::now();
         t2 = end - start;
         
-        ft.getTree().print2D(ft.getTree().getTreeRoot());
         TIMER_(t1, t2);
         PRINT_AL(std, 0);
         PRINT_AL(ft, 1);
@@ -3606,11 +3660,11 @@ void eraseMapKeyTest() {
 
 void runMapTests() {
 
-    ctorTest();
+    eraseMapTest();
     lowerBoundTest();   //
     upperBoundTest();   //
     eqRangeTest();      //
-    eraseMapTest();
+    ctorTest();
     eraseMapKeyTest();
     eraseMapRangeTest();
     insertPosMapTest();
@@ -3630,10 +3684,3 @@ void runMapTests() {
     ctorRangeTest();
     
 }
-
-
-// if (t2.count() > t1.count() * 20 )                                                           \
-//             {                                                                                            \
-//                std::cout << "\x1b[31m--------------❌❌❌❌❌❌TIME❌❌❌❌❌-------------\x1b[0m" << std::endl; \
-//                exit(1);                                                                                   \
-//             }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 21:10:31 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:55:22 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -491,16 +491,16 @@ namespace ft
 
 			// ITERATORS
 			iterator begin() { if (!this->_root) return iterator(_nil); return iterator(min()); }
-			const_iterator begin() const { if (!this->_root) return iterator(_nil); return const_iterator(min()); }
+			const_iterator begin() const { if (!this->_root) return const_iterator(_nil); return const_iterator(min()); }
 
 			iterator end() { return iterator(_nil); }
 			const_iterator end() const { return const_iterator(_nil); }
 
-			reverse_iterator rbegin() { return reverse_iterator(end(), 0); }
-			const_reverse_iterator rbegin() const { return const_reverse_iterator(end(), 0); }
+			reverse_iterator rbegin() { return reverse_iterator(_nil); }
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(_nil); }
 
-			reverse_iterator rend() { return reverse_iterator(begin(), 0); }
-			const_reverse_iterator rend() const { return const_reverse_iterator(begin(), 0); }
+			reverse_iterator rend() {  if (!this->_root) return reverse_iterator(_nil); return reverse_iterator(min()); }
+			const_reverse_iterator rend() const { if (!this->_root) return const_iterator(_nil); return const_iterator(min()); }
 
 			// CAPACITY
 			

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/09 20:33:09 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:02:23 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ template <class T>
 				return tmp;
 			}
 
-			bool	isLeft() {
+			bool	isLeft() const {
 				if (this->_parent && this->_parent->_left)
 					return this->_parent->_left == this;
 				return false;
 			}
 
-			bool	isRight() {
+			bool	isRight() const {
 				if (this->_parent && this->_parent->_right)
 					return this->_parent->_right == this;
 				return false;
@@ -114,12 +114,11 @@ template <class Node, class pair >
 			node_ptr baseNode() const { return _root; }
 			TreeIter& operator++() {
 				if (this->_root->_right)
-					this->_root = min(this->_root->_right);
-					
+					this->_root = min(this->_root->_right);	
 				else {
 					node_ptr tmp = this->_root;
 					node_ptr tmpParent = this->_root->_parent;
-					if (!tmpParent->_left && !tmpParent->_parent->_left)
+					if (isMax(this->_root))
 						this->_root->_right->_color = BLACK;
 					while (tmpParent && tmp == tmpParent->_right) {
 						tmp = tmp->_parent;
@@ -127,7 +126,6 @@ template <class Node, class pair >
 					}
 					this->_root = tmpParent;
 				}
-
 				return *this;
 			}
 			TreeIter operator++(int) { TreeIter tmp(*this); ++(*this); return tmp; }
@@ -137,12 +135,9 @@ template <class Node, class pair >
 				// The next access is the first node in the middle order in the right tree
 				if (this->_root->_left)
 					this->_root = max(this->_root->_left);
-					
 				else {
 					node_ptr tmp = this->_root;
 					node_ptr tmpParent = this->_root->_parent;
-					if (!tmpParent->_right && !tmpParent->_parent->_right)
-						this->_root->_right->_color = BLACK;
 					while (tmpParent && tmp == tmpParent->_left) {
 						tmp = tmp->_parent;
 						tmpParent = tmpParent->_parent;
@@ -158,6 +153,15 @@ template <class Node, class pair >
 				while (n->_parent)
 					n = n->_parent;
 				return n;
+			}
+
+			bool isMax(node_ptr n) const {
+				while (n->_parent) {
+					if (!n->isRight())
+						return false;	
+					n = n->_parent;
+				}
+				return true;
 			}
 
 			node_ptr min(node_ptr n) {
