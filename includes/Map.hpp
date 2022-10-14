@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:56:24 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/10 21:14:06 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:53:24 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../utils/pair.hpp"
 #include "../utils/utils.hpp"
 #include "RBTree.hpp"
-#include "ReverseIter.hpp"
+#include "ReverseIterMap.hpp"
 
 namespace ft {
 template <class Key, class Value, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, Value> > >
@@ -48,8 +48,8 @@ template <class Key, class Value, class Compare = std::less<Key>, class Allocato
 			typedef ft::RBTree<value_type, value_compare, allocator_type>	tree_type;
 			typedef typename tree_type::iterator							iterator;
 			typedef typename tree_type::const_iterator						const_iterator;
-			typedef typename ft::ReverseIter<iterator>						reverse_iterator;
-			typedef typename ft::ReverseIter<const_iterator>				const_reverse_iterator;			
+			typedef typename ft::ReverseIterMap<iterator>						reverse_iterator;
+			typedef typename ft::ReverseIterMap<const_iterator>				const_reverse_iterator;			
 
 		private:
 			tree_type		_tree;

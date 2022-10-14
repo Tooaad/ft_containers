@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RBTree.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:02:55 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/14 11:13:19 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:53:52 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../includes/TreeIter.hpp"
 #include "../utils/pair.hpp"
 #include "../utils/utils.hpp"
-#include "../includes/ReverseIter.hpp"
+#include "../includes/ReverseIterMap.hpp"
 #define COUN 4
 
 namespace ft
@@ -36,8 +36,8 @@ namespace ft
 		typedef typename node_alloc::const_pointer 					const_pointer;
 		typedef typename ft::TreeIter<pointer, pair> 				iterator;
 		typedef typename ft::TreeIter<const_pointer, pair>			const_iterator;
-		typedef typename ft::ReverseIter<iterator> 					reverse_iterator;
-		typedef typename ft::ReverseIter<const_iterator> 			const_reverse_iterator;
+		typedef typename ft::ReverseIterMap<iterator> 					reverse_iterator;
+		typedef typename ft::ReverseIterMap<const_iterator> 			const_reverse_iterator;
 
 	private:
 		pointer _root;

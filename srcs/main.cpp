@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/12 11:52:04 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:55:33 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int main()
     std::cout << rit->first << " => " << rit->second << '\n';
 	
 	// runVectTests();
-	// runMapTests();
-	// atexit(cleaks);
+	runMapTests();
+	atexit(cleaks);
 
 	return 0;
 	

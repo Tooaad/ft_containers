@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/14 11:13:25 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:56:22 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1941,7 +1941,7 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 0);
         }
 
-        if (comp1(it1->first, cit->first)) {        
+        if (comp1(it1->first, cit1->first)) {        
             PRINT_LIN("LESS", "", 1);
         } else {
             PRINT_LIN("NOT LESS", "", 1);
@@ -1959,7 +1959,7 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 0);
         }
 
-        if (comp1(it1->first, cit->first)) {        
+        if (comp1(it1->first, cit1->first)) {        
             PRINT_LIN("LESS", "", 1);
         } else {
             PRINT_LIN("NOT LESS", "", 1);
@@ -1975,7 +1975,7 @@ void keyCompTest() {
             PRINT_LIN("NOT LESS", "", 0);
         }
 
-        if (comp1(it1->first, cit->first)) {        
+        if (comp1(it1->first, cit1->first)) {        
             PRINT_LIN("LESS", "", 1);
         } else {
             PRINT_LIN("NOT LESS", "", 1);
