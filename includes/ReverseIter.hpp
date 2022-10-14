@@ -25,22 +25,22 @@ namespace ft {
 			typedef typename ft::iterator_traits<T>::pointer			pointer;
 			typedef typename ft::iterator_traits<T>::reference			reference;
 
-			ReverseIter() : _ptr() {}
-			explicit ReverseIter(pointer x) : _ptr(x) {}
+			ReverseIter(void) : _ptr() {}
+			explicit ReverseIter(T x) : _ptr(x) {}
 			template <class U>
-			ReverseIter(const ReverseIter<U> &iter) : _ptr(iter.base()) {}
+			ReverseIter(const ReverseIter<U>& iter) : _ptr(iter.base()) {}
 			~ReverseIter() {}
 
 			template <class U>
 			ReverseIter&	operator=(const ReverseIter<U>& other) {
-				this->_ptr = other._ptr;
+				this->_ptr = other.base();
 				return *this;
 			}
 
-			pointer base() const {return _ptr;}
+			T base() const { return this->_ptr; }
 
-			reference operator*() const { pointer tmp = this->_ptr; return *(--tmp); }
-			pointer operator->() const { operator*(); }
+			reference operator*() const { T tmp = this->_ptr; return *(--tmp); }
+			pointer operator->() const { return (&(*(*this))); }
 			reference operator[](difference_type pos) const {return *(*this + pos); }
 
 			ReverseIter& operator++() { _ptr--; return *this; }  
@@ -53,7 +53,7 @@ namespace ft {
 			ReverseIter operator-(difference_type pos) const { return ReverseIter(this->_ptr + pos); }
 
 		private:
-			pointer _ptr;
+			T _ptr;
 	};
 	
 	template <class A, class B>

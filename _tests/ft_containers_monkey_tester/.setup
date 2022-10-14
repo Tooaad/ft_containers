@@ -1,0 +1,3 @@
+INCLUDE_DIRECTORIES=( /Users/gpernas-/Desktop/ft_containers/includes/Vector.hpp )
+CFLAGS+=" -g3 -Wall -Werror -Wextra -std=c++98"
+CPP_LOGGING=y

@@ -33,7 +33,7 @@ template <typename T>
 
 			template <class U>
 			vectorIter&	operator=(const vectorIter<U>& other) {
-				this->_ptr = other._ptr;
+				this->_ptr = other.base();
 				return *this;
 			}
 

@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/10 22:00:07 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:13:25 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2745,10 +2745,10 @@ void eraseMapTest() {
     {
         intmap std(std_intstr_arr, std_intstr_arr + 1);
         _intmap ft(ft_intstr_arr, ft_intstr_arr + 1);
-        
+
         intmap::iterator it = std.end();
         _intmap::iterator it1 = ft.end();
-        
+
         it--;
         it1--;
 
