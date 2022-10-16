@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 18:37:58 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/14 17:56:22 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:04:45 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -3658,13 +3658,157 @@ void eraseMapKeyTest() {
         return ;
 }
 
+void reverseIteratorCompMapTest() {
+    SETUP_MAP_ARRAYS();
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl;
+    std::cout << "\x1b[41m          REVERSE ITER COMPARATOR TEST          \x1b[0m" << std::endl;
+    std::cout << "\x1b[33m************************************************\x1b[0m" << std::endl << std::endl;
+    {
+        _intmap ft(ft_intstr_arr, ft_intstr_arr + intstr_size);
+
+        _intmap::reverse_iterator it = ft.rbegin();
+        _intmap::reverse_iterator it2 = ft.rbegin();
+        _intmap::const_reverse_iterator cit = ft.rbegin();
+        _intmap::const_reverse_iterator cit2 = ft.rbegin();
+
+        if (it == ft.rbegin()) {
+            PRINT_LIN("Equal iterators", 0, 1);
+        }
+        if (cit == ft.rbegin()) {
+            PRINT_LIN("Equal const iterators", 0, 1);
+        }
+        if (cit == it) {
+           PRINT_LIN("Equal const iterators", 0, 1);
+        }
+
+        ++it;
+        cit += 6;
+
+        if (it != ft.rend()) {
+            PRINT_LIN("Not Equal iterators", 0, 1);
+        }
+        if (cit != ft.rend()) {
+            PRINT_LIN("Not Equal const iterators", 0, 1);
+        }
+        if (cit != it) {
+            PRINT_LIN("Not Equal const iterators", 0, 1);
+        }
+
+        if (it < it + 1) {
+            PRINT_LIN("Less Than", 0, 1);
+        }
+        if (it + 1 < it) {
+            PRINT_LIN("Less Than.", 0, 1);
+        }
+        if (it < it) {
+            PRINT_LIN("Less Than..", 0, 1);
+        }
+        if (cit < cit + 1) {
+            PRINT_LIN("Less Than...", 0, 1);
+        }
+        if (cit + 1 < cit) {
+            PRINT_LIN("Less Than....", 0, 1);
+        }
+        if (cit < cit) {
+            PRINT_LIN("Less Than.....", 0, 1);
+        }
+        if (it2 < cit2 + 1) {
+            PRINT_LIN("Less Than......", 0, 1);
+        }
+        if (it2 < cit2) {
+            PRINT_LIN("Less Than.......", 0, 1);
+        }
+
+        if (it <= it + 1) {
+            PRINT_LIN("Less Than or equal", 0, 1);
+        }
+        if (it + 1 <= it) {
+            PRINT_LIN("Less Than or equal.", 0, 1);
+        }
+        if (it <= it) {
+            PRINT_LIN("Less Than or equal..", 0, 1);
+        }
+        if (cit <= cit + 1) {
+            PRINT_LIN("Less Than or equal...", 0, 1);
+        }
+        if (cit + 1 <= cit) {
+            PRINT_LIN("Less Than or equal...", 0, 1);
+        }
+        if (cit <= cit) {
+            PRINT_LIN("Less Than or equal....", 0, 1);
+        }
+        if (it2 <= cit2 + 1) {
+            PRINT_LIN("Less Than or equal.....", 0, 1);
+        }
+        if (it2 <= cit2) {
+            PRINT_LIN("Less Than or equal......", 0, 1);
+        }
+
+        if (it > it + 1) {
+            PRINT_LIN("Greater Than", 0, 1);
+        }
+        if (it + 1 > it) {
+            PRINT_LIN("Greater Than.", 0, 1);
+        }
+        if (it > it) {
+            PRINT_LIN("Greater Than..", 0, 1);
+        }
+        if (cit > cit + 1) {
+            PRINT_LIN("Greater Than...", 0, 1);
+        }
+        if (cit + 1 > cit) {
+            PRINT_LIN("Greater Than....", 0, 1);
+        }
+        if (cit > cit) {
+            PRINT_LIN("Greater Than.....", 0, 1);
+        }
+        if (it2 + 1 > cit2) {
+            PRINT_LIN("Greater Than.....", 0, 1);
+        }
+        if (it2 > cit2) {
+            PRINT_LIN("Greater Than......", 0, 1);
+        }
+
+        if (it >= it + 1) {
+            PRINT_LIN("Greater Than or equal", 0, 1);
+        }
+        if (it + 1 >= it) {
+            PRINT_LIN("Greater Than or equal.", 0, 1);
+        }
+        if (it >= it) {
+            PRINT_LIN("Greater Than or equal..", 0, 1);
+        }
+        if (cit >= cit + 1) {
+            PRINT_LIN("Greater Than or equal...", 0, 1);
+        }
+        if (cit + 1 >= cit) {
+            PRINT_LIN("Greater Than or equal....", 0, 1);
+        }
+        if (cit >= cit) {
+            PRINT_LIN("Greater Than or equal.....", 0, 1);
+        }
+        if (it2 >= cit2 + 1) {
+            PRINT_LIN("Greater Than or equal......", 0, 1);
+        }
+        if (it2 + 1 >= cit2) {
+            PRINT_LIN("Greater Than or equal.......", 0, 1);
+        }
+        if (it2 >= cit2) {
+            PRINT_LIN("Greater Than or equal........", 0, 1);
+        }
+    }
+    if (nextTes())
+        return ;
+}
+
 void runMapTests() {
 
-    eraseMapTest();
+    reverseIteratorCompMapTest();
     lowerBoundTest();   //
     upperBoundTest();   //
     eqRangeTest();      //
     ctorTest();
+    eraseMapTest();
     eraseMapKeyTest();
     eraseMapRangeTest();
     insertPosMapTest();

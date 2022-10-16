@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TreeIter.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpernas- <gpernas-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:18:57 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/10 22:02:23 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:15:59 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ template <class T>
 		public:
 			Node*	_right;
 			Node*	_left; 
-			Node*	_parent;
+			Node*	_parent; 
 			T		_value;
 			bool	_color;
 			
@@ -110,7 +110,7 @@ template <class Node, class pair >
 				this->_root = other.baseNode();
 				return *this;
 			}
-			pointer base() const { return this; }
+
 			node_ptr baseNode() const { return _root; }
 			TreeIter& operator++() {
 				if (this->_root->_right)
@@ -178,6 +178,10 @@ template <class Node, class pair >
 			
 			reference operator*() const { return const_cast<reference> (_root->_value); }
 			pointer operator->() const { return const_cast<pointer> (&_root->_value); }
+			TreeIter& operator+=(difference_type pos) { this->_root -= pos; return *this; }
+			TreeIter& operator-=(difference_type pos) { this->_root += pos; return *this; }
+			TreeIter operator+(difference_type pos) const { return TreeIter(this->_root - pos); }
+			TreeIter operator-(difference_type pos) const { return TreeIter(this->_root + pos); }
 			
 	};
 	
@@ -198,5 +202,15 @@ template <class Node, class pair >
 
 	template <typename U, typename V, typename P1, typename P2>
 	bool	operator<=(const TreeIter<U,P1>& a, const TreeIter<V,P2>& b) { return a.baseNode() <= b.baseNode(); }
+
+	template <typename U, typename V, typename P1, typename P2>
+	ptrdiff_t		operator-(const TreeIter<U,P1>& lhs, const TreeIter<V,P2>& rhs) {
+		return lhs.baseNode() - rhs.baseNode();
+	}
+
+	template <typename U, typename P1>
+	TreeIter<U,P1>		operator+(typename TreeIter<U,P1>::difference_type n, const TreeIter<U,P1>& rhs) {
+		return (TreeIter<U,P1>)(rhs.baseNode() + n);
+	}
 
 }

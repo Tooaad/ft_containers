@@ -16,9 +16,9 @@ public:
 	std::clock_t stop();
 };
 
-#	include "../../map.hpp"
-#	include "../../stack.hpp"
-#	include "../../vector.hpp"
+#	include "../../includes/map.hpp"
+#	include "../../includes/stack.hpp"
+#	include "../../includes/vector.hpp"
 #	include <iostream>
 #	include <map>
 #	include <stack>

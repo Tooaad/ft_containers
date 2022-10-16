@@ -6,7 +6,7 @@
 /*   By: gpernas- <gpernas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 23:35:59 by gpernas-          #+#    #+#             */
-/*   Updated: 2022/10/14 17:55:33 by gpernas-         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:28:45 by gpernas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,8 @@ void cleaks() { system("leaks containers"); }
 
 int main()
 {
-
-	ft::map<char,int> mymap;
-
-  	mymap['x'] = 100;
-  	mymap['y'] = 200;
-  	mymap['z'] = 300;
-
-  // show content:
-  ft::map<char,int>::reverse_iterator rit;
-
-
-  for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
-    std::cout << rit->first << " => " << rit->second << '\n';
 	
-	// runVectTests();
+	runVectTests();
 	runMapTests();
 	atexit(cleaks);
 
