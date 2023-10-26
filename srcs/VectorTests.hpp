@@ -20,7 +20,7 @@
 #include <sstream>
 #include <cstring>
 #include <chrono>
-#include "../includes/vector.hpp"
+#include "../includes/Vector.hpp"
 
 template <typename Iter, typename Iter2>
 int compareVect(Iter first, Iter last, Iter2 first_, Iter2 last_)

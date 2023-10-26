@@ -12,9 +12,9 @@
 
 #include "VectorTests.hpp"
 #include "MapTests.hpp"
-#include "../includes/vector.hpp"
-#include "../includes/stack.hpp"
-#include "../includes/map.hpp"
+#include "../includes/Vector.hpp"
+#include "../includes/Stack.hpp"
+#include "../includes/Map.hpp"
 #include <iostream>
 #include <algorithm>
 #include <vector>

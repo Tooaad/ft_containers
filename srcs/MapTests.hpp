@@ -20,7 +20,7 @@
 #include <sstream>
 #include <cstring>
 #include <chrono>
-#include "../includes/map.hpp"
+#include "../includes/Map.hpp"
 
 template <typename Iter, typename Iter2>
 int compareMap(Iter first, Iter last, Iter2 first_, Iter2 last_)

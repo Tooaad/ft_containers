@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "../includes/vector.hpp"
+#include "../includes/Vector.hpp"
 #include "../utils/utils.hpp"
 
 namespace ft {

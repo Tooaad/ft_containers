@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 #include <iostream>
-#include "vectorIter.hpp"
+#include "VectorIter.hpp"
 #include "ReverseIter.hpp"
 #include "../utils/utils.hpp"
 
