@@ -10,7 +10,8 @@ Tests have been made for Map and Vector only, both tests checks functionality an
 ### Deployment
 Simply copy the srcs folder and Makefile into your root project, comiple and execute!
 
-**WARNING: Yoy may need to change your name containers to capital letters to made the test work. **
+#####WARNING: Yoy may need to change your name containers to capital letters to made the test work.
+Run `$make && ./containers`
 
 While executing, you might need to scroll up to see which section test is running, tap any key to skip to the next test.
 
