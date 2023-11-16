@@ -26,10 +26,8 @@ While executing, you might need to scroll up to see which section test is runnin
 
 [![SpeedTest](https://i.gyazo.com/39712888a5a59661e8e12ae83c36b1a6.png)](https://gyazo.com/39712888a5a59661e8e12ae83c36b1a6)
 
-
-https://github.com/Tooaad/ft_containers/assets/60491687/c3f70620-2f13-44dd-8c68-9ff8d2afeb68
-
-https://github.com/Tooaad/ft_containers/assets/60491687/69dbcf5f-2ba8-444a-a5a0-bc5fc485d9f3
+https://github.com/Tooaad/ft_containers/assets/60491687/53501cc7-6e55-4300-b80f-3bac9e4b50a2
+https://github.com/Tooaad/ft_containers/assets/60491687/f389e3c7-4c3a-4b8b-a434-7bf2479f5ed1
 > MapTest and VectorTest run in the same simulation
 
 ### References
