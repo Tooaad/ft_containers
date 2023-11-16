@@ -14,6 +14,8 @@ Run `$> make && ./containers`
 
 While executing, you might need to scroll up to see which section test is running, tap any key to skip to the next test.
 
+> _test folder contains other tests that are not the ones displayed here
+
 ### References
 - [Understanding Iterators and Iterator Traits](https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits "Understanding Iterators and Iterator Traits") 
 - [Code Sample of how to build your own iterator pt1](https://www.cplusplus.com/reference/iterator/iterator/ "Code Sample of how to build your own iterator pt1")
