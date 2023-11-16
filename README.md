@@ -28,7 +28,7 @@ While executing, you might need to scroll up to see which section test is runnin
 
 ## Results
 Speed Test
-[![Speed Tests](https://i.gyazo.com/ba9ffe725cce2a8af847759dbf11aa5a.png)](https://gyazo.com/ba9ffe725cce2a8af847759dbf11aa5a)
+[![Image from Gyazo](https://i.gyazo.com/beb73c7bbf23d31aece30eb5498ebd46.png)](https://gyazo.com/beb73c7bbf23d31aece30eb5498ebd46)
 
 
 MapTest and VectorTest run in the same simulation
