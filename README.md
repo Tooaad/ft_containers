@@ -30,12 +30,10 @@ this is a great template to begin with.
 - Observers
 - Allocator
 
-
 # Stack
 - Only Constructor! (It is not Orthodox Canonical)
 - Member Functions
 - Relational Operators
-
 
 ### References
 - Very important to start: https://stackoverflow.com/questions/7758580/writing-your-own-stl-container
