@@ -3,7 +3,6 @@ Recreation of a Map, Stack and Vector in C++98
 
 #### [First approach to a STL Containers](https://stackoverflow.com/questions/7758580/writing-your-own-stl-container "First approach of a STL Containers")
 
-
 ## Tests
 Tests have been made for Map and Vector only, both tests checks functionality and time.
 
@@ -14,7 +13,6 @@ Simply copy the srcs folder and Makefile into your root project, comiple and exe
 Run `$> make && ./containers`
 
 While executing, you might need to scroll up to see which section test is running, tap any key to skip to the next test.
-
 
 ### References
 - [Understanding Iterators and Iterator Traits](https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits "Understanding Iterators and Iterator Traits") 
@@ -28,7 +26,15 @@ While executing, you might need to scroll up to see which section test is runnin
 - Insert same key several times and print where is the value
 - How does operator[] works on the map? If you look for something that does not exist, should insert it and return it and can overwrite the searched value
 
+## Results
+MapTest and VectorTest run in the same simulation
 
+
+https://github.com/Tooaad/ft_containers/assets/60491687/c3f70620-2f13-44dd-8c68-9ff8d2afeb68
+https://github.com/Tooaad/ft_containers/assets/60491687/69dbcf5f-2ba8-444a-a5a0-bc5fc485d9f3
+
+Speed Test
+[![Speed Tests](https://i.gyazo.com/ba9ffe725cce2a8af847759dbf11aa5a.png)](https://gyazo.com/ba9ffe725cce2a8af847759dbf11aa5a)
 
 
 <!--
