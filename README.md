@@ -1,25 +1,25 @@
 # ft_containers
-Recreation of a Map, Stack and Vector in C++98
+Recreation of a Map, Stack, and Vector in C++98
 
 #### [First approach to a STL Containers](https://stackoverflow.com/questions/7758580/writing-your-own-stl-container "First approach of a STL Containers")
 
 ## Tests
-Tests have been made for Map and Vector only, both tests checks functionality and time.
+Tests have been made for Map and Vector only, both tests check functionality and time.
 
 ### Deployment
-Simply copy the srcs folder and Makefile into your root project, comiple and execute!
+Copy the srcs folder and Makefile into your root project, compile, and execute!
 
-##### WARNING: Yoy may need to change your name containers to capital letters to made the test work.
+##### WARNING: You may need to change your name containers to capital letters to make the test work.
 Run `$> make && ./containers`
 
-While executing, you might need to scroll up to see which section test is running, tap any key to skip to the next test.
+While executing, you should scroll up to see which section test is running and tap any key to skip to the next test.
 
 > _test folder contains other tests that are not the ones displayed here
 
 ## Tricky stuff
-- *Map.find* with a 0 without being inserted should not be founded otherwise your algorithm is wrong
-- Insert same key several times and print where is the value
-- How does operator[] works on the map? If you look for something that does not exist, should insert it and return it and can overwrite the searched value
+- *Map.find* with a 0 without being inserted should not be found otherwise your algorithm is wrong
+- Insert the same key several times and print where the value
+- How does operator[] works on the map? If you look for something that does not exist, you should insert it and return it and can overwrite the searched value
 
 ## Results
 #### Speed Test
